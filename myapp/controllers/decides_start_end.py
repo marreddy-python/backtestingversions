@@ -12,24 +12,29 @@ def myFunction():
     entities = price_data.query.order_by(desc(price_data.Time_stamp)).limit(1).all()
     print ('length_entities',len(entities))
     
-    end_date =  entities[0].Time_stamp 
-    print (end_date) 
-
-    #CONVERTING ENTERED_DATE TO WEEKDAY NAME
-    dt = datetime.fromtimestamp(end_date/1000.0).strftime('%Y-%m-%d')
-    year, month, day = (int(x) for x in dt.split('-'))  
-    print (year,month,day)
-
-    answer = pd.to_datetime(datetime(year,month, day)).weekday_name
-    print (answer)
-    
-    if answer=='Monday':
-        start_date =  end_date - (86400000*3)
+    if len(entities) == 0:
+        start_date = 0
+        end_date = 0
     else:
-        start_date =  end_date - (86400000*1)
+
+        end_date =  entities[0].Time_stamp 
+        print (end_date) 
+
+        #CONVERTING ENTERED_DATE TO WEEKDAY NAME
+        dt = datetime.fromtimestamp(end_date/1000.0).strftime('%Y-%m-%d')
+        year, month, day = (int(x) for x in dt.split('-'))  
+        print (year,month,day)
+
+        answer = pd.to_datetime(datetime(year,month, day)).weekday_name
+        print (answer)
     
-    rows = price_data.query.count()
-    print ('ROWS',rows)
+        if answer=='Monday':
+            start_date =  end_date - (86400000*3)
+        else:
+            start_date =  end_date - (86400000*1)
+    
+        rows = price_data.query.count()
+        print ('ROWS',rows)
 
     return start_date,end_date
 
