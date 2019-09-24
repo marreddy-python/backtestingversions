@@ -11,7 +11,7 @@ modulo1_blueprint = Blueprint(name='modulo1', import_name=__name__,template_fold
 static_folder='static', static_url_path='/login,/trades.svg,/infile.json')
 
 
-from myapp.models.users import Post
+from myapp.models.users import Post,db
 import time
 
 #LOGIN PAGE
