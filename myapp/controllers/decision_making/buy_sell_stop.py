@@ -56,7 +56,7 @@ def buy_sell_stop(buying_angle,selling_angle,angle,buying_price,current_price,le
         decision = HOLD
  
     
-    print decision 
+    print (decision) 
     return decision
 
 
