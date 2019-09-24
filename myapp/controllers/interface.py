@@ -113,22 +113,4 @@ class Strategy():
         return [id,startegy_values,isFavourite]
 
 
-# THESE CALLS NEEDS NEEDS TO BE FROM THE UI 
-'''loader = DataController()
-Strategy = Strategy(1,[40,20,'NO'],'TRUE')
-a = loader.getTrades('TVIX',Strategy ,'10000','20000')
-print(a)
-a = loader.MarketData('1565677800000','1565720940000')
-print(a)
-a = loader.getPerformance('TVIX',Strategy ,'10000','20000')
-print(a)
-
-
-startegy_loader = StrategyController()
-b = startegy_loader.saveStrategy(Strategy)
-print (b) 
-b = startegy_loader.updateStrategy(Strategy,[2,[20,10,'YES'],'TRUE'])
-print (b)
-b = startegy_loader.applyStrategy('TVIX',Strategy ,'10000','20000')
-print (b)''' 
 
