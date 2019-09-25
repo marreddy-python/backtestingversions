@@ -216,7 +216,7 @@
         // console.log(main_data["Metric_values"])
         $( "#dialog" ).dialog({
             autoOpen: false,   
-            width: 1500,  
+            width: 1200,  
             show: {
               effect: "blind",
               duration: 1000,   
@@ -351,13 +351,13 @@
     <p  class="para">
     <label class= "lab-name" for="fname">Buying angle</label>
     <input class="input-cls" maxlength="8" size="8" type="text" id="buying_angle" name="Buying_angle" required> 
-    <span for="fname" style = "opacity:0.6; font-size:18px;">DEGREES</span> 
+    <span for="fname" style = "opacity:0.6; font-size:10px;">DEGREES</span> 
     </p> 
 
     <p  class="para">
       <label class= "lab-name" for="fname">Selling angle</label>
       <input class="input-cls" maxlength="8" size="8" type="text" id="selling_angle" name="selling_angle" required> 
-      <span for="fname" style = "opacity:0.6; font-size:18px;">DEGREES</span> 
+      <span for="fname" style = "opacity:0.6; font-size:10px;">DEGREES</span> 
     </p> 
     
 
@@ -369,13 +369,13 @@
      
     <div class="Target">
       <p  class="para">
-          <input type="checkbox" id = "Optimization_steepness" name="Optimization" value="None" style="zoom:2;"> Optimization-steepness<input  class="input-cls" type="text" id="relative_angle" maxlength="4" size="4" name="relative_angle" style="border:1px solid blue" value=10 />
-          <span for="fname" style = "opacity:0.6; font-size:18px;">relative angle</span> <br>
+          <input type="checkbox" id = "Optimization_steepness" name="Optimization" value="None" style="zoom:2;"> <span style="font-size:15px;">Optimization-steepness</span><input  class="input-cls" type="text" id="relative_angle" maxlength="4" size="4" name="relative_angle" style="border:1px solid blue" value=10 />
+          <!-- <span for="fname" style = "opacity:0.6; font-size:15px;">relative angle</span> --><br> 
       </p>
 
       <p  class="para">
-        <input type="checkbox" id = "STPODVALUE"  value="None" style="zoom:2;"> STOP Order @ <span style="padding-left:65px;"></span><input class="input-cls"  type="text"  maxlength="4" size="4" id="stop_order" name="stop_order" style="border:1px solid blue;" value=0.3 /> 
-        <span for="fname" style = "opacity:0.6; font-size:18px;">%less than buy</span>
+        <input type="checkbox" id = "STPODVALUE"  value="None" style="zoom:2;"><span style="font-size:15px;"> STOP Order @ </span><span style="padding-left:65px;"></span><input class="input-cls"  type="text"  maxlength="4" size="4" id="stop_order" name="stop_order" style="border:1px solid blue;" value=0.3 /> 
+       <!-- <span for="fname" style = "opacity:0.6; font-size:15px;">%less than buy</span>-->
       </p>
 
       <p class="hol">
@@ -575,7 +575,7 @@
 
         <p>
           <label class= "lab-name">Buy Angle</label>
-          <input class="input-cls" maxlength="4" size="4" type="text" id="mytext"  size="2" value="0" readonly>
+          <input class="input-cls" maxlength="2" size="2" type="text" id="mytext"  size="2" value="0" readonly>
        
           <label class= "namde"  >Sell Angle </label>
           <input  class="input-cls" style=" border: 1px solid#4169E1 ;
@@ -583,16 +583,16 @@
        
         </p>
 
-        <p style="padding-top:13px;">
+        <p style="padding-top:0px;">
           <label class= "lab-name"> Stop order </label>
-          <input class="input-cls" maxlength="4" size="4" type="text" id="mytext"  size="2" value="0" readonly> 
+          <input class="input-cls" maxlength="2" size="2" type="text" id="mytext"  size="2" value="0" readonly> 
 
           <label class= "namde"  >Steepness</label>
-        <input class="input-cls" maxlength="8" size="8" type="text" id="mytext"  size="2" value="Disabled" readonly>
+        <input class="input-cls" maxlength="4" size="4" type="text" id="mytext"  size="2" value="Disabled" readonly>
   
         </p>
 
-        <p style= "font-size: 25px;padding-top:7px; ">
+        <p style= "font-size: 25px;padding-top:10px; ">
             <input  type="checkbox" value="Yes" style="zoom:2;">
             <label >Show in graph</label> 
         </p>
