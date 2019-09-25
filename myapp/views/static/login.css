@@ -36,9 +36,39 @@ li a:hover {
     display: none;
 }
 
+/* For desktops */
+@media screen and (min-width:1024px) {
+    
+    #first{
+        width:13%;
+        margin-left :10px;
+        /* height: 840px;  */
+      }
+
+    .icon{
+        display: none; 
+    }
+
+    .menu_itemsresponsive #first{
+        display:block;
+    }  
+
+    #second {
+        width:85%;
+        height:840px;
+        margin-left:10px;
+        background-color:#D3D3D3;
+    }
+    /* #tabvalues{ 
+        display: none;
+    }*/
+}
+
+
+
 /* RESPONSIVE CSS */
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width:1023px) {
      
     #first{
         width:100%;
@@ -59,10 +89,12 @@ li a:hover {
         width:100%;
         margin-left:0px;
         background-color:#D3D3D3;
+    }   
+    #tabvalues{
+        display:none
     }
-
-    
 }
+
 
 /* NORMAL CSS */
 #kinda{
@@ -75,10 +107,7 @@ li a:hover {
 
 
 .graph_area{
-    margin:20px;
-    /* position: fixed; */
-    /* position: relative; */
-    
+    margin:20px; 
 }
 
 .tab {
@@ -122,40 +151,7 @@ li a:hover {
     font-size: 20px;
     text-align: center;
 }
-.page1_tabs{
-    height:60px; 
-    font-size: 10px;
-    width:1280px;
-    margin-left: 10px;
-    margin-right: 10px;
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;   
-}
 
-
-#leftBox {
-    float:left;
-    height:60px;
-    width: 50%; 
-    background-color: white;
-    margin:0;
-}
-
-#rightBox {
-    float:right;
-    height:60px; 
-    width: 50%;
-    background: black;
-}
-
-.tab_view{
-    text-align: center;
-    margin-top:10px;
-    font-size: 30px;
-    
-}
-  
 .summary{
     width:220px;
     height:540px; 
@@ -185,8 +181,56 @@ li a:hover {
     padding-left:100px;
 }
 
+/* for desktop */
+@media only screen and (min-width:1025px){
+    #kinda{
+    width: 79%; 
+    height : 540px; 
+    border: 2px solid white;
+    float:left;   
+    background-color: white
+    }
+    .graph_area{
+        margin:20px; 
+    }
+    
+    .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    margin-right:0px;
+  }
+  #tabvalues{
+    font-size: 20px;   
+    padding:14px 16px;
+    float:right;
+
+    margin-right: 100px;
+}
+.phase{
+    font-size: 20px;
+}
+.summary{
+    width:20%;
+    height:540px; 
+    border: 2px solid white; 
+    /* float:right; */
+    margin-right:0px; 
+    background-color: white
+}
+#sam{
+    padding-left:10px;
+}
+
+}
+
+
+
+
+
 
 /* RESPONSIVE CSS */
+/* for mobile */
 @media only screen and (max-width:1024px){
     #kinda{
     width:100%;
@@ -259,13 +303,11 @@ li a:hover {
 }
 
 .Target{
-    /* float:right;  */
     font-size:20px;
     margin-top:50px;
 }
 
 .hol{
-  /* margin-top:40px;   */
   padding:30px;
 }
 
@@ -342,8 +384,8 @@ th {
     transform: translate(0%, -25%);
 }
 
+
 #dialog{
-    /* width:70%; */
     width: "90%",
 }
 
@@ -360,7 +402,30 @@ tbody tr {
   table-layout: fixed; 
 }
 
+/* for desktop */
+@media only screen and (min-width:1025px){
+    .Strategy{
+        width: 100%; 
+        height : 250px;  
+        border: 2px solid white; 
+        float:left;
+        margin-top:10px;
+        background-color: white
+    }
 
+    .Target{
+        font-size:20px;
+        margin-top:10px;
+    }
+
+    .hol{
+        padding:15px;
+      }
+}
+
+
+
+/* for mobile */
 @media only screen and (max-width:1024px){
     .Strategy{
         width:100%;
@@ -475,6 +540,20 @@ font-size:20px;
     margin-left:0px;
 }
 
+@media only screen and (min-width:1025px){
+    .namde{
+        padding-left:10px;
+        font-size:15px;
+    }
+    .lab-name{
+        /* float: left; */
+        margin-left:20px;
+        font-size:15px;
+        }
+        
+     
+}
+
 @media only screen and (max-width:1024px){
 .container{
     margin-top:100px;
@@ -510,7 +589,18 @@ font-size:20px;
    margin-left:10px;
 }
 
+@media only screen and (min-width:1025px){
+    .prak{
+        margin-top:15px;
+        margin-left:0px;
+        float:left;
+     }
+     
+}
 
+
+
+/* for mobile */
 @media only screen and (max-width:1024px){
     .Strategies_block{
         float: left; 
@@ -555,7 +645,6 @@ font-size:20px;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
    
- 
   }
   
 
