@@ -540,6 +540,7 @@ font-size:20px;
     margin-left:0px;
 }
 
+/* for desktop */
 @media only screen and (min-width:1025px){
     .namde{
         padding-left:10px;
@@ -633,7 +634,6 @@ font-size:20px;
     cursor: pointer;
   }
 
-  
 
 .loader {
     /* position: absolute; */
