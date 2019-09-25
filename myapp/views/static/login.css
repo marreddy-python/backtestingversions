@@ -15,6 +15,7 @@
     float: left;
     background-color:#D3D3D3;
 }
+
 ol li{
     list-style-type: none;
     font-size: 20px;
@@ -37,7 +38,7 @@ li a:hover {
 
 /* RESPONSIVE CSS */
 
-@media screen and (max-width:1024px) {
+@media screen and (min-width:1024px) {
      
     #first{
         width:100%;
@@ -186,7 +187,7 @@ li a:hover {
 
 
 /* RESPONSIVE CSS */
-@media only screen and (max-width:1024px){
+@media only screen and (min-width:1024px){
     #kinda{
     width:100%;
     height : 500px; 
@@ -360,7 +361,7 @@ tbody tr {
 }
 
 
-@media only screen and (max-width:1024px){
+@media only screen and (min-width:1024px){
     .Strategy{
         width:100%;
         height:400px;
@@ -474,7 +475,7 @@ font-size:20px;
     margin-left:0px;
 }
 
-@media only screen and (max-width:1024px){
+@media only screen and (min-width:1024px){
 .container{
     margin-top:100px;
     width: 400px; 
@@ -510,7 +511,7 @@ font-size:20px;
 }
 
 
-@media only screen and (max-width:1024px){
+@media only screen and (min-width:1024px){
     .Strategies_block{
         float: left; 
         display: block   
@@ -540,7 +541,6 @@ font-size:20px;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-
   }
 
   
@@ -558,8 +558,7 @@ font-size:20px;
  
   }
   
-  
-  
+
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
