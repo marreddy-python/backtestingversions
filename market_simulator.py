@@ -261,8 +261,6 @@ class HighChartsAdapter(AngleGenerator):
        
         db_data = price_data.query.filter(and_(price_data.Time_stamp.between(startTime,endTime),price_data.stock_symbol=='TVIX'))
         
-    
-
         fetchdata_length = db_data.count()
         print (fetchdata_length)
 
@@ -273,7 +271,7 @@ class HighChartsAdapter(AngleGenerator):
         else:
 
         # CONVERTING FETCHED DATA INTO THE LIST FORMAT INORDER TO SEND TO HIGHCHARTS EXPORT SERVER 
-            for i in range(0,fetchdata_length):
+            '''for i in range(0,fetchdata_length):
 
                 Time_stamp = db_data[i].Time_stamp
                 Opening = db_data[i].Opening_price
@@ -282,9 +280,9 @@ class HighChartsAdapter(AngleGenerator):
                 close = db_data[i].Closing_price
                 Volume = db_data[i].Volume
 
-                stock_data.append([Time_stamp,Opening,High,Low,close,Volume])
+                stock_data.append([Time_stamp,Opening,High,Low,close,Volume])'''
 
-            '''for candle in db_data:
+            for candle in db_data:
 
                 Time_stamp = int(candle.Time_stamp)
                 Opening = candle.Opening_price
@@ -293,8 +291,7 @@ class HighChartsAdapter(AngleGenerator):
                 close = candle.Closing_price
                 Volume = candle.Volume
                 
-
-                stock_data.append([Time_stamp,Opening,High,Low,close,Volume])'''
+                stock_data.append([Time_stamp,Opening,High,Low,close,Volume])
 
                 # print (stock_data)
            
@@ -304,8 +301,7 @@ class HighChartsAdapter(AngleGenerator):
             print (stock_length)
             candle_info = stock_data[stock_length-1]
         
-        
-     
+
             score = {"Time_stamp":None ,"Open": None, "High": None,"Low": None, "Close": None,"Volume": None, "Angle": None,}    
 
             score["Time_stamp"] = candle_info[0] 

@@ -53,7 +53,6 @@ def check(ENTERED_DATE):
         with open(filename, 'w') as w:
             w.write(json.dumps(a))
         
-
         return START_DATE
     
 
