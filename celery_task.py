@@ -14,7 +14,7 @@ app.config.update(
     CELERYBEAT_SCHEDULE = {
         'periodic_task-every-minute': {
             'task': 'periodic_task',
-            'schedule': crontab(minute="0",hour="0" ,day_of_week="mon,tue,wed,thu,fri")
+            'schedule': crontab(minute="30",hour="13" ,day_of_week="mon,tue,wed,thu,fri")
         }}
 )
 
