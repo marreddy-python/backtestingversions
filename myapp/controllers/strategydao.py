@@ -9,7 +9,7 @@ from decision_making.buy_sell_rlt_stop import buy_sell_rlt_stop
 from datetime import timedelta
 
 from myapp.models.users import Strategy,Strategy_type,Strategies_Grades,Trades,Daily_metric,Total_metric,db
-# db.create_all()
+db.create_all()
 from sqlalchemy import and_
 # HERE IMPORT STRATEGY FEATURES TABLE FROM CELERY TASK
 from celery_task import price_data,Strategy_features
