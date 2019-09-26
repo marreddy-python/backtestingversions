@@ -365,6 +365,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
      
         db_data = price_data.query.filter(and_(price_data.Time_stamp.between(START_DATE,END_DATE),price_data.stock_symbol=='TVIX'))
         
+        print (START_DATE,END_DATE)
 
         fetchdata_length = db_data.count()
         print ('fetchdata_length',fetchdata_length)

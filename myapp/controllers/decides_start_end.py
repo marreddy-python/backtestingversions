@@ -34,7 +34,7 @@ def myFunction():
             start_date =  end_date - (86400000*1)
     
         rows = price_data.query.count()
-        print ('ROWS',rows)
+        print('ROWS',rows)
 
     return start_date,end_date
 
