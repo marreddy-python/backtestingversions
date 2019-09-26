@@ -9,7 +9,7 @@ from celery.schedules import crontab
 app = Flask(__name__)
 
 app.config.update(
-    # CELERY_BROKER_URL='redis://localhost:6379/0',
+    CELERY_BROKER_URL='redis://h:p6626f06147f8c0f4f0acff655ad7ef9c50cf5715d11deeb9994ea6a92814315c@ec2-34-238-13-119.compute-1.amazonaws.com:30069',
     # CELERY_RESULT_BACKEND='redis://localhost:6379/0',
     CELERYBEAT_SCHEDULE = {
         'periodic_task-every-minute': {
@@ -17,7 +17,6 @@ app.config.update(
             'schedule': crontab(minute="0",hour="0" ,day_of_week="mon,tue,wed,thu,fri")
         }}
 )
-
 
 celery = make_celery(app)
 
