@@ -387,7 +387,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
 
         import operator
         stock_data = sorted(stock_data, key=operator.itemgetter(0)) 
-        print (stock_data)
+        # print (stock_data)
         return stock_data
             
     

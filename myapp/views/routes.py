@@ -156,22 +156,6 @@ def strategyview():
                                                 return json.dumps({'status':'Strategy_saved'})
                                         else:
                                                 return json.dumps({'status':'Strategy_alredy_saved'})
-
-
-                        #After clicking on save_and_compare button
-                        elif request.form.get('main') == 'Save_and_compare':
-
-
-                                tweenty_days = start_time - (86400000*20)
-                                b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days)
-                                
-                                Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,end_time)
-                                Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
-                                b = startegy_loader.saveStrategy(St,start_time,tweenty_days)
-                                Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
-
-                                return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance })
-
                                 
                         else:
                                 return json.dumps({'status':'Failed'})

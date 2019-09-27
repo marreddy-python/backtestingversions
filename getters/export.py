@@ -36,7 +36,6 @@ def highcharts_export(modified_data):
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     outfile = os.path.join(SITE_ROOT,'outfile.svg')
 
-
     xmldoc = minidom.parse(outfile)
 
     itemlist = xmldoc.getElementsByTagName('svg')
@@ -49,7 +48,7 @@ def highcharts_export(modified_data):
 
             ar = svg_path.split(" "); 
                 #br STORES COORDINATE POINT 
-            br = []
+            br =  []
             for x in range(0,len(ar)):
                 if(ar[x]=="M" or ar[x]=="L"):
                     continue
