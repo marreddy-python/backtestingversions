@@ -653,3 +653,14 @@ font-size:20px;
     100% { transform: rotate(360deg); }
   }
   
+  .ui-datepicker-calendar{
+  border-collapse: collapse;
+  overflow-x:auto;
+
+  }
+
+  table thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
