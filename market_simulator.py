@@ -294,7 +294,7 @@ class HighChartsAdapter(AngleGenerator):
                 
                 stock_data.append([Time_stamp,Opening,High,Low,close,Volume])
 
-                # print (stock_data)
+            print (stock_data)
            
             angle = highcharts_export(stock_data)
             print (angle)
