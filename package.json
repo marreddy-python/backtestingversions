@@ -1,4 +1,8 @@
 {
+   
+    "dependencies": {
+        "highcharts-export-server": "2.0.24"
+    },
     "scripts": {
       "preinstall": "export ACCEPT_HIGHCHARTS_LICENSE=1"
     }
