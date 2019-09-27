@@ -219,10 +219,11 @@ class SMAPreprocessor(StrategyPreprocessor):
         print (len(loaded_data))
     
         for i in range(0,len(loaded_data)):
+            print(i)
             # CHECK IF ANGLE IS ALREADY CALCULATED OR NOT if not calculate
             db_angledata = Strategy_features.query.filter(and_(Strategy_features.Day_identifier == loaded_data[i][0],Strategy_features.Symbol=='TVIX'))
             db_angledata_length = db_angledata.count()
-    
+            print (db_angledata_length)
             if db_angledata_length == 0 :
                 
                 endtime = loaded_data[i][0]
@@ -262,7 +263,7 @@ class HighChartsAdapter(AngleGenerator):
         db_data = price_data.query.filter(and_(price_data.Time_stamp.between(startTime,endTime),price_data.stock_symbol=='TVIX'))
         
         fetchdata_length = db_data.count()
-        print (fetchdata_length)
+        print ('fetchdata_length',fetchdata_length)
 
         stock_data = []
             
