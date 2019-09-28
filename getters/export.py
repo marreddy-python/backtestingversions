@@ -38,7 +38,7 @@ def highcharts_export(modified_data):
 
     print ("highcharts-export-server --type svg  -infile "+infile+" -outfile "+outfile)
   
-    subprocess.check_call("highcharts-export-server --type svg  -infile "+infile+" -outfile "+outfile, shell = True) 
+    subprocess.check_call("highcharts-export-server --type svg  -infile "+infile+" -outfile "+outfile, shell = False) 
     
     print ('Success')
 
