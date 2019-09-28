@@ -35,8 +35,8 @@ def highcharts_export(modified_data):
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     outfile = os.path.join(SITE_ROOT,'outfile.svg')
 
-    print('outfile'.outfile)
-    
+    print('outfile',outfile)
+
     subprocess.check_call("highcharts-export-server --type svg  -infile "+infile+" -outfile "+outfile, shell = True) 
     print ('Success')
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
