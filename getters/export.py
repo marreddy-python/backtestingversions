@@ -37,11 +37,10 @@ def highcharts_export(modified_data):
     print('outfile',outfile)
 
     print ("highcharts-export-server --type svg  -infile "+infile+" -outfile "+outfile)
-  
-
-    HIGHCHART_EXECUTABLE_PATH = os.path.join(os.path.dirname(__file__), 'node_modules/.bin/highcharts-export-server')
-
-    subprocess.check_call( HIGHCHART_EXECUTABLE_PATH +"--type svg  -infile "+infile+" -outfile "+outfile, shell = True) 
+    
+   subprocess.check_call("pwd", shell = True) 
+    
+    # subprocess.check_call("highcharts-export-server --type svg  -infile "+infile+" -outfile "+outfile, shell = True) 
     
     print ('Success')
 
@@ -52,7 +51,7 @@ def highcharts_export(modified_data):
 
     itemlist = xmldoc.getElementsByTagName('svg')
 
-    for path in xmldoc.getElementsByTagName('path'):
+    '''for path in xmldoc.getElementsByTagName('path'):
         
         if path.getAttribute("class") == "highcharts-graph":
 
@@ -80,3 +79,4 @@ def highcharts_export(modified_data):
                 return angle
             else:
                 return 'angle calculation is not possible'
+                '''
