@@ -37,14 +37,13 @@ def highcharts_export(modified_data):
     print('outfile',outfile)
 
     print ("highcharts-export-server --type svg  -infile "+infile+" -outfile "+outfile)
+  
 
+    HIGHCHART_EXECUTABLE_PATH = os.path.join(os.path.dirname(__file__), 'node_modules/.bin/highcharts-export-server')
 
-    HIGHCHART_EXECUTABLE_PATH = os.path.join( os.path.dirname(__file__), 'node_modules/.bin/highcharts-export-server')
-
-    subprocess.check_call(HIGHCHART_EXECUTABLE_PATH  "--type svg  -infile "+infile+" -outfile "+outfile, shell = True) 
+    subprocess.check_call( HIGHCHART_EXECUTABLE_PATH +"--type svg  -infile "+infile+" -outfile "+outfile, shell = True) 
     
     print ('Success')
-
 
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     outfile = os.path.join(SITE_ROOT,'outfile.svg')
