@@ -434,7 +434,9 @@ tbody tr {
         height:400px;
         border:1px solid red;
     }
-    .table{table-layout: fixed;}
+
+    /* .table{table-layout: fixed;} */
+    
     .table, td, th{border-collapse:collapse; border:1px solid #777;}
     th{ font-size:15px; background:#66C2E0;}
     .Strategy { overflow-x: scroll; }
