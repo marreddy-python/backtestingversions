@@ -272,17 +272,7 @@ class HighChartsAdapter(AngleGenerator):
         else:
 
         # CONVERTING FETCHED DATA INTO THE LIST FORMAT INORDER TO SEND TO HIGHCHARTS EXPORT SERVER 
-            '''for i in range(0,fetchdata_length):
-
-                Time_stamp = db_data[i].Time_stamp
-                Opening = db_data[i].Opening_price
-                High = db_data[i].High
-                Low = db_data[i].Low
-                close = db_data[i].Closing_price
-                Volume = db_data[i].Volume
-
-                stock_data.append([Time_stamp,Opening,High,Low,close,Volume])'''
-
+    
             for candle in db_data:
 
                 Time_stamp = int(candle.Time_stamp)
@@ -316,7 +306,7 @@ class HighChartsAdapter(AngleGenerator):
             data  = json.dumps(score)
             data = json.loads(data)
 
-            print (data) 
+            # print (data) 
 
             Day_identifier = candle_info[0]
 

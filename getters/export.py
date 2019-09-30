@@ -16,34 +16,28 @@ def highcharts_export(modified_data):
         a = json.load(f)  
         a['series'][0]['data'] = modified_data
 
-        print ('f',f)
-        print ('a',a)
+        # print ('f',f)
+        # print ('a',a)
 
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     updated = os.path.join(SITE_ROOT,'updated.json')
     with open(updated, 'w') as w:
         w.write(json.dumps(a))
         
-        print ('w',w)
+        # print ('w',w)
    
 
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     infile = os.path.join(SITE_ROOT,'updated.json')
-    print ('infile',infile)
+    # print ('infile',infile)
 
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     outfile = os.path.join(SITE_ROOT,'outfile.svg')
 
-    print('outfile',outfile)
+    # print('outfile',outfile)
 
-    print ("highcharts-export-server --type svg  -infile "+infile+" -outfile "+outfile)
-    
-    # subprocess.check_call("pwd", shell = True) 
-    # subprocess.check_call("cat "+infile, shell = True) 
     subprocess.check_call("highcharts-export-server --type svg -infile "+infile+" -outfile "+outfile, shell = True) 
     
-    print ('Success')
-
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     outfile = os.path.join(SITE_ROOT,'outfile.svg')
 

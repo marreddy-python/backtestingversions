@@ -85,7 +85,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
                 profit_loss = round(db_data[i].profit_loss,2)
                 profit_loss_percentage  = round(db_data[i].profit_loss_percentage,2)
                 buy_angle = round(db_data[i].buy_angle,2)
-                Sell_angle = db_data[i].Sell_angle
+                Sell_angle = round(db_data[i].Sell_angle)
                 Optimization = db_data[i].Optimization
                 Day_identifier = db_data[i].Day_identifier 
 
