@@ -436,7 +436,7 @@ tbody tr {
     }
 
     /* .table{table-layout: fixed;} */
-    
+
     .table, td, th{border-collapse:collapse; border:1px solid #777;}
     th{ font-size:15px; background:#66C2E0;}
     .Strategy { overflow-x: scroll; }
@@ -445,6 +445,13 @@ tbody tr {
         tbody tr {
             display: table;
             table-layout: fixed; 
+    }
+    
+    .table thead,
+    tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed; 
     }
 
     .table thead tr th{
@@ -455,7 +462,6 @@ tbody tr {
         height:400px; 
     }
     
-
 }
 
 .footer{
