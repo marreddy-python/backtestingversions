@@ -205,7 +205,7 @@ def Strategies1():
                 data,strategy_names = Data_loader.getStrategies()
                 print (strategy_names,data)
 
-                return render_template("page3.html", data = data ,strategy_names = strategy_names,page = Strategies1 )
+                return render_template("page3.html", data = data ,strategy_names = strategy_names,page = 'Strategies1' )
 
 
 
@@ -236,7 +236,7 @@ def settings():
                 Data_loader = DataController()
                 data,strategy_names = Data_loader.getStrategies()
                 
-                return render_template("page4.html",strategy_names = strategy_names,page = settings)
+                return render_template("page4.html",strategy_names = strategy_names,page = 'settings')
          
 
 
