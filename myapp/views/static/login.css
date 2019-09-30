@@ -457,9 +457,10 @@ tbody tr {
     .table thead tr th{
         width:200px;
     }
-    table tr th:nth-child(1), table tr td:nth-child(1){
+    table tr th:nth-child(2), table tr td:nth-child(2){
         display:none; 
        }
+
 
     .arena{
         height:400px; 
