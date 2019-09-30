@@ -27,7 +27,7 @@
 <nav class="navbar navbar-inverse" style="background-color:	#4169E1;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" style="color:white;"href="#">xTrade Analytics</a> 
+      <a class="navbar-brand" style="color:white;"href="#"> xTrade Analytics </a> 
       
       <a class="navbar-brand icon" style="color:white;" href="javascript:void(0);" onclick="Menu_icon()"><i class="fa fa-bars"></i></a>
 
@@ -45,7 +45,7 @@
 
           <ol class="nav nav-pills nav-stacked">
            
-              <li id ="uname" style="font-size: 27px;background-color: 	#BEBEBE;" > <a style="color:white;" href="#"> User name </a></li>
+              <li id ="uname" style="font-size: 27px;background-color: 	#BEBEBE;" > <a style="color:white;" href="#"> {{session['username']}} </a></li>
               <li> <a href="{{ url_for('modulo1.strategyview') }}">Strategy view</a></li>
               <li id="cart"> <a  href="{{ url_for('modulo1.Arena') }}">Arena </a></li>
               <li> <a href="{{ url_for('modulo1.Strategies1')}}">Strategies</a></li>

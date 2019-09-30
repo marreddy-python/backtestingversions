@@ -28,6 +28,7 @@ def login():
 
                 if login is not None:
                         print (uname)
+                        session['username'] = uname
                         flash('Logged in successfully.')
                         return redirect(url_for("modulo1.strategyview"))
             
