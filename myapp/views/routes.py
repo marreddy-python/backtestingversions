@@ -169,7 +169,7 @@ def strategyview():
                 print ('data',data )
                 print ('Stratey_values',Stratey_values)
                 return render_template("page1.html", Metric_values_singleday = Metric_values_singleday,Trades_singleday = Trades_singleday,Performance = Performance,daily_data = daily_data,Buy_flags = Buy_flags,Sell_flags = Sell_flags,
-                strategy_names = strategy_names,Strategy_values =Stratey_values)
+                strategy_names = strategy_names,Strategy_values =Stratey_values,page='strategyview')
 
 
 
@@ -177,7 +177,7 @@ def strategyview():
 def Arena():  
         Data_loader = DataController()
         data,strategy_names = Data_loader.getStrategies()
-        return render_template("page2.html",strategy_names = strategy_names, )     
+        return render_template("page2.html",strategy_names = strategy_names, page = 'Arena')     
 
          
 
@@ -205,7 +205,7 @@ def Strategies1():
                 data,strategy_names = Data_loader.getStrategies()
                 print (strategy_names,data)
 
-                return render_template("page3.html", data = data ,strategy_names = strategy_names )
+                return render_template("page3.html", data = data ,strategy_names = strategy_names,page = Strategies1 )
 
 
 
@@ -236,7 +236,7 @@ def settings():
                 Data_loader = DataController()
                 data,strategy_names = Data_loader.getStrategies()
                 
-                return render_template("page4.html",strategy_names = strategy_names,)
+                return render_template("page4.html",strategy_names = strategy_names,page = settings)
          
 
 
