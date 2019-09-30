@@ -458,7 +458,7 @@ tbody tr {
         width:200px;
     }
     table tr th:nth-child(1), table tr td:nth-child(1){
-        display:none;
+        display:none; 
        }
 
     .arena{
