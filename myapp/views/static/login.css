@@ -446,7 +446,7 @@ tbody tr {
             display: table;
             table-layout: fixed; 
     }
-    
+
     .table thead,
     tbody tr {
       display: table;
@@ -457,6 +457,9 @@ tbody tr {
     .table thead tr th{
         width:200px;
     }
+    table tr th:nth-child(1), table tr td:nth-child(1){
+        display:none;
+       }
 
     .arena{
         height:400px; 
