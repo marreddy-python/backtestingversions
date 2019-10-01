@@ -251,6 +251,16 @@ li a:hover {
 .graph_area{
     margin:3px;
 }
+.strategies_page3{
+    margin-top:0px;
+    /* margin-bottom: 0px; */
+}
+
+ul {
+    margin-top: 0;
+    margin-bottom: 0px
+}
+
 .tab {
     margin-right:0px;
 
