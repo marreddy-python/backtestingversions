@@ -118,7 +118,7 @@
               console.log(startDate_milliseconds)
 
               //finding the index of the time 
-              Performance_Data = {"Total_Profit": [], "Profit_Factor": [], "Profitable": [],"Max_Drawdown":[],"x":[]} 
+              // Performance_Data = {"Total_Profit": [], "Profit_Factor": [], "Profitable": [],"Max_Drawdown":[],"x":[]} 
        
               console.log(Performance_Data)
 
@@ -137,10 +137,10 @@
 
                 console.log(Total_Profit,Profit_Factor,Profitable,Max_Drawdown)
 
-                $('#singleday_Total_Profit').val(Total_Profit[element_index]); 
-                $('#singleday_Profit_factor').val(Profit_Factor[element_index]); 
-                $('#singleday_Profitable').val(Profitable[element_index]); 
-                $('#singleday_MaxDrawdown').val(Max_Drawdown[element_index]); 
+                $('#singleday_Total_Profit').val(roundToTwo(Total_Profit[element_index])); 
+                $('#singleday_Profit_factor').val(roundToTwo(Profit_Factor[element_index])); 
+                $('#singleday_Profitable').val(roundToTwo(Profitable[element_index])); 
+                $('#singleday_MaxDrawdown').val(roundToTwo(Max_Drawdown[element_index])); 
                
 
               // Filter the show trades 
@@ -499,7 +499,16 @@
                       chart. yAxis[0].setTitle({ 
                           text: 'Total_profit',
                       })
-                      chart.xAxis[0].setCategories(Performance_Data["x"]);
+                      
+                      a = Performance_Data["x"]
+                      b = []
+                      for(i = 0; i<a.length ; i++){
+                          var date = new Date(a[i]);
+                          b.push(date.toString("MMM dd"))
+                      }
+
+
+                      chart.xAxis[0].setCategories(b);
                       
 
                       // GET START DATE AND END DATE FROM PERFORMANCE VARAIABLE 
@@ -565,10 +574,10 @@
           
                   console.log(main_data["Trades_singleday"])
                 
-                  $('#singleday_Total_Profit').val(a["Total_Profit"]); 
-                  $('#singleday_Profit_factor').val(a["Profit_Factor"]); 
-                  $('#singleday_Profitable').val(a["Profitable"]); 
-                  $('#singleday_MaxDrawdown').val(a["Max_Drawdown"]); 
+                  $('#singleday_Total_Profit').val(roundToTwo(a["Total_Profit"])); 
+                  $('#singleday_Profit_factor').val(roundToTwo(a["Profit_Factor"])); 
+                  $('#singleday_Profitable').val(roundToTwo(a["Profitable"])); 
+                  $('#singleday_MaxDrawdown').val(roundToTwo(a["Max_Drawdown"])); 
                   
                   Singleday_Trades = main_data["Trades_singleday"]
                   Performance_Data  = main_data["Performance"]
@@ -608,6 +617,9 @@
                 $('#Optitab').html( Strategy_values[2]);
                 $('#stop_ordertab').html(Strategy_values[4] );
 
+                function roundToTwo(num) {    
+                      return +(Math.round(num + "e+2")  + "e-2");
+                }
 
              </script>
 
@@ -646,7 +658,7 @@
 
         <p class = "livecheckbox" style= "font-size: 25px;padding-top:10px; ">
             <input  type="checkbox" value="Yes" style="zoom:2;">
-            <label >Show in graph</label> 
+            <label style ="font-size:18px;">Show in graph</label> 
         </p>
 
       </div>
