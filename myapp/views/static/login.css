@@ -4,6 +4,15 @@
   }
   .highlight { background: yellow }
 
+  #triangle-topright {
+    width: 0;
+    height: 0;
+    opacity: 0.7;
+    border-top: 25px solid red;
+    border-right: 25px solid transparent;
+  }
+
+
 #first {
     margin-left :20px;
     width: 230px; 
