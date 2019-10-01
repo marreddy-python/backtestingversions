@@ -5,35 +5,39 @@
 
 
     <div class="strategies_page3" style="background-color: white ; ">
+
         <div class="phase">
 
             <ul>
 
-                <span id="sam">
-                    <label>Symbol</label>
-                    <select name="userinput_symbol" style="margin-left:10px;margin-top: 20px;">
+                 <span id="sam"> 
+                    <!-- <label style="font-size:15px; opacity:0.6; ">Symbol</label> -->
+                    <select name="userinput_symbol" style="font-size:15px;margin-left:10px;margin-top: 0px;">
                         <option selected="selected">TVIX</option>
                     </select>
                 </span>
 
                 <span id="sam">
-                    <label>Sort by :</label>
-                    <select name="userinput_symbol" style="margin-left:10px;margin-top: 20px;">
+                    <a  style="font-size:15px; opacity:0.6;padding-left: 20px;" href="{{ url_for('modulo1.strategyview') }}">New Strategy</a>
+                </span>
+               
+                <span id="sam">
+                    <a class="SeeMore2" style="font-size:15px; opacity:0.6;padding-left: 20px;" href="#"> Favourites</a>
+                    
+                </span>
+
+    
+
+                <span id="sam">
+                    <label style="font-size:15px; opacity:0.6;padding-left: 20px;">Sort by :</label>
+                    <select name="userinput_symbol" style="font-size:15px;margin-left:10px;margin-top: 20px;">
                         <option selected="selected">Total profit</option>
                     </select>
                 </span>
 
 
-                <span id="sam">
-
-                    <a class="SeeMore2" href="#">Go to Favourites</a>
-                    
-                </span>
-
-                <span id="sam">
-                    <a href="{{ url_for('modulo1.strategyview') }}">New Strategy</a>
-                </span>
             </ul>
+        
         </div>
 
     </div>
@@ -110,11 +114,11 @@
                 strategy_id = b.Strategy_id
 
                
-                $('#parent').append('<div class="Strategies strategy'+b.isFavourite+'" ><h3  class="disable_button' + i + '" style="color:blue;">' + heading + '</h3> <p  id="remove_strategy'+ strategy_id +'" class="close"> &times;</p> <a href="#" class="liketoggle unlike star" id='+strategy_id +'><i  class="fa fa-star" style="font-size: 1.5em;"></i></a>'+
-                    '<p style="font-size: 20px;">sma angles</p><p style="font-size: 20px;">Buy : <span style="font-weight: bold">' + b.Buy + '</span>' +
-                    '<span style="margin-left: 20px;">Sell : </span><span style="font-weight: bold">' + b.Sell + ' </span><span style="margin-left: 20px;">Optimization : </span>' +
-                    '<span style="font-weight: bold">' + b.Optimization + ' </span></p><p style="font-weight: 800; font-size:20px;"><span>Total profit : </span > <span style="font-weight: bold">' + b.TWENTY_TP + ' </span><span >Profit factor : </span>' +
-                    ' <span style="font-weight: bold">' + b.TWENTY_PF + ' </span><span> %profitable : </span> <span style="font-weight: bold">' + b.TWENTY_PT+ ' </span> <span>  </span></p><p><button class="view_button2">view</button><button class="view_button2" id="disable_button' + i + '">Add to arena</button></p>'+    
+                $('#parent').append('<div class="Strategies strategy'+b.isFavourite+'" ><h3  class="disable_button' + i + '" style="color:black; margin-left:16px; font-size:16px;opacity:0.7;padding-top:10px;">' + heading + '</h3> <p  id="remove_strategy'+ strategy_id +'" class="close"> &times;</p> <a href="#" class="liketoggle unlike star" id='+strategy_id +'><i  class="fa fa-star" style="font-size: 1.5em;"></i></a>'+
+                    '<p style="font-size: 14px;opacity:0.4;margin-left:16px;">sma angles</p><p style="font-size: 15px;margin-left:16px; opacity:0.6">Buy : <span style="font-weight: bold ">' + b.Buy + '</span>' +
+                    '<span style="margin-left: 20px;opacity:0.6">Sell : </span><span style="font-weight: bold;">' + b.Sell + ' </span><span style="margin-left: 20px;opacity:0.6">Optimization : </span>' +
+                    '<span style="font-weight: bold">' + b.Optimization + ' </span></p><p style="font-weight: 800; font-size:20px;"><span style="margin-left:16px;font-size:16px;opacity:0.6;padding-left:15px;">Total profit : </span > <span style="font-weight: bold">' + b.TWENTY_TP + ' </span><span style ="font-size:16px;opacity:0.6 ;padding-left:15px;">Profit factor : </span>' +
+                    ' <span style="font-weight: bold">' + b.TWENTY_PF + ' </span><span style="font-size:16px;opacity:0.6;padding-left:15px;"> %profitable : </span> <span style="font-weight: bold">' + b.TWENTY_PT+ ' </span> <span>  </span></p><p><button class="view_button2" style="margin-left:16px;">view</button><button class="view_button2" id="disable_button' + i + '">Add to arena</button></p>'+    
                     '</div>')
 
                     if (b.isFavourite == true){
@@ -282,6 +286,5 @@
 </div>
 
 {% endblock content %}
-
 
 
