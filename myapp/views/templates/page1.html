@@ -2,20 +2,19 @@
 {% extends "home.html" %}
 {% block content %}
 
-
 <div class="tab">
     <button class="tablinks active" onclick="openCity('first_tab')" id="defaultOpen">Daily Trades</button>
     <button class="tablinks" id = "Performance" onclick="openCity('second_tab')">Performance</button>
   
     <div id="tabvalues" > 
 
-    <label >Buy:</label>
-    <label id="Buytab"></label>
-    <label > Sell : </label>
+    <label style="opacity: 0.5;" >Buy:</label>
+    <label id="Buytab">  </label>
+    <label style="opacity: 0.5; padding-left: 5px;" > Sell : </label>
     <label id = "Selltab"> </label>
-    <label >Optimization : </label>
+    <label style="opacity: 0.5;padding-left: 5px;" >Optimization : </label>
     <label id="Optitab" > </label>
-    <label >Stop order : </label>
+    <label style="opacity: 0.5;padding-left: 5px;">Stop order : </label>
     <label id="stop_ordertab"> </label>
 
     </div>
@@ -35,11 +34,12 @@
                 <div class = "phase" style="margin-top: 10px;">
 
             
-                      <span id="sam">
-                          <label >Select Date</label>
-                          <input id="from" type="text" name="date_selector">
+                      <span id="sam1123">
+                          <label style="font-size: 15px;" >Select Date</label>
+                          <input id="from123" type="text" size="10" name="date_selector">
                       </span>
-     
+      
+                     
                   </div>
                 
                 <!--ONE DAY CHART-->
@@ -98,8 +98,10 @@
 
                 var endDate= convertDate(theDate);
 
-                console.log(startDate,endDate)
-              
+                console.log(startDate)
+                var myDate = new Date(startDate);
+                var startDate_milliseconds = myDate.getTime();
+
                 if (startDate!=="" && endDate!=="") {
                     startDate=startDate.split("/");
                     endDate=endDate.split("/");
@@ -107,13 +109,66 @@
                     var chart = $('#realtime-chart').highcharts();
                   // console.log(chart)
                     chart.xAxis[0].setExtremes(
-            Date.UTC(startDate[2], startDate[0]-1, startDate[1]),
-            Date.UTC(endDate[2], endDate[0]-1, endDate[1])
+                          Date.UTC(startDate[2], startDate[0]-1, startDate[1]),
+                          Date.UTC(endDate[2], endDate[0]-1, endDate[1])
                     );
                 }
+
+              //LOGIC FOR DYNAMIC NATURE OF SUMMARY AND TRADES
+              console.log(startDate_milliseconds)
+
+              //finding the index of the time 
+              Performance_Data = {"Total_Profit": [], "Profit_Factor": [], "Profitable": [],"Max_Drawdown":[],"x":[]} 
+       
+              console.log(Performance_Data)
+
+              if (Performance_Data !== null){
+                console.log('excuted')
+                time_milliseconds = Performance_Data["x"]
+                console.log(time_milliseconds)
+                console.log(typeof(time_milliseconds))
+
+                element_index = time_milliseconds.indexOf(startDate_milliseconds)
+                
+                Total_Profit = Performance_Data["Total_Profit"]
+                Profit_Factor = Performance_Data["Total_Profit"]
+                Profitable = Performance_Data["Profitable"]
+                Max_Drawdown = Performance_Data["Max_Drawdown"]
+
+                console.log(Total_Profit,Profit_Factor,Profitable,Max_Drawdown)
+
+                $('#singleday_Total_Profit').val(Total_Profit[element_index]); 
+                $('#singleday_Profit_factor').val(Profit_Factor[element_index]); 
+                $('#singleday_Profitable').val(Profitable[element_index]); 
+                $('#singleday_MaxDrawdown').val(Max_Drawdown[element_index]); 
+               
+
+              // Filter the show trades 
+
+              // $( "tr:contains(startDate)" ).addClass( "highlight" );
+
+               date = new Date(startDate_milliseconds).toISOString()
+               
+               selected_day = date.substring(0, 10)
+
+               console.log(typeof(selected_day))
+
+              var searchString = 'B';
+              $(".table tr td:contains('" + selected_day + "')").filter(function() {
+              return $(this).text().trim() == selected_day;
+                }).parent().remove();
+              
+              }
+
+              console.log($(".table tr td"))
+        
+            
             }
                  });
+
+
     })
+
 
    
     // $("#from").datepicker({ dateFormat: "yy-mm-dd"}).datepicker("setDate","7/11/2011" );
@@ -157,16 +212,14 @@
             </tbody>
 
             </table>
-
           
         </div>
 
 
 
         <div class= "summary"> 
-          
-    
-          <p style="font-size: 35px;background-color: #BEBEBE;text-align: center;color:white;">Summary</p>
+      
+          <p style="font-size: 15px;background-color: #e0e0e0;text-align: center;color:white;font-weight: bold; padding:2mm;color: rgba(0, 0, 0, 0.8);">Summary</p>
           
           <form style="margin-top:20px;">
 
@@ -179,7 +232,7 @@
               <label class="sum_lbl">%Profitable</label>
               <input class="sum_inp" type="text" id="singleday_Profitable" size="10" value="0">
 
-               <label class="sum_lbl">Max Drawdown</label>  
+              <label class="sum_lbl">Max Drawdown</label>  
               <input class="sum_inp" type="text" id="singleday_MaxDrawdown"  size="10" value="0">
             
               <p class="sum_lbl show_trades" ><a href = "#" id="opener">Show Trades>> </a></p>
@@ -229,8 +282,7 @@
         $( "#opener" ).click(function() {
          
           //Get the trades happend in a single day and pass it to dialog box data 
-         
-        
+
         $( "#dialog" ).dialog( "open" );
         
         //});
@@ -282,13 +334,13 @@
                   </span>
             
                 <span id="sam">
-                    <label >From</label>
-                    <input id="lbl1" type="date" name="start_date">
+                    <label style="font-size: 15px;"  >From</label>
+                    <input id="lbl1" type="date" style="font-size: 1.5rem"  name="start_date">
                 </span>
 
                 <span id="sam">
-                    <label >To</label>
-                    <input id="lbl2" type="date" name="end_date">
+                    <label style="font-size: 15px;" >To</label>
+                    <input id="lbl2" type="date" style="font-size: 1.5rem"  name="end_date">
                 </span>
              
 
@@ -312,7 +364,7 @@
 
     <div class= "summary"> 
     
-        <p style="font-size: 35px;background-color: #BEBEBE;text-align: center;color:white;">Summary</p>
+      <p style="font-size: 15px;background-color: #e0e0e0;text-align: center;color:white;font-weight: bold; padding:2mm;color: rgba(0, 0, 0, 0.8);">Summary</p>
           
         <form style="margin-top:20px;">
 
@@ -325,8 +377,8 @@
             <label class="sum_lbl"><a href="#" class="myHref" id = "Profitable">%Profitable</a></label>
             <input class="sum_inp" type="text" id="mytext"  size="10" value="0">
 
-            <!-- <label class="sum_lbl"><a href="#" class="myHref" id = "Max_Drawdown">Max Drawdown</a></label> 
-            <input class="sum_inp" type="text" id="mytext"  size="10" value="0">-->
+            <label class="sum_lbl"><a href="#" class="myHref" id = "Max_Drawdown">Max Drawdown</a></label> 
+            <input class="sum_inp" type="text" id="mytext"  size="10" value="0">
           
         </form>
 
@@ -384,7 +436,7 @@
           <button   class="btn btn-primary btn-lg" name="submit_button" id="Save" value="Save">Save </button>
           <!-- <button class="btn btn-primary btn-lg" name="submit_button" id="Save_and_compare" value="Save_and_compare">Save and compare</button> -->
       
-       
+    
           <script>
 
           
@@ -517,6 +569,7 @@
                   $('#singleday_Profit_factor').val(a["Profit_Factor"]); 
                   $('#singleday_Profitable').val(a["Profitable"]); 
                   $('#singleday_MaxDrawdown').val(a["Max_Drawdown"]); 
+                  
                   Singleday_Trades = main_data["Trades_singleday"]
                   Performance_Data  = main_data["Performance"]
                 
