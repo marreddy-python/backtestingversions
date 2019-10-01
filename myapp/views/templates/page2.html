@@ -150,10 +150,9 @@ var html = "";
 
     html +="<tr id="+b.Strategy+">"+
 
-            "<td>"
-            + '<p><input class ="must" style="zoom:1.5;" type="checkbox" id="check'+b.Strategy+'" name="check'+b.Strategy+'" checked/>'+
-
-                '<label id="siri'+i+'" style="font-size: 15px; margin-left:10px;">'+b.Strategy+'</label> </p>' + 
+        "<td>"
+            + '<p><input class ="must" style="zoom:2.2;" type="checkbox" id="check'+b.Strategy+'" name="check'+b.Strategy+'" checked/>'+
+            '<label style="width:20px;height:20px; background-color:black; margin-left:10px;"id="clr'+b.Strategy+'">  </label><label id="siri'+i+'" style="font-size: 15px; margin-left:10px;">'+b.Strategy+'</label></p>' + 
             
             "</td>"+
 
@@ -164,7 +163,7 @@ var html = "";
             "<td>"+  b.TWENTY_PT + "</td>"+
             // "<td>"+ null + "</td>"+
             
-            "<td>"+'<span class="mar" id="sam'+i+'" >&times;</span></td>'+"</tr>";
+            "<td>"+'<span class="mar" id="sam'+i+'" style="cursor: pointer; background-color:#eee;padding:0.5em;font-weight:bold;onmouseover="this.style.color"=#0F0" >&times;</span></td>'+"</tr>";
 }
 
 $("#tableHtml").html(html);
