@@ -131,13 +131,15 @@
                 console.log(typeof(time_milliseconds))
 
                 element_index = time_milliseconds.indexOf(startDate_milliseconds)
+
+                console.log(element_index)
                 
                 Total_Profit = Performance_Data["Total_Profit"]
                 Profit_Factor = Performance_Data["Profit_Factor"]
                 Profitable = Performance_Data["Profitable"]
                 Max_Drawdown = Performance_Data["Max_Drawdown"]
 
-                console.log(Total_Profit,Profit_Factor,Profitable,Max_Drawdown)
+                // console.log(Total_Profit,Profit_Factor,Profitable,Max_Drawdown)
 
                 $('#singleday_Total_Profit').val(roundToTwo(Total_Profit[element_index])); 
                 $('#singleday_Profit_factor').val(roundToTwo(Profit_Factor[element_index])); 
@@ -158,10 +160,9 @@
                console.log(selected_day)
 
               $(".table tr td:contains('" + selected_day + "')").filter(function() {
-              console.log($(".table tr td:contains('" + selected_day + "')"))
               return $(this).text().trim() == selected_day;
                 }).parent().remove();
-              
+
               }
 
               // console.log($(".table tr td"))
@@ -578,10 +579,10 @@
           
                   console.log(main_data["Trades_singleday"])
                 
-                  $('#singleday_Total_Profit').val(roundToTwo(a["Total_Profit"])); 
+                  /*$('#singleday_Total_Profit').val(roundToTwo(a["Total_Profit"])); 
                   $('#singleday_Profit_factor').val(roundToTwo(a["Profit_Factor"])); 
                   $('#singleday_Profitable').val(roundToTwo(a["Profitable"])); 
-                  $('#singleday_MaxDrawdown').val(roundToTwo(a["Max_Drawdown"])); 
+                  $('#singleday_MaxDrawdown').val(roundToTwo(a["Max_Drawdown"])); */
                   
                   Singleday_Trades = main_data["Trades_singleday"]
                   Performance_Data  = main_data["Performance"]
