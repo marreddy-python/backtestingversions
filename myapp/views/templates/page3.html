@@ -114,8 +114,8 @@
                 strategy_id = b.Strategy_id
 
                
-                $('#parent').append('<div class="Strategies strategy'+b.isFavourite+'" ><h3  class="disable_button' + i + '" style="color:black; margin-left:16px; font-size:16px;opacity:0.7;padding-top:0px;">' + heading + '</h3> <p  id="remove_strategy'+ strategy_id +'" class="close"> &times;</p> <a href="#" class="liketoggle unlike star" id='+strategy_id +'><i  class="fa fa-star" style="font-size: 1.5em;"></i></a>'+
-                    '<p style="font-size: 14px;opacity:0.4;margin-left:16px;">sma angles</p><p style="font-size: 15px;margin-left:16px; opacity:0.6">Buy : <span style="font-weight: bold ">' + b.Buy + '</span>' +
+                $('#parent').append('<div class="Strategies strategy'+b.isFavourite+'" ><h3  class="disable_button' + i + '" style="color:black; margin-left:16px; font-size:16px;opacity:0.7;padding-top:10px;">' + heading + '</h3> <p  id="remove_strategy'+ strategy_id +'" class="close"> &times;</p> <a href="#" class="liketoggle unlike star" id='+strategy_id +'><i  class="fa fa-star" style="font-size: 1.5em;"></i></a>'+
+                    '<p style="font-size: 10px;opacity:0.4;margin-left:16px;">sma angles</p><p style="font-size: 15px;margin-left:16px; opacity:0.6">Buy : <span style="font-weight: bold ">' + b.Buy + '</span>' +
                     '<span style="margin-left: 20px;opacity:0.6">Sell : </span><span style="font-weight: bold;">' + b.Sell + ' </span><span style="margin-left: 20px;opacity:0.6">Optimization : </span>' +
                     '<span style="font-weight: bold">' + b.Optimization + ' </span></p><p style="font-weight: 800; font-size:20px;"><span style="margin-left:16px;font-size:16px;opacity:0.6;padding-left:15px;">Total profit : </span > <span style="font-weight: bold">' + b.TWENTY_TP + ' </span><span style ="font-size:16px;opacity:0.6 ;padding-left:15px;">Profit factor : </span>' +
                     ' <span style="font-weight: bold">' + b.TWENTY_PF + ' </span><span style="font-size:16px;opacity:0.6;padding-left:15px;"> %profitable : </span> <span style="font-weight: bold">' + b.TWENTY_PT+ ' </span> <span>  </span></p><p><button class="view_button2" style="margin-left:16px;">view</button><button class="view_button2" id="disable_button' + i + '">Add to arena</button></p>'+    
@@ -212,6 +212,7 @@
 
 
 // confirmDialog box 
+var x 
 function ConfirmDialog(message) {
   $('<div></div>').appendTo('body')
     .html('<div><h6>' + message + '?</h6></div>')
@@ -224,19 +225,24 @@ function ConfirmDialog(message) {
       resizable: false,
       buttons: {
         Yes: function() { 
+                console.log('Yes clicked')
                 $(this).dialog("close");
-                return 'YES'
+                x = 'YES'
             },
         No: function() {
+                console.log('no clicked')
                 $(this).dialog("close");
-                return 'NO'
+                x = 'NO'
         }
       },
       close: function(event, ui) {
         $(this).remove();
       }
     });
+
 };
+
+
             
             // Add to favouritess
             $(".liketoggle").click(function() {
@@ -244,7 +250,7 @@ function ConfirmDialog(message) {
                 var id = $(this).attr('id');
                 console.log(id)
 
-                x = ConfirmDialog('Are you sure wants to add strategy as a favourite ');
+                ConfirmDialog('Are you sure wants to add strategy as a favourite ');
                 console.log(x)
 
                 if (x == 'YES')
@@ -292,7 +298,7 @@ function ConfirmDialog(message) {
             console.log(strategy_id)
 
 
-            x = ConfirmDialog('Are you sure wants to delete the strategy ');
+            ConfirmDialog('Are you sure wants to delete the strategy ');
             console.log(x)
 
             if (x == 'YES')
