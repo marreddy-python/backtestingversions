@@ -137,9 +137,9 @@ class DataDAOPostgreImpl(DataDAOPostgre):
             return a,b,c 
 
         a,b,c = myFunction(start)
-        start_date = date(a, b, c-1)
+        start_date = date(a, b, c)
         a,b,c = myFunction(end)
-        end_date = date(a, b, c+1)
+        end_date = date(a, b, c)
         print (start_date,end_date)
 
         # Filter the daily_metric table based on the day identifiers 
