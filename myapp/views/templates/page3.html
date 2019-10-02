@@ -248,21 +248,45 @@ function ConfirmDialog(message) {
                 // POST REQUEST TO ADD STRATEGEY TO THE FAVOURITE STRATEGIES
                 var id = $(this).attr('id');
                 console.log(id)
-             
-        
 
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ url_for('modulo1.Strategies1')}}",
-                        data : $(this).attr('id'),
-                        success: function(main_data){
-                            console.log('main_data',main_data)          
-                            $('#'+id).toggleClass("unlike like");
-                            $('#'+id).closest("div").toggleClass('strategyfalse strategytrue')
-    
-                        }            
+                $('<div></div>').appendTo('body')
+                    .html('<div><h6>' + 'Are you sure wants to add strategy as a favourite or remove from the favourite ' + '</h6></div>')
+                    .dialog({
+                        modal: true,
+                        title: 'Delete message',
+                        zIndex: 10000,
+                        autoOpen: true,
+                        width: 'auto',
+                        resizable: false,
+                        buttons: {
+                        Yes: function() { 
+                            console.log('Yes clicked')
+                            $.ajax({
+                                type: 'POST',
+                                url: "{{ url_for('modulo1.Strategies1')}}",
+                                data : id,
+                                success: function(main_data){
+                                    console.log('main_data',main_data)          
+                                    $('#'+id).toggleClass("unlike like");
+                                    $('#'+id).closest("div").toggleClass('strategyfalse strategytrue')
+                                }            
+                            });
+                            $(this).dialog("close");
+                        },
+                        
+                        No: function() {
+                            console.log('no clicked')
+                            $(this).dialog("close");
+                        }
+                        },
+                        close: function(event, ui) {
+                        $(this).remove();
+                    }
                     });
+
             });
+
+
 
 
         // Loading the saved strategies,updating home template recent strategy values
@@ -295,7 +319,7 @@ function ConfirmDialog(message) {
             console.log(strategy_id)
            
             $('<div></div>').appendTo('body')
-                    .html('<div><h6>' + 'message' + '?</h6></div>')
+                    .html('<div><h6>' + 'Are you sure wants to delete the strategy ?' + '?</h6></div>')
                         .dialog({
                             modal: true,
                             title: 'Delete message',
