@@ -22,7 +22,7 @@
                 </span>
                
                 <span id="sam">
-                    <a class="SeeMore2" style="font-size:15px; opacity:0.6;padding-left: 20px;" href="#"> Go to Favourites</a>
+                    <a class="SeeMore2" style="font-size:15px; opacity:0.6;padding-left: 20px;" href="#"> Favourites</a>
                     
                 </span>
 
@@ -117,8 +117,8 @@
                 $('#parent').append('<div class="Strategies strategy'+b.isFavourite+'" ><h3  class="disable_button' + i + '" style="color:black; margin-left:16px; font-size:16px;opacity:0.7;padding-top:10px;">' + heading + '</h3> <p  id="remove_strategy'+ strategy_id +'" class="close"> &times;</p> <a href="#" class="liketoggle unlike star" id='+strategy_id +'><i  class="fa fa-star" style="font-size: 1.5em;"></i></a>'+
                     '<p style="font-size: 14px;opacity:0.4;margin-left:16px;">sma angles</p><p style="font-size: 15px;margin-left:16px; opacity:0.6">Buy : <span style="font-weight: bold ">' + b.Buy + '</span>' +
                     '<span style="margin-left: 20px;opacity:0.6">Sell : </span><span style="font-weight: bold;">' + b.Sell + ' </span><span style="margin-left: 20px;opacity:0.6">Optimization : </span>' +
-                    '<span style="font-weight: bold">' + b.Optimization + ' </span></p><p style="font-weight: 800; font-size:20px;"><span style="margin-left:16px;font-size:16px;opacity:0.6;">Total profit : </span > <span style="font-weight: bold">' + b.TWENTY_TP + ' </span><span style ="font-size:16px;opacity:0.6 ;padding-left:15px;">Profit factor : </span>' +
-                    ' <span style="font-weight: bold">' + b.TWENTY_PF + ' </span><span style="font-size:16px;opacity:0.6;padding-left:15px;"> %profitable : </span> <span style="font-weight: bold">' + b.TWENTY_PT+ ' </span> <span>  </span></p><p><button class="view_button2" style="margin-left:16px;">View</button><button class="view_button2" id="disable_button' + i + '">Add to arena</button></p>'+    
+                    '<span style="font-weight: bold">' + b.Optimization + ' </span></p><p style="font-weight: 800; font-size:20px;"><span style="margin-left:16px;font-size:16px;opacity:0.6;padding-left:15px;">Total profit : </span > <span style="font-weight: bold">' + b.TWENTY_TP + ' </span><span style ="font-size:16px;opacity:0.6 ;padding-left:15px;">Profit factor : </span>' +
+                    ' <span style="font-weight: bold">' + b.TWENTY_PF + ' </span><span style="font-size:16px;opacity:0.6;padding-left:15px;"> %profitable : </span> <span style="font-weight: bold">' + b.TWENTY_PT+ ' </span> <span>  </span></p><p><button class="view_button2" style="margin-left:16px;">view</button><button class="view_button2" id="disable_button' + i + '">Add to arena</button></p>'+    
                     '</div>')
 
                     if (b.isFavourite == true){
@@ -211,24 +211,57 @@
         });
 
 
+// confirmDialog box 
+function ConfirmDialog(message) {
+  $('<div></div>').appendTo('body')
+    .html('<div><h6>' + message + '?</h6></div>')
+    .dialog({
+      modal: true,
+      title: 'Delete message',
+      zIndex: 10000,
+      autoOpen: true,
+      width: 'auto',
+      resizable: false,
+      buttons: {
+        Yes: function() { 
+                $(this).dialog("close");
+                return 'YES'
+            },
+        No: function() {
+                $(this).dialog("close");
+                return 'NO'
+        }
+      },
+      close: function(event, ui) {
+        $(this).remove();
+      }
+    });
+};
+            
+            // Add to favouritess
             $(".liketoggle").click(function() {
                 // POST REQUEST TO ADD STRATEGEY TO THE FAVOURITE STRATEGIES
                 var id = $(this).attr('id');
                 console.log(id)
-                $.ajax({
-                   type: 'POST',
-                   url: "{{ url_for('modulo1.Strategies1')}}",
-                   data : $(this).attr('id'),
-                   success: function(main_data){
-                        console.log('main_data',main_data)          
-                        $('#'+id).toggleClass("unlike like");
-                        $('#'+id).closest("div").toggleClass('strategyfalse strategytrue')
-                       
-                   }            
-            });
 
-            // $(this).toggleClass("like unlike");
-        });
+                x = ConfirmDialog('Are you sure wants to add strategy as a favourite ');
+                console.log(x)
+
+                if (x == 'YES')
+                {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ url_for('modulo1.Strategies1')}}",
+                        data : $(this).attr('id'),
+                        success: function(main_data){
+                            console.log('main_data',main_data)          
+                            $('#'+id).toggleClass("unlike like");
+                            $('#'+id).closest("div").toggleClass('strategyfalse strategytrue')
+    
+                        }            
+                    });
+                }
+            });
 
 
         // Loading the saved strategies,updating home template recent strategy values
@@ -251,7 +284,6 @@
 
 
         // Deleteing a strategy
-        
         $(".close").click(function() {
             console.log('delete option clicked')
             var id = $(this).attr('id');
@@ -259,7 +291,13 @@
             var strategy_id = parseInt(id.match(/\d+/)) 
             console.log(strategy_id)
 
-            $.ajax({
+
+            x = ConfirmDialog('Are you sure wants to delete the strategy ');
+            console.log(x)
+
+            if (x == 'YES')
+            {
+                $.ajax({
                    type: 'POST',
                    url: "{{ url_for('modulo1.delete_strategy')}}",
                    data : {
@@ -271,7 +309,8 @@
                         $('#'+strategy_id).closest("div").remove();    
        
                    }        
-            });
+                });
+            }
         });
 
 
@@ -286,5 +325,6 @@
 </div>
 
 {% endblock content %}
+
 
 
