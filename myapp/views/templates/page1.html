@@ -117,6 +117,8 @@
               //LOGIC FOR DYNAMIC NATURE OF SUMMARY AND TRADES
               console.log(startDate_milliseconds)
 
+              startDate_milliseconds = startDate_milliseconds + 19800000
+
               //finding the index of the time 
               // Performance_Data = {"Total_Profit": [], "Profit_Factor": [], "Profitable": [],"Max_Drawdown":[],"x":[]} 
        
@@ -153,14 +155,16 @@
 
                console.log(typeof(selected_day))
 
-              var searchString = 'B';
+               console.log(selected_day)
+
               $(".table tr td:contains('" + selected_day + "')").filter(function() {
+              console.log($(".table tr td:contains('" + selected_day + "')"))
               return $(this).text().trim() == selected_day;
                 }).parent().remove();
               
               }
 
-              console.log($(".table tr td"))
+              // console.log($(".table tr td"))
         
             
             }
