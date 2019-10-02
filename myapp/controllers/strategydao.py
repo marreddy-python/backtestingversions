@@ -424,7 +424,7 @@ class MetricImpl(Metric):
         a,b,c = myFunction(starttime)
         start_date = date(a, b, c)
         a,b,c = myFunction(endtime)
-        end_date = date(a, b, c+1)
+        end_date = date(a, b, c)
 
        
         st_da= str(start_date) 

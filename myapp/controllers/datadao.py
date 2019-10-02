@@ -254,7 +254,8 @@ class DataDAOPostgreImpl(DataDAOPostgre):
             a,b,c = myFunction(starttime)
             start_date = str(date(a, b, c))
             a,b,c = myFunction(endtime)
-            end_date = str(date(a, b, c+1))
+            
+            end_date = str(date(a, b, c))
                   
 
             print (start_date,end_date)
