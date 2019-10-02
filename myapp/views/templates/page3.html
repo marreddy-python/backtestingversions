@@ -211,8 +211,7 @@
         });
 
 
-// confirmDialog box 
-var x 
+
 function ConfirmDialog(message) {
   $('<div></div>').appendTo('body')
     .html('<div><h6>' + message + '?</h6></div>')
@@ -227,7 +226,7 @@ function ConfirmDialog(message) {
         Yes: function() { 
                 console.log('Yes clicked')
                 $(this).dialog("close");
-                x = 'YES'
+        
             },
         No: function() {
                 console.log('no clicked')
@@ -250,11 +249,7 @@ function ConfirmDialog(message) {
                 var id = $(this).attr('id');
                 console.log(id)
              
-                console.log(x)
-
-                // ConfirmDialog('Are you sure wants to add strategy as a favourite ');
-                
-                console.log(x)
+        
 
                     $.ajax({
                         type: 'POST',
@@ -293,31 +288,48 @@ function ConfirmDialog(message) {
         $(".close").click(function() {
             console.log('delete option clicked')
             var id = $(this).attr('id');
-            // console.log(parseInt(id.match(/\d+/)))
+            
+            console.log(parseInt(id.match(/\d+/)))
      
             var strategy_id = parseInt(id.match(/\d+/)) 
             console.log(strategy_id)
-
-            console.log(x)
-
-            // ConfirmDialog('Are you sure wants to delete the strategy ');
-
-            console.log(x)
            
-            $.ajax({
-                   type: 'POST',
-                   url: "{{ url_for('modulo1.delete_strategy')}}",
-                   data : {
-                       'clicked_strategy': parseInt(id.match(/\d+/))
-                    },
-                    success: function(main_data){
-                        console.log('main_data',main_data) 
+            $('<div></div>').appendTo('body')
+                    .html('<div><h6>' + message + '?</h6></div>')
+                        .dialog({
+                            modal: true,
+                            title: 'Delete message',
+                            zIndex: 10000,
+                            autoOpen: true,
+                            width: 'auto',
+                            resizable: false,
+                            buttons: {
+                                Yes: function() { 
+                                    console.log('Yes clicked')
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "{{ url_for('modulo1.delete_strategy')}}",
+                                        data : {
+                                            'clicked_strategy': parseInt(id.match(/\d+/))
+                                        },
+                                        success: function(main_data){
+                                        console.log('main_data',main_data) 
 
-                        $('#'+strategy_id).closest("div").remove();    
+                                        $('#'+strategy_id).closest("div").remove();    
        
-                   }        
-                });
-            
+                                     }        
+                                });
+                                    $(this).dialog("close");
+                            },
+                                No: function() {
+                                    console.log('no clicked')
+                                    $(this).dialog("close");   
+                                }
+                            },
+                        close: function(event, ui) {
+                        $(this).remove();
+                        }
+                    });    
         });
 
 
