@@ -325,11 +325,19 @@
                 }
                 console.log(SHI)
 
-                console.log(data)
+                // console.log(data)
 
                 console.log(data.Strategies[SHI])
 
-                
+                s = data.Strategies[SHI]
+          
+                heading = s.Buy+'_'+s.Sell+'_'+s.Optimization+'_'+s.stop_order
+
+                console.log('Buy',s.Buy)
+                console.log('Sell',s.Sell)
+                console.log('OPtimization',s.Optimization)
+                console.log('stop_order',s.stop_order)
+  
 
             });
       
