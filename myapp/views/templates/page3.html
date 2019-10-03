@@ -345,14 +345,15 @@
 
                 //Getting the clicked strategy information 
                 for(m=0;m<data.Strategies.length;m++){
-                    b = data.Strategies[(data.Strategies.length-1) - m]
+                    // b = data.Strategies[(data.Strategies.length-1) - m]
                     b = data.Strategies[m]
-                    console.log(data.Strategies[data.Strategies.length-m])
+                    // console.log(data.Strategies[data.Strategies.length-m])
                     if (b.Strategy == x){
-                        //console.log('success')
                         SHI = m
                     }   
                 }
+
+                console.log(SHI)
             });
       
 
