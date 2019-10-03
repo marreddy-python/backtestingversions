@@ -334,7 +334,7 @@ class MetricImpl(Metric):
         start_date = date(a, b, c)
         a,b,c = myFunction(endtime)
         
-        end_date = date(a, b, c)
+        end_date = date(a, b, c + 1)
 
         def daterange(start_date, end_date):
             for n in range(int ((end_date - start_date).days)):
@@ -424,7 +424,7 @@ class MetricImpl(Metric):
         a,b,c = myFunction(starttime)
         start_date = date(a, b, c)
         a,b,c = myFunction(endtime)
-        end_date = date(a, b, c)
+        end_date = date(a, b, c +1 )
 
        
         st_da= str(start_date) 
