@@ -332,9 +332,7 @@
                 s = data.Strategies[SHI]
           
                 heading = s.Buy+'_'+s.Sell+'_'+s.Optimization+'_'+s.stop_order
-
                 
-               // window.location =   "https://xtradeanalytics1.herokuapp.com" + "'"+{{ url_for('modulo1.view_strategy' ,username=heading ) }+"'"
                window.location = "{{ url_for('modulo1.view_strategy') }}"
             });
       
