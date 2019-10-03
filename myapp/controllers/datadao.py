@@ -227,9 +227,17 @@ class DataDAOPostgreImpl(DataDAOPostgre):
 
             isFavourite = entities[i].isFavourite
 
+            if(params["optimization"]) == "checked":
+                relative_angle = params["relative_angle"]
+            else:
+                relative_angle = 'N'
 
+            if(params["stop_order"])== "None":
+                stop_order = 'N'
+            else:
+                stop_order = params["less_than_buy"]
 
-            st = str(params["buying_angle"])+'_'+str(params["selling_angle"])+'_'+str(params["relative_angle"])+'_'+str(params["less_than_buy"]) 
+            st = str(params["buying_angle"])+'_'+str(params["selling_angle"])+'_'+str(relative_angle)+'_'+str(stop_order) 
             
             Total_Profit = []
             Profit_factor = []
