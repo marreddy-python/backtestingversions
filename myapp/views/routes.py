@@ -245,13 +245,34 @@ def settings():
 @modulo1_blueprint.route('/delete_strategy', methods=['GET','POST'])
 def delete_strategy():
         if request.method == "POST":
-                
-        
 
                 print (request.form.get('clicked_strategy'))
 
                 deletestrategy(request.form.get('clicked_strategy'))
 
                 return json.dumps({'status':'Deleted ssuccesfully'})
+
+
+
+
+'''@modulo1_blueprint.route('/view_strategy', methods=['GET','POST'])
+def delete_strategy():
+        if request.method == "POST":
+                 
+                global start_time,end_time,St, Performance,Metric_values_singleday,Trades_singleday,Buy_flags,Sell_flags,Stratey_values
+
+                St = Strategy(1,Stratey_values,'NONE')
+
+                Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
+                Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
+                Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
+
+
+                return json.dumps({'status':'success'})'''
+
+
+@modulo1_blueprint.route('/view_strategy/<username>', methods=['GET','POST'])
+def view_strategy(username):
+        print(username)
 
 
