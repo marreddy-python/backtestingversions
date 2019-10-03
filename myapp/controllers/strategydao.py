@@ -23,7 +23,6 @@ class StrategyDAO():
     
     def saveStrategy(self,s,End_time,Start_time ): 
     
-     
         sc = {
             "buying_angle":s.startegy_values[0] ,
             "selling_angle":  s.startegy_values[1],
@@ -39,17 +38,16 @@ class StrategyDAO():
         score = json.loads(data)
 
        
-
         print ('SAVED STRATEY',score)
  
         Created_at = time.strftime("%a, %d %b %Y %H:%M:%S")
 
-        if sc["optimization"]=="None" and sc["stop_order"]=="None":
+        if sc["optimization"]=="None":
             Opti = "No"
-        else:
+        elif sc["stop_order"]=="None":
             Opti = "YES"
 
-
+      
         # if not stored that strategy than store it.
 
         # saving into the startegy table 
@@ -143,6 +141,8 @@ class SMAStrategyProcessor(StrategyProcessor):
         St = stgy
         current_strategy = stgy
 
+        print(current_strategy)
+
         #GLOBAL VARIABLES
         buy_price = 0
         sell_price = 0
@@ -167,7 +167,9 @@ class SMAStrategyProcessor(StrategyProcessor):
             strategies = db_get_strategies[st].Params
             if  db_get_strategies[st].Start_time == start and db_get_strategies[st].End_time == end:
                     stored_strategies.append(strategies)
-                    
+
+        print ('stored_strategies',stored_strategies)   
+
         # Check if current strategy is exist in strategies table 
         if (current_strategy in stored_strategies):
             pass

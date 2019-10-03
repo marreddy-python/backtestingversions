@@ -229,7 +229,8 @@ class DataDAOPostgreImpl(DataDAOPostgre):
 
 
 
-            st = str(params["buying_angle"])+'_'+str(params["selling_angle"])+'_'+ "{}".format(entities[i].Optimization)
+            st = str(params["buying_angle"])+'_'+str(params["selling_angle"])+'_'+str(params["relative_angle"])+'_'+str(params["less_than_buy"]) )
+            
             Total_Profit = []
             Profit_factor = []
             profitable = []
@@ -314,7 +315,8 @@ class DataDAOPostgreImpl(DataDAOPostgre):
                 "Strategy":st,
                 "Buy":params["buying_angle"],
                 "Sell":params["selling_angle"],
-                "Optimization": Optimization,
+                "Optimization": params["relative_angle"],
+                "stop_order" : params["less_than_buy"],
                 "Total_profit": Total_Profit,
                 "Profit_factor": Profit_factor,
                 "profitable": profitable,
@@ -329,7 +331,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
 
             yourdict["Strategies"].append(b)
          
-
+         
             n =  len(yourdict["Strategies"])
             strategy_names = []
 

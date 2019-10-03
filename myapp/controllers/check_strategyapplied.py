@@ -35,6 +35,7 @@ def applied_or_not(s,start,end):
         return 'notexist'
 
 
+
 def strategy_savedornot(s,start,end):
     sc = {
         "buying_angle":s.startegy_values[0] ,
