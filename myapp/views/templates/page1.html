@@ -567,7 +567,7 @@
                    less_than_buy : $('#stop_order').attr('value'),
                  },
                  
-                 
+
                   contentType: "application/x-www-form-urlencoded",
                   success: function(main_data){
 
@@ -629,6 +629,10 @@
                       return +(Math.round(num + "e+2")  + "e-2");
                 }
 
+                $(window).on('load', function() {
+                    console.log('All assets are loaded')
+                })
+                
              </script>
 
             </p>

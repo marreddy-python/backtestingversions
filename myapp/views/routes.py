@@ -274,5 +274,6 @@ def delete_strategy():
 @modulo1_blueprint.route('/view_strategy/<username>', methods=['GET','POST'])
 def view_strategy(username):
         print(username)
+        return 'success'
 
 
