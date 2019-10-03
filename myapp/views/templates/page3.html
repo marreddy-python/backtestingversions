@@ -51,35 +51,7 @@
 
 
         <script>
-
-                /*$('.SeeMore2').click(function(){
-		            var $this = $(this);
-		            $this.toggleClass('SeeMore2');
-		            if($this.hasClass('SeeMore2')){
-			            $this.text('Favourites');			
-		            } else {
-			        $this.text('All Strategies');
-		            }
-
-                    // console.log($this.text())
-
-                    // based $this.text() value filter the strategies 
-
-                    $.ajax({
-                        type: 'POST',
-                        data:{
-                            id : $this.text(),
-                        },
-                        url: "{{ url_for('modulo1.Strategies1')}}",
-                        contentType: "application/x-www-form-urlencoded",
-                        success: function(data){
-                        console.log(data)
-                        }
-                    });
-
-                });*/
                  
-
             $(".SeeMore2").click(function() {
                 var newText = $(this).text() == "Go to Favourites" ? "Go to All Strategies" : "Go to Favourites";
                 $(this).text(newText);
@@ -97,7 +69,6 @@
             });  
               
             // console.log($(".SeeMore2").text())
-            
 
             var  data = JSON.parse('{{ data | tojson | safe}}');
           
@@ -338,7 +309,7 @@
                 // X IS THE CURRENT STRATEGY NAME 
                 x = document.getElementsByClassName(id)[0].innerHTML;
 
-                console.log(x)
+                // console.log(x)
 
                 //GLOBAL VARAIABLE FOR ACESSING CLICKED STRATEGY INFORMATION
                 var SHI = 0
@@ -352,8 +323,12 @@
                         SHI = m
                     }   
                 }
-
                 console.log(SHI)
+
+                console.log(data)
+
+                console.log(data[SHI])
+                
             });
       
 
