@@ -274,6 +274,11 @@ def delete_strategy():
 @modulo1_blueprint.route('/view_strategy/<username>', methods=['GET','POST'])
 def view_strategy(username):
         print(username)
-        return 'success'
+        Data_loader = DataController()
+        data,strategy_names = Data_loader.getStrategies()
+
+        return render_template("page2.html",strategy_names = strategy_names, page = 'Arena')     
+
+        # return 'success'
 
 
