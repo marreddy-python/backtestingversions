@@ -333,49 +333,9 @@
           
                 heading = s.Buy+'_'+s.Sell+'_'+s.Optimization+'_'+s.stop_order
 
-                {{  url_for('modulo1.view_strategy' ,username=heading ) }}
                 
-                
-                /*console.log('Buy',s.Buy)
-                console.log('Sell',s.Sell)
-                console.log('OPtimization',s.Optimization)
-                console.log('stop_order',s.stop_order)
-
-                if (s.Optimization == 'N'){
-                    Optimization = 'None'
-                    relative_angle = 10
-                }else{
-                    Optimization = 'checked'
-                    relative_angle = s.Optimization
-                }
-
-                if(s.stop_order == 'N'){
-                    STPODVALUE = 'None'
-                    less_than_buy = 0.3
-                }else{
-                    STPODVALUE = 'checked'
-                    less_than_buy = s.stop_order
-                }
-
-                $.ajax({
-                   type: 'POST',
-                   url: "{{ url_for('modulo1.strategyview')}}",
-                   data: {
-                   main : $(this).attr('value') ,
-                   Buying_angle : s.Buy,
-                   selling_angle : s.Sell ,
-                   Optimization :   Optimization,
-                   relative_angle : relative_angle,
-                   STPODVALUE : STPODVALUE ,
-                   less_than_buy :  less_than_buy,
-                 },
-                 success: function(main_data){
-                console.log('main_data',main_data)    
-                }        
-            });
-                 */
-  
-
+               // window.location =   "https://xtradeanalytics1.herokuapp.com" + "'"+{{ url_for('modulo1.view_strategy' ,username=heading ) }+"'"
+               window.location = "{{ url_for('modulo1.view_strategy') }}"
             });
       
 
