@@ -302,10 +302,10 @@ class DataDAOPostgreImpl(DataDAOPostgre):
 
 
             print (start_date,end_date) 
-            TWENTY_TP = 0 
-            TWENTY_PF = 0
-            TWENTY_PT = 0
-            TWENTY_MD = 0
+            TWEENTY_TP = 0 
+            TWEENTY_PF = 0
+            TWEENTY_PT = 0
+            TWEENTY_MD = 0
 
             db_gettotalmetric = Total_metric.query.filter(and_( Total_metric.Start_Date == starttime, Total_metric.End_Date == endtime ,))
             dailydata_length = db_gettotalmetric.count()
@@ -320,12 +320,6 @@ class DataDAOPostgreImpl(DataDAOPostgre):
                     TWEENTY_PF = round(db_gettotalmetric[i].Profit_Factor ,3)
                     TWEENTY_PT = round(db_gettotalmetric[i].Profitable,3)
                     TWENTY_MD  = db_gettotalmetric[i].Max_Drawdown
-                else:
-                    TWENTY_TP = 0 
-                    TWENTY_PF = 0
-                    TWENTY_PT = 0
-                    TWENTY_MD = 0
-
                     
             b = {
                 "Strategy_id":Strategy_id ,
