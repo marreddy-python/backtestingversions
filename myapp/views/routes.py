@@ -102,9 +102,7 @@ def strategyview():
                 less_than_buy = float(request.form.get('less_than_buy'))
                 
                 print(Buying_angle,selling_angle,optimization,relative_angle,stop_order,less_than_buy)
-                
                 Stratey_values = [Buying_angle,selling_angle,optimization,relative_angle,stop_order,less_than_buy] 
-
                 if selling_angle == '' and Buying_angle == '':
                         print ('--------------------------------FAILED-----------------------------')
                         # FLASH MESSAGE NEEDS TO BE HERE 
@@ -113,34 +111,16 @@ def strategyview():
                 else:
                         # INSTANCE OF STRATEGY CLASS
                         St = Strategy(1,Stratey_values,'NONE')
-                        # data_st.man  = St
-
-                        # STRATEGY CONTROLLER 
                         startegy_loader = StrategyController()
-
-                        #After clicking on apply button
-                        if request.form.get('main') == 'Apply': 
-
-                                # strategy should be applied for 20days 
-                                tweenty_days = end_time - (86400000*20)
-                                startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days) 
-                                # Getting the trades and metric values for a single day
-                                Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
-                                Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
-                                Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
-                                
-                                # return both trades and metric values 
-                                return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags , })
 
                         #After Clicking on save button
                         if request.form.get('main') == 'Save':
-                                # Check if strategy is already applied or not, if not applied apply, if applied save strategy
+                
                                 tweenty_days = end_time - (86400000*20)
                                 sus = applied_or_not(St,start_time,tweenty_days)
                                 print (sus)
 
                                 if sus ==  'notexist':
-                                        # Check if strategy is already applied or not if not applied apply, if applied save strategy
                                         tweenty_days = end_time - (86400000*20)
                                         b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days)
                                         Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
@@ -151,12 +131,13 @@ def strategyview():
                                         return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags  })
                                 
                                 else:
-                                        ma = strategy_savedornot(St,start_time,tweenty_days)
-                                        if ma == 'notsaved':
-                                                b = startegy_loader.saveStrategy(St,start_time,tweenty_days)
-                                                return json.dumps({'status':'Strategy_saved'})
-                                        else:
-                                                return json.dumps({'status':'Strategy_alredy_saved'})
+                                        
+                                        return json.dumps({'status':'Strategy_alredy_applied '})
+
+                                
+                        else:
+                                return json.dumps({'status':'Failed'})
+
                                 
                         else:
                                 return json.dumps({'status':'Failed'})
