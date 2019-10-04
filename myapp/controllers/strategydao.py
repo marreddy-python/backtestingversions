@@ -321,6 +321,7 @@ class MetricImpl(Metric):
         pass
 
 
+
     def getMetric(self,starttime,endtime,s):
 
         def myFunction(milliseconds):
@@ -337,7 +338,9 @@ class MetricImpl(Metric):
         a,b,c = myFunction(endtime)
         
         end_date = date(a, b, c + 1)
-
+        
+        print(start_date,end_date)
+        
         def daterange(start_date, end_date):
             for n in range(int ((end_date - start_date).days)):
                 yield start_date + timedelta(n)
@@ -345,6 +348,8 @@ class MetricImpl(Metric):
         # get each day between starttime and endtime
         for single_date in daterange(start_date, end_date):
             required_day = single_date.strftime("%Y-%m-%d") 
+
+            print('required_day',required_day)
         
 
             # Filter the database based on Day_identifier 
