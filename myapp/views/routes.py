@@ -134,9 +134,10 @@ def strategyview():
                                         else:
 
                                                 metric_calc = MetricImpl()
-                                                metric_calc.getMetric(start_date,end_date,St)
+
+                                                metric_calc.getMetric(start_time,tweenty_days,St)
           
-                                                metric_calc.Tot_met(start_date,end_date,St)
+                                                metric_calc.Tot_met(start_time,tweenty_days,St)
             
                                                 Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
                                                 b = startegy_loader.saveStrategy(St,start_time,tweenty_days)
