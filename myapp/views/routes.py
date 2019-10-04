@@ -6,7 +6,7 @@ from myapp.controllers.interface import StrategyController,Strategy,DataControll
 from myapp.controllers.decides_start_end import myFunction
 from myapp.controllers.add_favourite import addFav,deletestrategy
 from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot
-from myapp.controllers.strategy_dao  import MetricImpl
+from myapp.controllers.strategydao import MetricImpl
 
 modulo1_blueprint = Blueprint(name='modulo1', import_name=__name__,template_folder='templates',
 static_folder='static', static_url_path='/login,/trades.svg,/infile.json')

@@ -245,11 +245,11 @@ class SMAStrategyProcessor(StrategyProcessor):
             # After all trades enters into the database call metric class for calculation of metric values with starting and ending time 
             #  After metric calculation call total metric values for calculation of metric values for 20days
             
-            metric_calc = MetricImpl()
+            '''metric_calc = MetricImpl()
             print (St)
             metric_calc.getMetric(start_date,end_date,St)
           
-            metric_calc.Tot_met(start_date,end_date,St)
+            metric_calc.Tot_met(start_date,end_date,St)'''
             
         # return 'Strategy applied successfully for 20days'
     
