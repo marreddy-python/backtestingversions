@@ -319,7 +319,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
                     TWEENTY_TP = round(db_gettotalmetric[i].Total_Profit,3)
                     TWEENTY_PF = round(db_gettotalmetric[i].Profit_Factor ,3)
                     TWEENTY_PT = round(db_gettotalmetric[i].Profitable,3)
-                    TWENTY_MD  = db_gettotalmetric[i].Max_Drawdown
+                    TWEENTY_MD  = db_gettotalmetric[i].Max_Drawdown
                     
             b = {
                 "Strategy_id":Strategy_id ,
@@ -336,7 +336,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
                 "TWENTY_TP" : TWEENTY_TP , 
                 "TWENTY_PF" : TWEENTY_PF,
                 "TWENTY_PT" : TWEENTY_PT,
-                "TWENTY_MD" : TWENTY_MD ,
+                "TWENTY_MD" : TWEENTY_MD ,
                 "isFavourite" : isFavourite
             }
 
