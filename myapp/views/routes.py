@@ -117,14 +117,14 @@ def strategyview():
                         #After Clicking on save button
                         if request.form.get('main') == 'Save':
                 
-                                tweenty_days = end_time - (86400000*20)
+                                tweenty_days = end_time - (86400000*10)
                                 sus = applied_or_not(St,start_time,tweenty_days)
                                 print (sus)
 
                                 if sus ==  'notexist':
-                                        
+
                                         if step_number == 1:
-                                                tweenty_days = end_time - (86400000*20)
+                                                tweenty_days = end_time - (86400000*10)
                                                 b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days)
                                                 Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
                                                 print('step number1 excuting')
