@@ -322,7 +322,7 @@ class MetricImpl(Metric):
 
 
 
-    def getMetric(self,starttime,endtime,s):
+    def getMetric(self,endtime,starttime,s):
 
         def myFunction(milliseconds):
             date = datetime.datetime.fromtimestamp(milliseconds/1000.0)
@@ -431,7 +431,7 @@ class MetricImpl(Metric):
 
 
 
-    def Tot_met(self,starttime,endtime,s):
+    def Tot_met(self,endtime,starttime,s):
 
         def myFunction(milliseconds):
             date = datetime.datetime.fromtimestamp(milliseconds/1000.0)
