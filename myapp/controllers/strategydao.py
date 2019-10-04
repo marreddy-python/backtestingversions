@@ -487,8 +487,24 @@ class MetricImpl(Metric):
                 print ('CALCULATION OF PROFIT_FACTOR AND PROFITABLE IS NOT POSSIBLE')
                 Profit_Factor = 0
                 Profitable = 0
+        
 
 
+        sc = {
+            "buying_angle":s.startegy_values[0] ,
+            "selling_angle":  s.startegy_values[1],
+            "optimization":s.startegy_values[2],
+            "relative_angle": s.startegy_values[3],
+            "stop_order":  s.startegy_values[4],
+            "less_than_buy": s.startegy_values[5]
+        }
+ 
+        print ('score',sc)
+        
+        data  = json.dumps(sc)
+        stgy = json.loads(data)
+        
+        Strategy = stgy
         # Enter these values into the total_metric table
         data_to_db = Total_metric( Strategy = Strategy, Strategy_id = 'SMA', Total_Profit =  Profit ,Profit_Factor =  Profit_Factor, Profitable = Profitable ,Max_Drawdown = None,Start_Date = starttime,End_Date = endtime )
         db.session.add(data_to_db)
