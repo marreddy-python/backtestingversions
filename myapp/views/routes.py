@@ -6,9 +6,10 @@ from myapp.controllers.interface import StrategyController,Strategy,DataControll
 from myapp.controllers.decides_start_end import myFunction
 from myapp.controllers.add_favourite import addFav,deletestrategy
 from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot
-
+from myapp.controllers.strategy_dao MetricImpl
 modulo1_blueprint = Blueprint(name='modulo1', import_name=__name__,template_folder='templates',
 static_folder='static', static_url_path='/login,/trades.svg,/infile.json')
+
 
 
 from myapp.models.users import Post,db
@@ -117,19 +118,25 @@ def strategyview():
                         #After Clicking on save button
                         if request.form.get('main') == 'Save':
                 
-                                tweenty_days = end_time - (86400000*10)
+                                tweenty_days = end_time - (86400000*5)
                                 sus = applied_or_not(St,start_time,tweenty_days)
                                 print (sus)
 
                                 if sus ==  'notexist':
 
                                         if step_number == 1:
-                                                tweenty_days = end_time - (86400000*10)
+                                                tweenty_days = end_time - (86400000*5)
                                                 b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days)
                                                 Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
                                                 print('step number1 excuting')
                                                 return jsonify({'step':1 })       
                                         else:
+
+                                                metric_calc = MetricImpl()
+                                                metric_calc.getMetric(start_date,end_date,St)
+          
+                                                metric_calc.Tot_met(start_date,end_date,St)
+            
                                                 Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
                                                 b = startegy_loader.saveStrategy(St,start_time,tweenty_days)
                                                 Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)

@@ -569,12 +569,11 @@
                  },
                   contentType: "application/x-www-form-urlencoded",
                   success: function(s){
-
                       a = s["step"]
-
                       console.log('step_number',a)
 
                       if (a == 1 ){
+                        
                         $.ajax({
                             type: 'POST',
                             url: "{{ url_for('modulo1.strategyview')}}",
@@ -588,7 +587,7 @@
                                 less_than_buy : $('#stop_order').attr('value'),
                                 step_number : 2
                           },
-                          
+
                           contentType: "application/x-www-form-urlencoded",
 
                           success: function(main_data){      
