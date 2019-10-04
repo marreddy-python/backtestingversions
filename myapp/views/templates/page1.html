@@ -438,7 +438,7 @@
          
 
           <!-- <button class="btn btn-primary btn-lg" name="submit_button" id="Apply" value="Apply">Apply</button> -->
-          <button   class="btn btn-default btn-xl" name="submit_button" id="Save" value="Save"> Create </button>
+          <button   class="btn btn-default btn-xl" name="submit_button" id="Save" value="Save"> Apply  </button>
           <!-- <button class="btn btn-primary btn-lg" name="submit_button" id="Save_and_compare" value="Save_and_compare">Save and compare</button> -->
       
     
@@ -509,10 +509,10 @@
                       b = []
                       for(i = 0; i<a.length ; i++){
                           var date = new Date(a[i]);
-                          b.push(date.toString("MMM dd"))
+                          b.push(date.toLocaleDateString())
                       }
 
-
+                     
                       chart.xAxis[0].setCategories(b);
                       
 
