@@ -249,6 +249,9 @@ def delete_strategy():
 @modulo1_blueprint.route('/view_strategy/<username>', methods=['GET','POST'])
 def view_strategy(username):
         print(username)
+        
+        global start_time,end_time,St, Performance,Metric_values_singleday,Trades_singleday,Buy_flags,Sell_flags,Stratey_values
+
         Data_loader = DataController()
         data,strategy_names = Data_loader.getStrategies()
         print ('data',data )
