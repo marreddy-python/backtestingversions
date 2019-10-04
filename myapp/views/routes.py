@@ -130,19 +130,13 @@ def strategyview():
                                        
                                         return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags  })
                                 
-                                else:
-                                        
+                                else:  
                                         return json.dumps({'status':'Strategy_alredy_applied '})
 
                                 
                         else:
                                 return json.dumps({'status':'Failed'})
-
-                                
-                        else:
-                                return json.dumps({'status':'Failed'})
-
-       
+  
         else:
                 
                 Data_loader = DataController()
