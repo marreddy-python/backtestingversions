@@ -309,6 +309,9 @@ class DataDAOPostgreImpl(DataDAOPostgre):
 
             db_gettotalmetric = Total_metric.query.filter(and_( Total_metric.Start_Date == starttime, Total_metric.End_Date == endtime ,))
             dailydata_length = db_gettotalmetric.count()
+            
+            print('dailydata_length',dailydata_length)
+
             for i in range(0,dailydata_length):
 
                 if (db_gettotalmetric[i].Strategy["buying_angle"] == current_strategy[0] and db_gettotalmetric[i].Strategy["selling_angle"]==current_strategy[1] and db_gettotalmetric[i].Strategy["optimization"]==current_strategy[2] and db_gettotalmetric[i].Strategy["relative_angle"]==current_strategy[3] and  db_gettotalmetric[i].Strategy["stop_order"]==current_strategy[4] and db_gettotalmetric[i].Strategy["less_than_buy"]==current_strategy[5]):
@@ -317,6 +320,11 @@ class DataDAOPostgreImpl(DataDAOPostgre):
                     TWEENTY_PF = round(db_gettotalmetric[i].Profit_Factor ,3)
                     TWEENTY_PT = round(db_gettotalmetric[i].Profitable,3)
                     TWENTY_MD  = db_gettotalmetric[i].Max_Drawdown
+                else:
+                    TWENTY_TP = 0 
+                    TWENTY_PF = 0
+                    TWENTY_PT = 0
+                    TWENTY_MD = 0
 
                     
             b = {
