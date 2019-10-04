@@ -321,7 +321,7 @@ class MetricImpl(Metric):
         pass
 
 
-    def getMetric(self,starttime,endtime,Strategy):
+    def getMetric(self,starttime,endtime,s):
 
         def myFunction(milliseconds):
             date = datetime.datetime.fromtimestamp(milliseconds/1000.0)
@@ -398,6 +398,22 @@ class MetricImpl(Metric):
 
             print ('Profitable',Profitable)
 
+            sc = {
+                "buying_angle":s.startegy_values[0] ,
+                "selling_angle":  s.startegy_values[1],
+                "optimization":s.startegy_values[2],
+                "relative_angle": s.startegy_values[3],
+                "stop_order":  s.startegy_values[4],
+                "less_than_buy": s.startegy_values[5]
+            }
+ 
+            print ('score',sc)
+        
+            data  = json.dumps(sc)
+            stgy = json.loads(data)
+        
+            Strategy = stgy
+
 
             # Enter these values into the daily trade metrics 
             data_to_db = Daily_metric( Strategy =  Strategy,Symbol = 'TVIX',
@@ -410,7 +426,7 @@ class MetricImpl(Metric):
 
 
 
-    def Tot_met(self,starttime,endtime,Strategy):
+    def Tot_met(self,starttime,endtime,s):
 
 
  
