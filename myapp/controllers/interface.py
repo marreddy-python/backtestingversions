@@ -42,6 +42,7 @@ class DataController():
     def getStrategies(self):
         data = self.DS.getStrategies()
         return data 
+     
 
 
 
@@ -80,6 +81,31 @@ class StrategyController():
         self.end = end
         b = self.SS.applyStrategy(symbol,Strategy,start,end)
         return b 
+
+    def metricCalculation(self,start_time,tweenty_days,St):
+        self.St = St
+        self.start_time = start_time
+        self.tweenty_days = tweenty_days
+
+        b = self.SS.metric_calcgetMetric(start_time,tweenty_days,St)
+
+        return b 
+
+    
+    def Total_metricCalculation(self,start_time,tweenty_days,St):
+        self.St = St
+        self.start_time = start_time
+        self.tweenty_days = tweenty_days
+
+        b = self.SS.metric_calcTot_met(start_time,tweenty_days,St)
+        return b 
+            
+
+
+
+
+
+
 
     def getProgress():
         pass

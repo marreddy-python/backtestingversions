@@ -340,7 +340,7 @@ class MetricImpl(Metric):
         end_date = date(a, b, c + 1)
         
         print(start_date,end_date)
-        
+
         def daterange(start_date, end_date):
             for n in range(int ((end_date - start_date).days)):
                 yield start_date + timedelta(n)
@@ -433,8 +433,6 @@ class MetricImpl(Metric):
 
     def Tot_met(self,starttime,endtime,s):
 
-
- 
         def myFunction(milliseconds):
             date = datetime.datetime.fromtimestamp(milliseconds/1000.0)
             startday = date.strftime('%Y-%m-%d')

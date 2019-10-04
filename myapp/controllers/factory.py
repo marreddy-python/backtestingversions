@@ -27,3 +27,9 @@ def get_smastprsr():
     from strategydao import SMAStrategyProcessor
     SMASP = SMAStrategyProcessor()
     return SMASP
+
+#METRIC CALCULATION 
+def get_metric():
+    from strategydao import MetricImpl
+    MTRC = MetricImpl()
+    return MTRC

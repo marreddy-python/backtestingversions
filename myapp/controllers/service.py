@@ -2,7 +2,7 @@ import sys
 sys.dont_write_bytecode=True
 import abc
 
-from factory import get_dd,get_sd,get_smastprsr
+from factory import get_dd,get_sd,get_smastprsr,get_metric
 
 class iDataService(object):
 
@@ -76,6 +76,7 @@ class StrategyService(iStrategyService):
 
     SD = get_sd()
     SMA_SPP = get_smastprsr()
+    get_metr = get_metric()
 
     def saveStrategy(self,Strategy,Start_time,End_time):
         b = self.SD.saveStrategy(Strategy,Start_time,End_time)
@@ -91,6 +92,15 @@ class StrategyService(iStrategyService):
     def applyStrategy(self,symbol,Strategy,start,end):
         b = self.SMA_SPP.applyStrategy(Strategy,start,end)
         return b
+
+    def metric_calcgetMetric(start_time,tweenty_days,St):
+        b = self.get_metr.getMetric(start_time,tweenty_days,St)
+        return b 
+
+    def metric_calcTot_met(start_time,tweenty_days,St):
+        b = self.get_metr.Tot_met(start_time,tweenty_days,St)
+        return b
+    
     
     def getProgress():
         pass

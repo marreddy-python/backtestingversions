@@ -133,9 +133,9 @@ def strategyview():
                                                 return jsonify({'step':1 })       
                                         else:
 
-                                                metric_calc = MetricImpl()
-                                                metric_calc.getMetric(start_time,tweenty_days,St)
-                                                metric_calc.Tot_met(start_time,tweenty_days,St)
+                                                
+                                                startegy_loader.metricCalculation(start_time,tweenty_days,St)
+                                                startegy_loader.Total_metricCalculation(start_time,tweenty_days,St)
             
                                                 Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
                                                 b = startegy_loader.saveStrategy(St,start_time,tweenty_days)
