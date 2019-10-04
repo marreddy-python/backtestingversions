@@ -251,8 +251,10 @@ def view_strategy(username):
         print(username)
         Data_loader = DataController()
         data,strategy_names = Data_loader.getStrategies()
-
-        return render_template("page2.html",strategy_names = strategy_names, page = 'Arena')     
+        print ('data',data )
+        print ('Stratey_values',Stratey_values)
+        return render_template("page1.html", Metric_values_singleday = Metric_values_singleday,Trades_singleday = Trades_singleday,Performance = Performance,daily_data = daily_data,Buy_flags = Buy_flags,Sell_flags = Sell_flags,
+        strategy_names = strategy_names,Strategy_values =Stratey_values,page='strategyview')
 
         # return 'success'
 
