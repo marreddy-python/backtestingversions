@@ -100,6 +100,7 @@ def strategyview():
                 relative_angle = int(request.form.get('relative_angle'))
                 stop_order = str(request.form.get('STPODVALUE'))
                 less_than_buy = float(request.form.get('less_than_buy'))
+                step_number  = int(request.form.get('step_number'))
                 
                 print(Buying_angle,selling_angle,optimization,relative_angle,stop_order,less_than_buy)
                 Stratey_values = [Buying_angle,selling_angle,optimization,relative_angle,stop_order,less_than_buy] 
@@ -121,14 +122,20 @@ def strategyview():
                                 print (sus)
 
                                 if sus ==  'notexist':
-                                        tweenty_days = end_time - (86400000*20)
-                                        b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days)
-                                        Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
-                                        Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
-                                        b = startegy_loader.saveStrategy(St,start_time,tweenty_days)
-                                        Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
-                                       
-                                        return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags  })
+                                        
+                                        if step_number == 1:
+                                                tweenty_days = end_time - (86400000*20)
+                                                b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days)
+                                                Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
+                                                print('step number1 excuting')
+                                                return jsonify({'step':1 })       
+                                        else:
+                                                Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
+                                                b = startegy_loader.saveStrategy(St,start_time,tweenty_days)
+                                                Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
+                                                print('step number2  excuting')
+                                                # return jsonify({'step':2 }) 
+                                                return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags,'step':2 })
                                 
                                 else:  
                                         return json.dumps({'status':'Strategy_alredy_applied '})
@@ -249,15 +256,10 @@ def delete_strategy():
 @modulo1_blueprint.route('/view_strategy/<username>', methods=['GET','POST'])
 def view_strategy(username):
         print(username)
-        
-        global start_time,end_time,St, Performance,Metric_values_singleday,Trades_singleday,Buy_flags,Sell_flags,Stratey_values
-
         Data_loader = DataController()
         data,strategy_names = Data_loader.getStrategies()
-        print ('data',data )
-        print ('Stratey_values',Stratey_values)
-        return render_template("page1.html", Metric_values_singleday = Metric_values_singleday,Trades_singleday = Trades_singleday,Performance = Performance,daily_data = daily_data,Buy_flags = Buy_flags,Sell_flags = Sell_flags,
-        strategy_names = strategy_names,Strategy_values =Stratey_values,page='strategyview')
+
+        return render_template("page2.html",strategy_names = strategy_names, page = 'Arena')     
 
         # return 'success'
 

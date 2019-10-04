@@ -565,44 +565,66 @@
                    relative_angle : $('#relative_angle').attr('value'),
                    STPODVALUE : $('#STPODVALUE').attr("checked"),
                    less_than_buy : $('#stop_order').attr('value'),
+                   step_number : 1
                  },
-                 
-
                   contentType: "application/x-www-form-urlencoded",
-                  success: function(main_data){
+                  success: function(s){
 
-                  console.log(main_data)
+                      a = s["step"]
 
-                  //$('.graph_area').show();
-                  
-                  $(".loader").hide();
-          
-                  console.log(main_data["Metric_values"])
-                  a = main_data["Metric_values"]
-          
-                  console.log(main_data["Trades_singleday"])
-                
-                  /*$('#singleday_Total_Profit').val(roundToTwo(a["Total_Profit"])); 
-                  $('#singleday_Profit_factor').val(roundToTwo(a["Profit_Factor"])); 
-                  $('#singleday_Profitable').val(roundToTwo(a["Profitable"])); 
-                  $('#singleday_MaxDrawdown').val(roundToTwo(a["Max_Drawdown"])); */
-                  
-                  Singleday_Trades = main_data["Trades_singleday"]
-                  Performance_Data  = main_data["Performance"]
-                
+                      console.log('step_number',a)
 
-                  flags( main_data["Buy_flags"],main_data["Sell_flags"])
+                      if (a == 1 ){
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ url_for('modulo1.strategyview')}}",
+                            data: {
+                                main : 'Save' ,
+                                Buying_angle : $('#buying_angle').attr('value'),
+                                selling_angle : $('#selling_angle').attr('value'),
+                                Optimization : $('#Optimization_steepness' ).attr("checked") ,
+                                relative_angle : $('#relative_angle').attr('value'),
+                                STPODVALUE : $('#STPODVALUE').attr("checked"),
+                                less_than_buy : $('#stop_order').attr('value'),
+                                step_number : 2
+                          },
+                          contentType: "application/x-www-form-urlencoded",
 
-                  $('#Buytab').html( $('#buying_angle').attr('value'));
-                $('#Selltab').html( $('#selling_angle').attr('value'));
-                $('#Optitab').html( $('#Optimization_steepness' ).attr("checked"));
-                $('#stop_ordertab').html($('#STPODVALUE').attr("checked"), );
+                          success: function(main_data){      
+                            console.log(main_data)
 
-                  
-                
+                            console.log('step_number',main_data["step"])
+
+                            //$('.graph_area').show();
+
+                            $(".loader").hide();
+
+                            console.log(main_data["Metric_values"])
+                            a = main_data["Metric_values"]
+                            console.log(main_data["Trades_singleday"])
+
+                            $('#singleday_Total_Profit').val(a["Total_Profit"]); 
+                            $('#singleday_Profit_factor').val(a["Profit_Factor"]); 
+                            $('#singleday_Profitable').val(a["Profitable"]); 
+                            $('#singleday_MaxDrawdown').val(a["Max_Drawdown"]); 
+
+                            Singleday_Trades = main_data["Trades_singleday"]
+                            Performance_Data  = main_data["Performance"]
+
+
+                            flags( main_data["Buy_flags"],main_data["Sell_flags"])
+                            $('#Buytab').html( $('#buying_angle').attr('value'));
+                            $('#Selltab').html( $('#selling_angle').attr('value'));
+                            $('#Optitab').html( $('#Optimization_steepness' ).attr("checked"));
+                            $('#stop_ordertab').html($('#STPODVALUE').attr("checked"), );
+
+                          }
+                      });
+                      }
                 }
               });
              });
+
                 // Loading the saved strategies , updating home template recent strategy values
                 console.log('strategy_names' , JSON.parse('{{ strategy_names | tojson | safe}}') )
                 a = JSON.parse('{{ strategy_names | tojson | safe}}');
@@ -638,6 +660,7 @@ window.onload = function() {
 $(document).ready(function test() {
   console.log("let's go! doucument");
   });
+
 
              </script>
 
