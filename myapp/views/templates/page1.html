@@ -5,7 +5,10 @@
 <div class="tab">
     <button class="tablinks active" onclick="openCity('first_tab')" id="defaultOpen">Daily Trades</button>
     <button class="tablinks" id = "Performance" onclick="openCity('second_tab')">Performance</button>
-  
+    
+    <a href = "#" onClick="scrollSmoothToBottom()"> Apply strategy </a>
+
+
     <div id="tabvalues" > 
 
     <label style="opacity: 0.5;" >Buy:</label>
@@ -177,10 +180,18 @@
 
   $( "input[name=date_selector]" ).datepicker("show");
 
-  $("#from123").datepicker().datepicker("setDate", "11/11/2019");
+  // $("#from123").datepicker().datepicker("setDate", "11/11/2019");
 
 
-                </script>
+  scrollingElement = (document.scrollingElement || document.body)
+
+  function scrollSmoothToBottom (id) {
+   $(scrollingElement).animate({
+      scrollTop: document.body.scrollHeight
+   }, 700);
+}
+
+  </script>
 
            
             </div>
