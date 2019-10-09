@@ -151,17 +151,6 @@
                 $('#singleday_Profitable').val(roundToTwo(Profitable[element_index])); 
                 $('#singleday_MaxDrawdown').val(roundToTwo(Max_Drawdown[element_index])); 
                
-
-              // Filter the show trades 
-              // $( "tr:contains(startDate)" ).addClass( "highlight" );
-              /*date = new Date(startDate_milliseconds).toISOString()  
-               selected_day = date.substring(0, 10)
-               console.log(typeof(selected_day))
-               console.log(selected_day)
-              $(".table tr td:contains('" + selected_day + "')").filter(function() {
-              return $(this).text().trim() == selected_day;
-                }).parent().remove();*/
-
               }
 
               // console.log($(".table tr td"))
@@ -175,21 +164,31 @@
                 xAxExtremes = xAxis.getExtremes(),
                 dataMin = chart.xAxis[0].min
                 dataMax =  chart.xAxis[0].max,
-
                 console.log('dataMin',dataMin)
-                console.log('dataMax',dataMax)
-
+               
                 var d = new Date(dataMin);
-
                 var n = d.toLocaleDateString("en-US");
-        
                 $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
-                $('#singleday_Total_Profit').val(1500)
                 
+                if (Performance_Data !== null){
+                console.log('excuted')
+                time_milliseconds = Performance_Data["x"]
+                default_date = dataMin + 60000
+                element_index = time_milliseconds.indexOf(default_date)
+
+                $('#singleday_Total_Profit').val(roundToTwo(Performance_Data["Total_Profit"][element_index])); 
+                $('#singleday_Profit_factor').val(roundToTwo(Performance_Data["Profit_Factor"][element_index])); 
+                $('#singleday_Profitable').val(roundToTwo(Performance_Data["Profitable"][element_index])); 
+                $('#singleday_MaxDrawdown').val(roundToTwo(Performance_Data["Max_Drawdown"][element_index])); 
+               
+              }
+
+
+
+
     });
 
   
-
 
   $( "input[name=date_selector]" ).datepicker("show");
 
