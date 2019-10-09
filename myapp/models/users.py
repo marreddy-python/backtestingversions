@@ -25,6 +25,7 @@ class Strategy(db.Model):
     End_time = db.Column(db.BigInteger, nullable=False)
     Optimization = db.Column(db.String,nullable = False)
     
+    
     addresses = db.relationship("Strategies_Grades",backref = "owner")
 
 
