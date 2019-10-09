@@ -180,8 +180,9 @@
   console.log('dataMax',dataMax)
 
   // $("#from123").val( "11/11/2019")
-  // $("#from123").datepicker().datepicker("setDate", "11/11/2019");
-  $( "#from123" ).datepicker({ defaultDate:"11/11/2019" });
+  $( "input[name=date_selector]").datepicker().datepicker("setDate", "11/11/2019");
+  // $( "#from123" ).datepicker({ defaultDate:"11/11/2019" });
+
 
   $( "input[name=date_selector]" ).datepicker("show");
 
