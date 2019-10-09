@@ -236,6 +236,13 @@ li a:hover {
     float:right;
     margin-right: 100px;
 }
+#tabscroller{
+    font-size: 15px;   
+    padding:14px 16px;
+    float:left;
+    margin-left: 15px;
+}
+
 .phase{
     font-size: 20px;
 }

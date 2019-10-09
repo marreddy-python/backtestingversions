@@ -5,12 +5,12 @@
 <div class="tab">
     <button class="tablinks active" onclick="openCity('first_tab')" id="defaultOpen">Daily Trades</button>
     <button class="tablinks" id = "Performance" onclick="openCity('second_tab')">Performance</button>
-    
-    <a class = "tablinks" href = "#" onClick="scrollSmoothToBottom()"> Apply strategy </a>
-
+ 
+    <div id= "tabscroller">
+    <p style = "float:left;"><a  href = "#" onClick="scrollSmoothToBottom()"> Apply strategy </a></p>
+    </div>
 
     <div id="tabvalues" > 
-
     <label style="opacity: 0.5;" >Buy:</label>
     <label id="Buytab">  </label>
     <label style="opacity: 0.5; padding-left: 5px;" > Sell : </label>
