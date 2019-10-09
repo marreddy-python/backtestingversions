@@ -238,9 +238,10 @@ li a:hover {
 }
 #tabscroller{
     font-size: 15px;   
-    padding:14px 16px;
+    /* padding:14px 16px; */
     float:left;
     margin-left: 15px;
+    margin-top:15px;
 }
 
 .phase{
