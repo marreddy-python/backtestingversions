@@ -154,13 +154,13 @@
 
               // Filter the show trades 
               // $( "tr:contains(startDate)" ).addClass( "highlight" );
-               date = new Date(startDate_milliseconds).toISOString()  
+              /*date = new Date(startDate_milliseconds).toISOString()  
                selected_day = date.substring(0, 10)
                console.log(typeof(selected_day))
                console.log(selected_day)
               $(".table tr td:contains('" + selected_day + "')").filter(function() {
               return $(this).text().trim() == selected_day;
-                }).parent().remove();
+                }).parent().remove();*/
 
               }
 
@@ -184,7 +184,8 @@
                 var n = d.toLocaleDateString("en-US");
         
                 $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
-    
+                $('#singleday_Total_Profit').val(1500)
+                
     });
 
   
