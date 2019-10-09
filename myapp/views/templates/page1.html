@@ -86,7 +86,6 @@
                      $.datepicker._defaults.dateFormat,
                      selectedDate, instance.settings );
 
-
                 dates.not( this ).datepicker( "option",  "defaultDate", option, date  );
                
                 var startDate=$("input[name=date_selector]")[0].value;
@@ -170,23 +169,25 @@
             }
                  });
 
-        
+                // Default date for the datepicker 
+                var chart = $('#realtime-chart').highcharts();
+                xAxis = chart.xAxis[0]
+                xAxExtremes = xAxis.getExtremes(),
+                dataMin = chart.xAxis[0].min
+                dataMax =  chart.xAxis[0].max,
 
-          $( "input[name=date_selector]").datepicker().datepicker("setDate", "11/11/2019");
+                console.log('dataMin',dataMin)
+                console.log('dataMax',dataMax)
+
+                var d = new Date(dataMin);
+
+                var n = d.toLocaleDateString();
+        
+              $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
     
     });
 
-  // Default date for the datepicker 
-  var chart = $('#realtime-chart').highcharts();
-  xAxis = chart.xAxis[0]
-  xAxExtremes = xAxis.getExtremes(),
-  dataMin = xAxExtremes.dataMin,
-  dataMax =  xAxExtremes.dataMax,
-
-  console.log('dataMin',dataMin)
-  console.log('dataMax',dataMax)
-
-  // $("input[name=date_selector]").val("11/11/2019");
+  
 
 
   $( "input[name=date_selector]" ).datepicker("show");
