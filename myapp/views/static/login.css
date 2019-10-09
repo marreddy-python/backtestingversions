@@ -255,7 +255,7 @@ li a:hover {
     border: 2px solid white; 
     /* float:right; */
     margin-right:0px; 
-    background-color: white
+    /* background-color: white */
 }
 #sam{
     padding-left:10px;
@@ -310,7 +310,7 @@ li a:hover {
     margin-top:25px;
     border: 2px solid white; 
     float:left;
-    background-color: white
+    /* background-color: white */
 
 }
 
