@@ -67,9 +67,6 @@
                     $('#realtime-chart').highcharts('StockChart', chartConfig); 
                   }
 
-    
-  $("#from123").datepicker().datepicker("setDate", "11/11/2019");
-
                  $(function() {
                  
                 var dates = $( "input[name=date_selector]" ).datepicker({
@@ -177,12 +174,10 @@
   console.log('dataMin',dataMin)
   console.log('dataMax',dataMax)
 
-  
-  // $("#from123").datepicker().datepicker("setDate", "11/11/2019");
 
+  $( "input[name=date_selector]" ).datepicker("show");
 
-
-    $( "input[name=date_selector]" ).datepicker("show");
+  $("#from123").datepicker().datepicker("setDate", "11/11/2019");
 
 
                 </script>
