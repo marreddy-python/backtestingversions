@@ -70,7 +70,9 @@
                     $('#realtime-chart').highcharts('StockChart', chartConfig); 
                   }
 
-                 $(function() {
+                  $('#from123').change(function() {
+                 
+                //  $(function() {
                  
                 var dates = $( "input[name=date_selector]" ).datepicker({
            
@@ -95,8 +97,6 @@
                     var d = new Date(inputFormat)
                     return [ pad(d.getMonth()+1),pad(d.getDate()), d.getFullYear()].join('/')
                 }
-
-
 
                 var endDate= convertDate(theDate);
 
@@ -165,7 +165,7 @@
  
             }
                  });
-    })
+    });
 
   // Default date for the datepicker 
   var chart = $('#realtime-chart').highcharts();
@@ -180,7 +180,7 @@
 
   $( "input[name=date_selector]" ).datepicker("show");
 
-  // $("#from123").datepicker().datepicker("setDate", "11/11/2019");
+  $("#from123").datepicker().datepicker("setDate", "11/11/2019");
 
 
   
