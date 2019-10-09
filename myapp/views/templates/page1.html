@@ -75,6 +75,8 @@
               $('#from123').change(function() {
                 //  $(function() {
                 var dates = $( "input[name=date_selector]" ).datepicker({
+                // changeMonth: true,
+                // changeYear: true,
            
             onSelect: function( selectedDate ) {
                var option = $(this).is("input[name=date_selector]")
@@ -167,6 +169,7 @@
  
             }
                  });
+            $( "input[name=date_selector]").datepicker().datepicker("setDate", "11/11/2019");
     });
 
   // Default date for the datepicker 
@@ -181,7 +184,7 @@
 
   // $("#from123").val( "11/11/2019")
   
-  $( "input[name=date_selector]").datepicker().datepicker("setDate", "11/11/2019");
+  
   // $( "#from123" ).datepicker({ defaultDate:"11/11/2019" });
 
 
