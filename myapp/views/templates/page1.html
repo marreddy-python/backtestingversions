@@ -68,9 +68,11 @@
                   }
 
     
+  $("#from123").datepicker().datepicker("setDate", "11/11/2019");
+
                  $(function() {
                  
-         var dates = $( "input[name=date_selector]" ).datepicker({
+                var dates = $( "input[name=date_selector]" ).datepicker({
            
             onSelect: function( selectedDate ) {
                var option = $(this).is("input[name=date_selector]")
@@ -148,17 +150,11 @@
                
 
               // Filter the show trades 
-
               // $( "tr:contains(startDate)" ).addClass( "highlight" );
-
-               date = new Date(startDate_milliseconds).toISOString()
-               
+               date = new Date(startDate_milliseconds).toISOString()  
                selected_day = date.substring(0, 10)
-
                console.log(typeof(selected_day))
-
                console.log(selected_day)
-
               $(".table tr td:contains('" + selected_day + "')").filter(function() {
               return $(this).text().trim() == selected_day;
                 }).parent().remove();
@@ -176,18 +172,15 @@
   xAxis = chart.xAxis[0],
   xAxExtremes = xAxis.getExtremes(),
   dataMin = xAxExtremes.dataMin,
+  dataMax =  xAxExtremes.dataMax,
 
   console.log('dataMin',dataMin)
+  console.log('dataMax',dataMax)
+
   
-  
-  $("#from123").datepicker().datepicker("setDate", "11/11/2019");
+  // $("#from123").datepicker().datepicker("setDate", "11/11/2019");
 
 
-
-
-   
-    // $("#from").datepicker({ dateFormat: "yy-mm-dd"}).datepicker("setDate","7/11/2011" );
-    // $("#from").datepicker().datepicker("setDate", "7/11/2011");
 
     $( "input[name=date_selector]" ).datepicker("show");
 
