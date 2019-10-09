@@ -170,7 +170,7 @@
             }
                  });
 
-          $("input[name=date_selector]").val("11/11/2019");
+        
 
           $( "input[name=date_selector]").datepicker().datepicker("setDate", "11/11/2019");
     
@@ -185,6 +185,8 @@
 
   console.log('dataMin',dataMin)
   console.log('dataMax',dataMax)
+  
+  $("input[name=date_selector]").val("11/11/2019");
 
   $( "input[name=date_selector]" ).datepicker("show");
 
