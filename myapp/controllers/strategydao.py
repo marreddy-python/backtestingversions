@@ -42,12 +42,21 @@ class StrategyDAO():
  
         Created_at = time.strftime("%a, %d %b %Y %H:%M:%S")
 
-        if sc["optimization"]=="None":
+        '''if sc["optimization"]=="None":
             Opti = "No"
         elif sc["stop_order"]=="None":
-            Opti = "YES"
+            Opti = "No"'''
+        
+        if sc["optimization"]=="None" and  sc["stop_order"]=="None":
+            Opti = "Not_applied"
 
-      
+        elif sc["optimization"]!="None":
+            Opti = "relative_angle"
+
+        elif sc["stop_order"]!="None":
+            Opti = "stop_order"
+
+        
         # if not stored that strategy than store it.
 
         # saving into the startegy table 
