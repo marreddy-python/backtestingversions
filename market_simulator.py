@@ -14,7 +14,6 @@ sys.dont_write_bytecode=True
 
 from sqlalchemy.types import Integer
 
-
 class MarketSimulator:
 
     def __init__(self):
@@ -32,7 +31,7 @@ class MarketSimulator:
         for i in range(len(self.symbols)):
 
             endtime = int(time.time()*1000.0) 
-            starttime = endtime - 86400000*20
+            starttime = endtime - 86400000*5
 
             print(starttime,endtime)
 
