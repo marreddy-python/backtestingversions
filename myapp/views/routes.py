@@ -131,9 +131,7 @@ def strategyview():
                                                 Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
                                                 print('step number1 excuting')
                                                 return jsonify({'step':1 })       
-                                        else:
-
-                                                
+                                        else:   
                                                 startegy_loader.metricCalculation(start_time,tweenty_days,St)
                                                 startegy_loader.Total_metricCalculation(start_time,tweenty_days,St)
             

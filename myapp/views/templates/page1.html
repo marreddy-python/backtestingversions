@@ -240,7 +240,7 @@
               <label class="sum_lbl">Max Drawdown</label>  
               <input class="sum_inp" type="text" id="singleday_MaxDrawdown"  size="10" value="0">
             
-              <p class="sum_lbl show_trades" ><a href = "#" id="opener">Show Trades>> </a></p>
+              <p class="sum_lbl show_trades" style = "display:none" ><a href = "#" id="opener">Show Trades>> </a></p>
 
           </form>
       
@@ -601,6 +601,7 @@
 
                             console.log(main_data["Metric_values"])
                             a = main_data["Metric_values"]
+
                             console.log(main_data["Trades_singleday"])
 
                             $('#singleday_Total_Profit').val(a["Total_Profit"]); 
@@ -610,7 +611,6 @@
 
                             Singleday_Trades = main_data["Trades_singleday"]
                             Performance_Data  = main_data["Performance"]
-
 
                             flags( main_data["Buy_flags"],main_data["Sell_flags"])
                             $('#Buytab').html( $('#buying_angle').attr('value'));
@@ -652,16 +652,6 @@
                 }
 
 
-
-window.onload = function() {
- console.log("let's go!");
-}
-
-$(document).ready(function test() {
-  console.log("let's go! doucument");
-  });
-
-
              </script>
 
             </p>
@@ -672,7 +662,7 @@ $(document).ready(function test() {
 
 <!-- </form> -->
 
-  <div class="column" style="background-color: #F0F0F0" >
+  <div class="column" style="background-color: #F0F0F0 ;display:none" >
     
       <p style="font-size: 15px;background-color: #e0e0e0;text-align: center;color:white;font-weight: bold; padding:2mm;color: rgba(0, 0, 0, 0.8);">Live trade Strategy</p>
     
