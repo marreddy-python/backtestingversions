@@ -179,8 +179,7 @@ li a:hover {
     border: 2px solid white; 
     float:right;
     margin-right:30px;
-    background-color:#F4F4F4;
-
+    /* background-color:#F4F4F4; */
 }
 
 .arena{
