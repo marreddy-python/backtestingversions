@@ -181,9 +181,9 @@
 
                 var d = new Date(dataMin);
 
-                var n = d.toLocaleDateString();
+                var n = d.toLocaleDateString("en-US");
         
-              $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
+                $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
     
     });
 
@@ -368,9 +368,7 @@
 
               {% include'high_performance.html'%}
 
-             
-
-
+            
             <div>
 
             </div>
@@ -622,10 +620,10 @@
 
                             console.log(main_data["Trades_singleday"])
 
-                            $('#singleday_Total_Profit').val(a["Total_Profit"]); 
-                            $('#singleday_Profit_factor').val(a["Profit_Factor"]); 
-                            $('#singleday_Profitable').val(a["Profitable"]); 
-                            $('#singleday_MaxDrawdown').val(a["Max_Drawdown"]); 
+                            // $('#singleday_Total_Profit').val(a["Total_Profit"]); 
+                            // $('#singleday_Profit_factor').val(a["Profit_Factor"]); 
+                            // $('#singleday_Profitable').val(a["Profitable"]); 
+                            // $('#singleday_MaxDrawdown').val(a["Max_Drawdown"]); 
 
                             Singleday_Trades = main_data["Trades_singleday"]
                             Performance_Data  = main_data["Performance"]
