@@ -110,6 +110,9 @@ li a:hover {
     #tabvalues{
         display:none
     }
+    #tabscroller{
+        display:none 
+    }
 }
 
 

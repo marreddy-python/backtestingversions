@@ -70,10 +70,10 @@
                     $('#realtime-chart').highcharts('StockChart', chartConfig); 
                   }
 
-                  $('#from123').change(function() {
-                 
+
+
+              $('#from123').change(function() {
                 //  $(function() {
-                 
                 var dates = $( "input[name=date_selector]" ).datepicker({
            
             onSelect: function( selectedDate ) {
@@ -169,7 +169,7 @@
 
   // Default date for the datepicker 
   var chart = $('#realtime-chart').highcharts();
-  xAxis = chart.xAxis[0],
+  xAxis = chart.xAxis[0]
   xAxExtremes = xAxis.getExtremes(),
   dataMin = xAxExtremes.dataMin,
   dataMax =  xAxExtremes.dataMax,
@@ -177,9 +177,10 @@
   console.log('dataMin',dataMin)
   console.log('dataMax',dataMax)
 
+  $("#from123").val( "11/11/2019")
 
   // $("#from123").datepicker().datepicker("setDate", "11/11/2019");
-  $( "#from123" ).datepicker({ defaultDate:"11/11/2019" });
+  // $( "#from123" ).datepicker({ defaultDate:"11/11/2019" });
 
   $( "input[name=date_selector]" ).datepicker("show");
 
@@ -231,16 +232,16 @@
           <form style="margin-top:20px;">
 
               <label class="sum_lbl">Total profit </label>
-              <input class="sum_inp" type="text" id="singleday_Total_Profit" size="10" value="0$">
+              <input class="sum_inp" type="text" id="singleday_Total_Profit" size="10" value=" ">
 
               <label class="sum_lbl">Profit factor</label>
-              <input class="sum_inp" type="text" id="singleday_Profit_factor" size="10" value="0">
+              <input class="sum_inp" type="text" id="singleday_Profit_factor" size="10" value=" ">
 
               <label class="sum_lbl">%Profitable</label>
-              <input class="sum_inp" type="text" id="singleday_Profitable" size="10" value="0">
+              <input class="sum_inp" type="text" id="singleday_Profitable" size="10" value=" ">
 
               <label class="sum_lbl">Max Drawdown</label>  
-              <input class="sum_inp" type="text" id="singleday_MaxDrawdown"  size="10" value="0">
+              <input class="sum_inp" type="text" id="singleday_MaxDrawdown"  size="10" value=" ">
             
               <p class="sum_lbl show_trades" style = "display:none" ><a href = "#" id="opener">Show Trades>> </a></p>
 
