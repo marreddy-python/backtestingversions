@@ -183,14 +183,7 @@
   // $("#from123").datepicker().datepicker("setDate", "11/11/2019");
 
 
-  scrollingElement = (document.scrollingElement || document.body)
-
-  function scrollSmoothToBottom (id) {
-   $(scrollingElement).animate({
-      scrollTop: document.body.scrollHeight
-   }, 700);
-}
-
+  
   </script>
 
            
@@ -455,6 +448,15 @@
 
           
             // SWITCHING TABS
+            scrollingElement = (document.scrollingElement || document.body)
+            console.log(scrollingElement)
+            function scrollSmoothToBottom (id) {
+            console.log('scroller clicked')
+            $(scrollingElement).animate({
+                scrollTop: document.body.scrollHeight
+            }, 700);
+            }
+
 
             function openCity(cityName) {
                   var i, tabcontent, tablinks;
