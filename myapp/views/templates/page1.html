@@ -633,6 +633,11 @@
                             $('#stop_ordertab').html($('#STPODVALUE').attr("checked"), );
 
                             // SUMMARY VALUES FOR DEAFULT DATE
+
+                            var d = new Date(dataMin);
+                            var n = d.toLocaleDateString("en-US");
+                            $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
+             
                             if (Performance_Data !== null){
                                 console.log('excuted')
                                 time_milliseconds = Performance_Data["x"]
