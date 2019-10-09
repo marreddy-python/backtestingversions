@@ -6,7 +6,7 @@
     <button class="tablinks active" onclick="openCity('first_tab')" id="defaultOpen">Daily Trades</button>
     <button class="tablinks" id = "Performance" onclick="openCity('second_tab')">Performance</button>
     
-    <a class = "scrolldown" href = "#" onClick="scrollSmoothToBottom()"> Apply strategy </a>
+    <a class = "tablinks" href = "#" onClick="scrollSmoothToBottom()"> Apply strategy </a>
 
 
     <div id="tabvalues" > 
@@ -405,7 +405,7 @@
 
   <div class="column">
 
-    <p class="para" style = "font-weight: bold; font-size: 30px;"> Strategy</p>
+    <p class="para" style = "font-weight: bold; font-size: 30px;"> Apply strategy</p>
     <p  class="para">
     <label class= "lab-name" for="fname">Buying angle</label>
     <input class="input-cls" maxlength="8" size="8" type="text" id="buying_angle" name="Buying_angle" required> 
@@ -453,7 +453,7 @@
             console.log('scroller clicked')
             $(scrollingElement).animate({
                 scrollTop: 1200
-            }, 100);
+            }, 400);
              }
 
             function openCity(cityName) {
