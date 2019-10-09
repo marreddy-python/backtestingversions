@@ -166,13 +166,23 @@
               }
 
               // console.log($(".table tr td"))
-        
-            
+ 
             }
                  });
-
-
     })
+
+  // Default date for the datepicker 
+  var chart = $('#realtime-chart').highcharts();
+  xAxis = chart.xAxis[0],
+  xAxExtremes = xAxis.getExtremes(),
+  dataMin = xAxExtremes.dataMin,
+
+  console.log('dataMin',dataMin)
+  
+  
+  $("#from123").datepicker().datepicker("setDate", "11/11/2019");
+
+
 
 
    
