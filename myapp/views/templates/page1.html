@@ -39,7 +39,7 @@
             
                       <span id="sam1123">
                           <label style="font-size: 15px;" >Select Date</label>
-                          <input id="from123" type="text" size="10" name="date_selector">
+                          <input id="from123" type="text" size="10" name="date_selector" value = " ">
                       </span>
       
                      
@@ -186,7 +186,8 @@
   console.log('dataMin',dataMin)
   console.log('dataMax',dataMax)
 
-  // $("input[name=date_selector]").val("11/11/2019");
+  $("input[name=date_selector]").val("11/11/2019");
+
 
   $( "input[name=date_selector]" ).datepicker("show");
 
