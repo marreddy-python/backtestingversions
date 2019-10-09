@@ -6,7 +6,7 @@
     <button class="tablinks active" onclick="openCity('first_tab')" id="defaultOpen">Daily Trades</button>
     <button class="tablinks" id = "Performance" onclick="openCity('second_tab')">Performance</button>
     
-    <a href = "#" onClick="scrollSmoothToBottom()"> Apply strategy </a>
+    <a href = "#" onClick="scrollToBottom()"> Apply strategy </a>
 
 
     <div id="tabvalues" > 
@@ -449,14 +449,16 @@
           
             // SWITCHING TABS
             scrollingElement = (document.scrollingElement || document.body)
-            console.log(scrollingElement)
+            /*console.log(scrollingElement)
             function scrollSmoothToBottom (id) {
             console.log('scroller clicked')
             $(scrollingElement).animate({
                 scrollTop: document.body.scrollHeight
             }, 700);
+            }*/
+            function scrollToBottom () {
+              scrollingElement.scrollTop = scrollingElement.scrollHeight;
             }
-
 
             function openCity(cityName) {
                   var i, tabcontent, tablinks;
