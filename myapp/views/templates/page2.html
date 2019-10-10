@@ -409,6 +409,18 @@ $('.mar').click(function(e){
     });
 
 
+
+    $(chart.series).each(function(i, serie){
+        serie.legendItem.on('mouseover', function(){ 
+            //any action
+            id = serie.name
+            alert(id);
+        }).on('mouseout', function(){
+            default_values_summary();
+        })
+    });
+
+
     default_values_summary();
     function default_values_summary(){
         main = JSON.parse(sessionStorage.getItem("ba")) 
