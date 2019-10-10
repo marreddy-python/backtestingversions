@@ -409,12 +409,25 @@ $('.mar').click(function(e){
     });
 
 
-
-    $(chart.series).each(function(i, serie){
+// Hovering the name 
+$(chart.series).each(function(i, serie){
         serie.legendItem.on('mouseover', function(){ 
             //any action
             id = serie.name
             alert(id);
+        for(i=0;i<main.Strategies.length;i++){
+            b = main.Strategies[i]
+            if(b.Strategy==id){
+                chart.get(id).setState('hover') 
+                //CHANGING THE VALUES OF A DIMENSIONS 
+                $('#marsu0').val( b.TWENTY_TP)
+                $('#marsu1').val( b.TWENTY_PF )
+                $('#marsu2').val( b.TWENTY_PT)    
+            }
+            else{
+                chart.get(b.Strategy).setState('inactive')  
+            }  
+        }
         }).on('mouseout', function(){
             default_values_summary();
         })
