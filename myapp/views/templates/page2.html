@@ -333,6 +333,8 @@ $('.mar').click(function(e){
         var elem = document.querySelectorAll('#cart');
         elem[0].children[0].innerHTML = 'Arena('+n+')';
     }
+    // calling function for default values of a dimensions
+    default_values_summary();
 })
 
 
@@ -360,7 +362,6 @@ $('.mar').click(function(e){
 
 //MOUSE HOVER EFFECT FOR THE TABLE
     $("table tr").on('mouseover', function(event) {  
-
         id = $(this).attr('id')
 
         console.log(id)
@@ -384,7 +385,7 @@ $('.mar').click(function(e){
        
     });
 
-    $("table tr").on('mouseleave', function(event) { 
+    /*$("table tr").on('mouseleave', function(event) { 
         id = $(this).attr('id')  
         for(i=0;i<main.Strategies.length;i++){
             b = main.Strategies[i]
@@ -395,7 +396,25 @@ $('.mar').click(function(e){
         $('#marsu2').val(0)
    
         } 
+    });*/
+
+
+    $("table tr").on('mouseleave', function(event) {
+        default_values_summary();
     });
+
+
+    default_values_summary();
+    function default_values_summary(){
+        main = JSON.parse(sessionStorage.getItem("ba")) 
+        if (main.Strategies.length > 0){
+            b = main.Strategies[0]
+            $('#marsu0').val( b.TWENTY_TP)
+            $('#marsu1').val( b.TWENTY_PF )
+            $('#marsu2').val( b.TWENTY_PT)            
+        }
+    }
+
 
 
     // Loading the saved strategies , updating home template recent strategy values
