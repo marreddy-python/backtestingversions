@@ -26,4 +26,8 @@ def deletestrategy(clicked_id):
 
     print ('STRATEGY DELETED SUCCESFULLY')
 
+    
+
+
+
  
