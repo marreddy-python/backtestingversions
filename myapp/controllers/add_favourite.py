@@ -1,4 +1,5 @@
 from myapp.models.users import Strategy,db,Trades,Daily_metric,Total_metric
+from sqlalchemy import and_
 
 def addFav(clicked_id):
        
