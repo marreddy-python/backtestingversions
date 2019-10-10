@@ -31,9 +31,9 @@ def deletestrategy(clicked_id):
     print('DELETE STRATEGY',delete_strategy)
 
     # Deleting the trades
-    db_data = Trades.query.filter(and_(Trades.Strategy["buying_angle"]== delete_strategy["buying_angle"],
-    Trades.Strategy["selling_angle"]== delete_strategy["selling_angle"],Trades.Strategy["optimization"]== delete_strategy["optimization"],Trades.Strategy["relative_angle"]==delete_strategy["relative_angle"],
-    Trades.Strategy["stop_order"]==delete_strategy["stop_order"],Trades.Strategy["less_than_buy"]== delete_strategy["less_than_buy"])).all().delete()
+    db_data = Trades.query.filter(and_(Trades.Strategy["buying_angle"].astext.cast(Integer) == delete_strategy["buying_angle"],
+    Trades.Strategy["selling_angle"].astext.cast(Integer)== delete_strategy["selling_angle"],str(Trades.Strategy["optimization"])== delete_strategy["optimization"],Trades.Strategy["relative_angle"].astext.cast(Integer)==delete_strategy["relative_angle"],
+    str(Trades.Strategy["stop_order"])==delete_strategy["stop_order"],Trades.Strategy["less_than_buy"].astext.cast(Integer)== delete_strategy["less_than_buy"])).all().delete()
      
     db.session.commit()
 
