@@ -400,6 +400,11 @@ $('.mar').click(function(e){
 
 
     $("table tr").on('mouseleave', function(event) {
+        id = $(this).attr('id')  
+        for(i=0;i<main.Strategies.length;i++){
+            b = main.Strategies[i]
+            chart.get(b.Strategy).setState(); 
+        }
         default_values_summary();
     });
 
