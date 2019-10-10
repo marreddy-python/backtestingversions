@@ -414,10 +414,11 @@ $(chart.series).each(function(i, serie){
         serie.legendItem.on('mouseover', function(){ 
             //any action
             id = serie.name
-            alert(id);
+            
         for(i=0;i<main.Strategies.length;i++){
             b = main.Strategies[i]
             if(b.Strategy==id){
+                console.log(b.TWENTY_PF,b.TWENTY_PT,b.TWENTY_TP)
                 chart.get(id).setState('hover') 
                 //CHANGING THE VALUES OF A DIMENSIONS 
                 $('#marsu0').val( b.TWENTY_TP)
