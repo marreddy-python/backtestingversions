@@ -414,6 +414,7 @@ $('.mar').click(function(e){
         main = JSON.parse(sessionStorage.getItem("ba")) 
         if (main.Strategies.length > 0){
             b = main.Strategies[0]
+            chart.get(b.Strategy).setState('hover'); 
             $('#marsu0').val( b.TWENTY_TP)
             $('#marsu1').val( b.TWENTY_PF )
             $('#marsu2').val( b.TWENTY_PT)            
