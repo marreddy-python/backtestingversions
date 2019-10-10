@@ -34,7 +34,8 @@ def deletestrategy(clicked_id):
 
     # Deleting the trades
     db_data = Trades.query.filter(and_(Trades.Strategy["buying_angle"] == cast(delete_strategy["buying_angle"], JSON)
-    Trades.Strategy["selling_angle"]== cast(delete_strategy["selling_angle"],JSON),Trades.Strategy["optimization"] == cast(delete_strategy["optimization"],JSON),Trades.Strategy["relative_angle"]==cast(delete_strategy["relative_angle"],JSON),
+    Trades.Strategy["selling_angle"]== cast(delete_strategy["selling_angle"],JSON),Trades.Strategy["optimization"] == cast(delete_strategy["optimization"],JSON),
+    Trades.Strategy["relative_angle"]==cast(delete_strategy["relative_angle"],JSON),
     Trades.Strategy["stop_order"]==cast(delete_strategy["stop_order"],JSON),Trades.Strategy["less_than_buy"]== cast(delete_strategy["less_than_buy"],JSON)).all().delete()
      
     db.session.commit()
