@@ -33,22 +33,15 @@ def deletestrategy(clicked_id):
     print('DELETE STRATEGY',delete_strategy)
 
     # Deleting the trades
-    db_data = Trades.query.filter(and_( Trades.Strategy["buying_angle"] == cast(delete_strategy["buying_angle"], JSON),
-    Trades.Strategy["selling_angle"]== cast(delete_strategy["selling_angle"],JSON),Trades.Strategy["optimization"] == cast(delete_strategy["optimization"],JSON),
-    Trades.Strategy["relative_angle"]==cast(delete_strategy["relative_angle"],JSON),
-    Trades.Strategy["stop_order"]==cast(delete_strategy["stop_order"],JSON),Trades.Strategy["less_than_buy"]== cast(delete_strategy["less_than_buy"],JSON))).all()
+    db_data = Trades.query.filter(and_( Trades.c.Strategy["buying_angle"].cast(Integer) == delete_strategy["buying_angle"],
+    Trades.c.Strategy["selling_angle"].cast(Integer)== delete_strategy["selling_angle"],Trades.c.Strategy["optimization"].astext == delete_strategy["optimization"],
+    Trades.c.Strategy["relative_angle"].cast(Integer)== delete_strategy["relative_angle"],
+    Trades.c.Strategy["stop_order"].astext== delete_strategy["stop_order"],Trades.c.Strategy["less_than_buy"].cast(Integer)== delete_strategy["less_than_buy"])).all()
      
     db.session.delete(db_data)
     db.session.commit()
 
-    #  Deleting the daily_metric
-    '''res = Daily_metric.query.filter_by(Strategy = delete_strategy).delete()
-    db.session.commit()
-
-    # Total metric
-    res = Total_metric.query.filter_by(Strategy = delete_strategy).delete()
-    db.session.commit()'''
-
+ 
 
     # deleting the strategy from the strategy page
     res = Strategy.query.filter_by(id=clicked_id).delete()
