@@ -1,5 +1,7 @@
 from myapp.models.users import Strategy,db,Trades,Daily_metric,Total_metric
 from sqlalchemy import and_
+from sqlalchemy import JSON
+from sqlalchemy.sql.expression import cast
 
 def addFav(clicked_id):
        
@@ -31,9 +33,9 @@ def deletestrategy(clicked_id):
     print('DELETE STRATEGY',delete_strategy)
 
     # Deleting the trades
-    db_data = Trades.query.filter(and_(Trades.Strategy["buying_angle"].astext.cast(Integer) == delete_strategy["buying_angle"],
-    Trades.Strategy["selling_angle"].astext.cast(Integer)== delete_strategy["selling_angle"],str(Trades.Strategy["optimization"])== delete_strategy["optimization"],Trades.Strategy["relative_angle"].astext.cast(Integer)==delete_strategy["relative_angle"],
-    str(Trades.Strategy["stop_order"])==delete_strategy["stop_order"],Trades.Strategy["less_than_buy"].astext.cast(Integer)== delete_strategy["less_than_buy"])).all().delete()
+    db_data = Trades.query.filter(and_(Trades.Strategy["buying_angle"] == cast(delete_strategy["buying_angle"], JSON)
+    Trades.Strategy["selling_angle"]== cast(delete_strategy["selling_angle"],JSON),Trades.Strategy["optimization"] == cast(delete_strategy["optimization"],JSON),Trades.Strategy["relative_angle"]==cast(delete_strategy["relative_angle"],JSON),
+    Trades.Strategy["stop_order"]==cast(delete_strategy["stop_order"],JSON),Trades.Strategy["less_than_buy"]== cast(delete_strategy["less_than_buy"],JSON)).all().delete()
      
     db.session.commit()
 
