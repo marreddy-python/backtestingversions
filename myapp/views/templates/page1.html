@@ -11,38 +11,27 @@
     </div>
 
     <div id="tabvalues" > 
-    <label style="opacity: 0.5;" >Buy:</label>
-    <label id="Buytab">  </label>
-    <label style="opacity: 0.5; padding-left: 5px;" > Sell : </label>
-    <label id = "Selltab"> </label>
-    <label style="opacity: 0.5;padding-left: 5px;" >Optimization : </label>
-    <label id="Optitab" > </label>
-    <label style="opacity: 0.5;padding-left: 5px;">Stop order : </label>
-    <label id="stop_ordertab"> </label>
-
+        <label style="opacity: 0.5;" >Buy:</label>
+        <label id="Buytab">  </label>
+        <label style="opacity: 0.5; padding-left: 5px;" > Sell : </label>
+        <label id = "Selltab"> </label>
+        <label style="opacity: 0.5;padding-left: 5px;" >Optimization : </label>
+        <label id="Optitab" > </label>
+        <label style="opacity: 0.5;padding-left: 5px;">Stop order : </label>
+        <label id="stop_ordertab"> </label>
     </div>
- 
 </div>
 
 
 <div id="first_tab"  class="tabcontent" >
   <div>
         <div id = "kinda" >
- 
- 
-            <!-- <div  class="loader"> </div> -->
-          
-
             <div class= "graph_area"  style="margin-top: 0px;">
                 <div class = "phase" style="margin-top: 10px;">
-
-            
                       <span id="sam1123">
                           <label style="font-size: 15px;" >Select Date</label>
                           <input id="from123" type="text" size="10" name="date_selector" value = " ">
-                      </span>
-      
-                     
+                      </span> 
                   </div>
                 
                 <!--ONE DAY CHART-->
@@ -50,110 +39,88 @@
                       {% include "dailytrades_highcharts.html" %}
                 {% endwith %} 
             
-
- 
                 <div style="margin-left:350px;" class="loader"> </div>  
-              
-
+            
                 <script>
 
-                Buy_flags = JSON.parse('{{ Buy_flags | tojson | safe}}');
-                Sell_flags = JSON.parse('{{ Sell_flags | tojson | safe}}');
-                flags(Buy_flags,Sell_flags)
+                    Buy_flags = JSON.parse('{{ Buy_flags | tojson | safe}}');
+                    Sell_flags = JSON.parse('{{ Sell_flags | tojson | safe}}');
+                    flags(Buy_flags,Sell_flags)
 
-                 function flags(Buy_flags,Sell_flags){
+                    function flags(Buy_flags,Sell_flags){
 
-                    console.log(Buy_flags,Sell_flags)
-                    chartConfig.series[2].data  = Buy_flags
-                    chartConfig.series[3].data  = Sell_flags
+                        console.log(Buy_flags,Sell_flags)
+                        chartConfig.series[2].data  = Buy_flags
+                        chartConfig.series[3].data  = Sell_flags
                     
-                    $('#realtime-chart').highcharts('StockChart', chartConfig); 
-                  }
+                        $('#realtime-chart').highcharts('StockChart', chartConfig); 
+                    }
 
-
-
-              // $('#from123').change(function() {
                 $(function() {
-                var dates = $( "input[name=date_selector]" ).datepicker({
-                // changeMonth: true,
-                // changeYear: true,
-           
-            onSelect: function( selectedDate ) {
-               var option = $(this).is("input[name=date_selector]")
-                instance = $( this ).data( "datepicker" ),
-                date = $.datepicker.parseDate(
-                     instance.settings.dateFormat || 
-                     $.datepicker._defaults.dateFormat,
-                     selectedDate, instance.settings );
 
-                dates.not( this ).datepicker( "option",  "defaultDate", option, date  );
+                    var dates = $( "input[name=date_selector]" ).datepicker({
+                    onSelect: function( selectedDate ) {
+                    var option = $(this).is("input[name=date_selector]")
+                    instance = $( this ).data( "datepicker" ),
+                    date = $.datepicker.parseDate(
+                    instance.settings.dateFormat || 
+                    $.datepicker._defaults.dateFormat,
+                    selectedDate, instance.settings );
+
+                    dates.not( this ).datepicker( "option",  "defaultDate", option, date  );
                
-                var startDate=$("input[name=date_selector]")[0].value;
-                // console.log(startDate)
+                    var startDate=$("input[name=date_selector]")[0].value;
+
+                    var theDate = new Date(startDate);
+                    theDate.setDate(theDate.getDate()+1);
+              
+                    function convertDate(inputFormat) {
+                        function pad(s) { return (s < 10) ? '0' + s : s; }
+                        var d = new Date(inputFormat)
+                        return [ pad(d.getMonth()+1),pad(d.getDate()), d.getFullYear()].join('/')
+                    }
+
+                    var endDate= convertDate(theDate);
+
+                    console.log(startDate)
+                    var myDate = new Date(startDate);
+                    var startDate_milliseconds = myDate.getTime();
+
+                    if (startDate!=="" && endDate!=="") {
+                        startDate=startDate.split("/");
+                        endDate=endDate.split("/");
+                        var chart = $('#realtime-chart').highcharts();
+                        chart.xAxis[0].setExtremes(
+                            Date.UTC(startDate[2], startDate[0]-1, startDate[1]),
+                            Date.UTC(endDate[2], endDate[0]-1, endDate[1])
+                        );
+                    }
+
+                  //LOGIC FOR DYNAMIC NATURE OF SUMMARY AND TRADES
+                  console.log(startDate_milliseconds)
+
+                  startDate_milliseconds = startDate_milliseconds + 19800000
+
+                  console.log(Performance_Data)
+
+                  if (Performance_Data !== null){
+                      console.log('excuted')
+                      time_milliseconds = Performance_Data["x"]
+                      console.log(time_milliseconds)
+                      console.log(typeof(time_milliseconds))
+
+                      element_index = time_milliseconds.indexOf(startDate_milliseconds)
+
+                      console.log(element_index)
+
+                      // console.log(Total_Profit,Profit_Factor,Profitable,Max_Drawdown)
+
+                      $('#singleday_Total_Profit').val(roundToTwo( Performance_Data["Total_Profit"][element_index])); 
+                      $('#singleday_Profit_factor').val(roundToTwo(Performance_Data["Profit_Factor"][element_index])); 
+                      $('#singleday_Profitable').val(roundToTwo(Performance_Data["Profitable"][element_index])); 
+                      $('#singleday_MaxDrawdown').val(roundToTwo(Performance_Data["Max_Drawdown"][element_index])); 
                
-                var theDate = new Date(startDate);
-                theDate.setDate(theDate.getDate()+1);
-                
-                // console.log(theDate)
-                function convertDate(inputFormat) {
-                    function pad(s) { return (s < 10) ? '0' + s : s; }
-                    var d = new Date(inputFormat)
-                    return [ pad(d.getMonth()+1),pad(d.getDate()), d.getFullYear()].join('/')
-                }
-
-                var endDate= convertDate(theDate);
-
-                console.log(startDate)
-                var myDate = new Date(startDate);
-                var startDate_milliseconds = myDate.getTime();
-
-                if (startDate!=="" && endDate!=="") {
-                    startDate=startDate.split("/");
-                    endDate=endDate.split("/");
-                    // console.log(startDate,endDate)
-                    var chart = $('#realtime-chart').highcharts();
-                  // console.log(chart)
-                    chart.xAxis[0].setExtremes(
-                          Date.UTC(startDate[2], startDate[0]-1, startDate[1]),
-                          Date.UTC(endDate[2], endDate[0]-1, endDate[1])
-                    );
-                }
-
-              //LOGIC FOR DYNAMIC NATURE OF SUMMARY AND TRADES
-              console.log(startDate_milliseconds)
-
-              startDate_milliseconds = startDate_milliseconds + 19800000
-
-              //finding the index of the time 
-              // Performance_Data = {"Total_Profit": [], "Profit_Factor": [], "Profitable": [],"Max_Drawdown":[],"x":[]} 
-       
-              console.log(Performance_Data)
-
-              if (Performance_Data !== null){
-                console.log('excuted')
-                time_milliseconds = Performance_Data["x"]
-                console.log(time_milliseconds)
-                console.log(typeof(time_milliseconds))
-
-                element_index = time_milliseconds.indexOf(startDate_milliseconds)
-
-                console.log(element_index)
-                
-                Total_Profit = Performance_Data["Total_Profit"]
-                Profit_Factor = Performance_Data["Profit_Factor"]
-                Profitable = Performance_Data["Profitable"]
-                Max_Drawdown = Performance_Data["Max_Drawdown"]
-
-                // console.log(Total_Profit,Profit_Factor,Profitable,Max_Drawdown)
-
-                $('#singleday_Total_Profit').val(roundToTwo(Total_Profit[element_index])); 
-                $('#singleday_Profit_factor').val(roundToTwo(Profit_Factor[element_index])); 
-                $('#singleday_Profitable').val(roundToTwo(Profitable[element_index])); 
-                $('#singleday_MaxDrawdown').val(roundToTwo(Max_Drawdown[element_index])); 
-               
-              }
-
-              // console.log($(".table tr td"))
+                  }
  
             }
                  });
@@ -183,19 +150,15 @@
                
               }
 
-    });
+          });
 
-  
+            $( "input[name=date_selector]" ).datepicker("show");
 
-  $( "input[name=date_selector]" ).datepicker("show");
+        </script>
+     
+    </div>
 
-
-  </script>
-
-           
-            </div>
-
-        </div>
+  </div>
 
 
 
@@ -254,15 +217,11 @@
       
         </div> 
 
-      
-      
-      
-
+    
         <script>
 
 
 
-        // METRIC VALUES FOR SINGLE DAY 
 
           a =  JSON.parse('{{ Metric_values_singleday | tojson | safe}}');
 
@@ -616,11 +575,6 @@
                             a = main_data["Metric_values"]
 
                             console.log(main_data["Trades_singleday"])
-
-                            // $('#singleday_Total_Profit').val(a["Total_Profit"]); 
-                            // $('#singleday_Profit_factor').val(a["Profit_Factor"]); 
-                            // $('#singleday_Profitable').val(a["Profitable"]); 
-                            // $('#singleday_MaxDrawdown').val(a["Max_Drawdown"]); 
 
 
                             Singleday_Trades = main_data["Trades_singleday"]
