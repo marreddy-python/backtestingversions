@@ -517,7 +517,6 @@ class MetricImpl(Metric):
                 Profitable = 0
         
 
-
         sc = {
             "buying_angle":s.startegy_values[0] ,
             "selling_angle":  s.startegy_values[1],
