@@ -103,6 +103,7 @@ def strategyview():
                 stop_order = str(request.form.get('STPODVALUE'))
                 less_than_buy = float(request.form.get('less_than_buy'))
                 step_number  = int(request.form.get('step_number'))
+                strategy_id  = int(request.form.get('strategy_id'))
                 
                 print(Buying_angle,selling_angle,optimization,relative_angle,stop_order,less_than_buy)
                 Stratey_values = [Buying_angle,selling_angle,optimization,relative_angle,stop_order,less_than_buy] 
@@ -119,35 +120,31 @@ def strategyview():
                         #After Clicking on save button
                         if request.form.get('main') == 'Save':
                 
-                                tweenty_days = end_time - (86400000*5)
-                                sus = applied_or_not(St,start_time,tweenty_days)
-                                print (sus)
-
-                                if sus ==  'notexist':
-
-                                        if step_number == 1:
-                                                tweenty_days = end_time - (86400000*5)
-                                                strategy_id = get_strategy_id()
-                                                b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days , strategy_id)
-                                                Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
-                                                print('step number1 excuting')
-                                                return jsonify({'step':1 })       
-                                        else:   
+                                if step_number == 1:
+                                        tweenty_days = end_time - (86400000*5)
+                                        
+                                        if strategy_id == -1:
                                                 strategy_id = get_strategy_id()
 
-                                                startegy_loader.metricCalculation(start_time,tweenty_days,St,strategy_id)
-                                                startegy_loader.Total_metricCalculation(start_time,tweenty_days,St,strategy_id)
+                                        b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days , strategy_id)
+                                        Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
+                                        print('step number1 excuting')
+                                        return jsonify({'step':1 })       
+                                else:   
+                                        if strategy_id == -1:
+                                                strategy_id = get_strategy_id()
+
+                                        startegy_loader.metricCalculation(start_time,tweenty_days,St,strategy_id)
+                                        startegy_loader.Total_metricCalculation(start_time,tweenty_days,St,strategy_id)
             
-                                                Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
-                                                b = startegy_loader.saveStrategy(St,start_time,tweenty_days,strategy_id)
-                                                Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
-                                                print('step number2  excuting')
-                                                # return jsonify({'step':2 }) 
-                                                return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags,'step':2 })
+                                        Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
+                                        b = startegy_loader.saveStrategy(St,start_time,tweenty_days,strategy_id)
+                                        Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
+                                        print('step number2  excuting')
+                                        # return jsonify({'step':2 }) 
+                                        return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags,'step':2 })
                                 
-                                else:  
-                                        return json.dumps({'status':'Strategy_alredy_applied '})
-
+                               
                                 
                         else:
                                 return json.dumps({'status':'Failed'})

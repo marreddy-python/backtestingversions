@@ -537,7 +537,8 @@
                    relative_angle : $('#relative_angle').attr('value'),
                    STPODVALUE : $('#STPODVALUE').attr("checked"),
                    less_than_buy : $('#stop_order').attr('value'),
-                   step_number : 1
+                   step_number : 1,
+                   strategy_id: -1
                  },
                   contentType: "application/x-www-form-urlencoded",
                   success: function(s){
@@ -557,7 +558,8 @@
                                 relative_angle : $('#relative_angle').attr('value'),
                                 STPODVALUE : $('#STPODVALUE').attr("checked"),
                                 less_than_buy : $('#stop_order').attr('value'),
-                                step_number : 2
+                                step_number : 2,
+                                strategy_id: -1
                           },
 
                           contentType: "application/x-www-form-urlencoded",
@@ -719,8 +721,10 @@
                    relative_angle : params[3],
                    STPODVALUE : params[4],
                    less_than_buy : params[5],
-                   step_number : 1
+                   step_number : 1,
+                   strategy_id: params[6]
                  },
+
                   contentType: "application/x-www-form-urlencoded",
                   success: function(s){
                       a = s["step"]
@@ -739,7 +743,8 @@
                                 relative_angle : params[3],
                                 STPODVALUE : params[4],
                                 less_than_buy : params[5],
-                                step_number : 2
+                                step_number : 2,
+                                strategy_id: params[6]
                           },
 
                           contentType: "application/x-www-form-urlencoded",

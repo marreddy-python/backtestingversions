@@ -15,6 +15,8 @@ from sqlalchemy import and_
 from celery_task import price_data,Strategy_features
 # from background_jobs.celery_task import price_data,Strategy_features
 
+from datetime import datetime
+import time
 
 
 import time
@@ -104,87 +106,106 @@ class SMAStrategyProcessor(StrategyProcessor):
 
         global start_date,end_date,Strategy 
 
-        # Get the data from Strategy_Features table
-        db_data = Strategy_features.query.with_entities(Strategy_features.Feature).all()
-        
-        print ('length_of_angle',len(db_data))
-    
-        # fetched_data = db_data.count()
-        fetched_data = len(db_data)
-    
-        # STOCK_DATA STORES THE MARKET DATA ALONG WITH THE ANGLE INFOMATION 
-        stock_data = []
-        for i in range(0,fetched_data):
 
-            a =  db_data[i].Feature
-            Time_stamp = a["Time_stamp"]
-            Opening = a["Open"]
-            High = a["High"]
-            Low = a["Low"]
-            close = a["Close"]
-            Volume = a["Volume"]
-            Angle = a["Angle"]
+        r_start = datetime.fromtimestamp(start/1000)
+        r_start = r_start.replace(hour=0,minute=0,second=0)
 
-            if Time_stamp >= start and Time_stamp <= end:
+        r_end = datetime.fromtimestamp(end)
+        r_end = r_end.replace(hour=0,minute=0,second=0)
 
-                stock_data.append([Time_stamp,Opening,High,Low,close,Volume,Angle])
+        r_start_milliseconds = time.mktime(r_start.timetuple())*1000
+        r_end_milliseconds = time.mktime(r_end.timetuple())*1000
+
+        while(r_start_milliseconds <= r_end_milliseconds){
 
             
-        print (start,end)
-       
-        sc = {
-            "buying_angle":s.startegy_values[0] ,
-            "selling_angle":  s.startegy_values[1],
-            "optimization":s.startegy_values[2],
-            "relative_angle": s.startegy_values[3],
-            "stop_order":  s.startegy_values[4],
-            "less_than_buy": s.startegy_values[5]
+            r_eod = r_start_milliseconds + 24*60*60*1000
+
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
+
+            if db_get != None:
+
+                print('calling apply for the day', r_start_milliseconds,r_eod)
+
+                # apply(s,r_eod,r_start_milliseconds,strategy_id)
+            else:
+                # pass
+
+                print('skiping it fir ',r_start_milliseconds,r_eod )
+            r_start_milliseconds = r_start_milliseconds + 24*60*60*1000
         }
- 
-        print ('score',sc)
+
+
+        def apply(s,end,start,strategy_id):
+
+            # Get the data from Strategy_Features table
+            db_data = Strategy_features.query.with_entities(Strategy_features.Feature).all()
         
-        data  = json.dumps(sc)
-        stgy = json.loads(data)
+            print ('length_of_angle',len(db_data))
+    
+            # fetched_data = db_data.count()
+            fetched_data = len(db_data)
+    
+            # STOCK_DATA STORES THE MARKET DATA ALONG WITH THE ANGLE INFOMATION 
+            stock_data = []
+            for i in range(0,fetched_data):
 
-        start_date = start
-        end_date = end
-        St = stgy
-        current_strategy = stgy
+                a =  db_data[i].Feature
 
-        print(current_strategy)
+                Time_stamp = a["Time_stamp"]
+                Opening = a["Open"]
+                High = a["High"]
+                Low = a["Low"]
+                close = a["Close"]
+                Volume = a["Volume"]
+                Angle = a["Angle"]
 
-        #GLOBAL VARIABLES
-        buy_price = 0
-        sell_price = 0
-        buy_value = 0
-        sell_value = 0
-        profit_loss = 0
-        profit_loss_percentage = 0
-        buy_angle = 0
-        Sell_angle = 0
-        Symbol = 'TVIX'
-        Type = 'SMA'
-        buy_time = 0
-        Sell_time = 0
-        Opmz = 0
-        Day_identifier = 0
+                if Time_stamp >= start and Time_stamp <= end:
 
-        # Get all strategies from the strategy table
-        db_get_strategies =  Strategy.query.filter(Strategy.Symbol=='TVIX').all()
-        fetched_length = len(db_get_strategies)
-        stored_strategies = []
-        for st in range(0,fetched_length):
-            strategies = db_get_strategies[st].Params
-            if  db_get_strategies[st].Start_time == start and db_get_strategies[st].End_time == end:
-                    stored_strategies.append(strategies)
+                    stock_data.append([Time_stamp,Opening,High,Low,close,Volume,Angle])
 
-        print ('stored_strategies',stored_strategies)   
+            
 
+            print (start,end)
+       
+            sc = {
+                "buying_angle":s.startegy_values[0] ,
+                "selling_angle":  s.startegy_values[1],
+                "optimization":s.startegy_values[2],
+                "relative_angle": s.startegy_values[3],
+                "stop_order":  s.startegy_values[4],
+                "less_than_buy": s.startegy_values[5]
+            }
+ 
+            print ('score',sc)
+        
+            data  = json.dumps(sc)
+            stgy = json.loads(data)
 
-        # Check if current strategy is exist in strategies table 
-        if (current_strategy in stored_strategies):
-            pass
-        else:
+            start_date = start
+            end_date = end
+            St = stgy
+            current_strategy = stgy
+
+            print(current_strategy)
+
+            #GLOBAL VARIABLES
+            buy_price = 0
+            sell_price = 0
+            buy_value = 0
+            sell_value = 0
+            profit_loss = 0
+            profit_loss_percentage = 0
+            buy_angle = 0
+            Sell_angle = 0
+            Symbol = 'TVIX'
+            Type = 'SMA'
+            buy_time = 0
+            Sell_time = 0
+            Opmz = 0
+            Day_identifier = 0
+
+      
             # iterate over the lenth of candles
             for i in range(0,len(stock_data)):
 
