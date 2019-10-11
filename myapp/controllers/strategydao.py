@@ -114,7 +114,8 @@ class SMAStrategyProcessor(StrategyProcessor):
 
     def applyStrategy(self,s,end,start,strategy_id):
 
-
+        
+        print ('ENETERED APPLY STRATEGY')
         def apply(s,end,start,strategy_id):
 
             # Get the data from Strategy_Features table
@@ -254,7 +255,7 @@ class SMAStrategyProcessor(StrategyProcessor):
         
 
 
-
+        print('Excuting apply strategy')
         global start_date,end_date,Strategy 
 
         r_start = datetime.fromtimestamp(start/1000)
@@ -286,8 +287,9 @@ class SMAStrategyProcessor(StrategyProcessor):
             r_start = datetime.fromtimestamp(r_start_milliseconds/1000)
             r_start = r_start.replace(hour=0,minute=0,second=0)
         
-
-    
+        
+        print ('existing applystrategy')
+        
 
 class Trade():
 
