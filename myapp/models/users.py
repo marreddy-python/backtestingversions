@@ -27,13 +27,11 @@ class Strategy(db.Model):
     End_time = db.Column(db.BigInteger, nullable=False)
     Optimization = db.Column(db.String,nullable = False)
     
-
     addresses = db.relationship("Strategies_Grades",backref = "owner")
 
 
 
 class Strategy_type(db.Model):
-
     Strategy_type_id = db.Column(db.Integer,primary_key=True,nullable = True)
     Strategy_type_name = db.Column(db.String, nullable=False)
 
