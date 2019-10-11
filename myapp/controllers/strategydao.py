@@ -70,6 +70,7 @@ class StrategyDAO():
             res = Total_metric.query.filter_by(strategy_id=strategy_id).update(dict(Created_at = Created_at,Total_Profit = Profit,Profit_Factor = Profit_Factor,  Start_time= Start_time, End_time =  End_time))
             db.session.commit()
 
+
         else:
             db_data = Strategy(strategy_id = strategy_id ,Strategy_type_id = 'SMA', Symbol = 'TVIX',Created_at = Created_at, Params = score, Start_time= Start_time, End_time =  End_time,Optimization=Opti,isFavourite = False)
             db.session.add(db_data)
