@@ -110,7 +110,7 @@ class SMAStrategyProcessor(StrategyProcessor):
         r_start = datetime.fromtimestamp(start/1000)
         r_start = r_start.replace(hour=0,minute=0,second=0)
 
-        r_end = datetime.fromtimestamp(end)
+        r_end = datetime.fromtimestamp(end/1000)
         r_end = r_end.replace(hour=0,minute=0,second=0)
 
         r_start_milliseconds = time.mktime(r_start.timetuple())*1000
