@@ -78,8 +78,8 @@ class StrategyService(iStrategyService):
     SMA_SPP = get_smastprsr()
     get_metr = get_metric()
 
-    def saveStrategy(self,Strategy,Start_time,End_time):
-        b = self.SD.saveStrategy(Strategy,Start_time,End_time,strategy_id )
+    def saveStrategy(self,Strategy,Start_time,End_time,strategy_id):
+        b = self.SD.saveStrategy(Strategy,Start_time,End_time,strategy_id)
         return b 
 
     def getNewStrategy(list):
