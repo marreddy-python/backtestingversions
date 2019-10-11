@@ -130,7 +130,6 @@ class SMAStrategyProcessor(StrategyProcessor):
                 # apply(s,r_eod,r_start_milliseconds,strategy_id)
             else:
                 # pass
-
                 print('skiping it fir ',r_start_milliseconds,r_eod )
 
             r_start_milliseconds = r_start_milliseconds + 24*60*60*1000
