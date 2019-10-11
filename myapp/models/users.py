@@ -82,6 +82,7 @@ class Daily_metric(db.Model):
     Day_identifier = db.Column(db.DateTime,nullable= False)
 
 
+
 class Total_metric(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     strategy_id= db.Column(db.Integer,nullable = False)
