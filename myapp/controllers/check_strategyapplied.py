@@ -113,6 +113,8 @@ def get_strategyinfo(id):
 
     db_get_strategies =  Strategy.query.filter(Strategy.strategy_id==id).first()
 
+    params = db_get_strategies.Params
+    
     if db_get_strategies != None:
         strategy_params = [params["buying_angle"],params["selling_angle"],params["optimization"],params["relative_angle"],params["stop_order"],params["less_than_buy"]]
         

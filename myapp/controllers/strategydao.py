@@ -180,6 +180,7 @@ class SMAStrategyProcessor(StrategyProcessor):
 
         print ('stored_strategies',stored_strategies)   
 
+
         # Check if current strategy is exist in strategies table 
         if (current_strategy in stored_strategies):
             pass
