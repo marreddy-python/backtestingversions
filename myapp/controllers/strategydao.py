@@ -136,8 +136,8 @@ class SMAStrategyProcessor(StrategyProcessor):
             if db_get != None:
 
                 print('calling apply for the day', r_start_milliseconds,r_eod)
-
-                # apply(s,r_eod,r_start_milliseconds,strategy_id)
+                apply(s,r_eod,r_start_milliseconds,strategy_id)
+                
             else:
                 # pass
                 print('skiping it fir ',r_start_milliseconds,r_eod )
