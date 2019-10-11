@@ -59,9 +59,9 @@ class StrategyController():
         self.start = None
         self.end = None
     
-    def saveStrategy(self,Strategy,Start_time,End_time):
+    def saveStrategy(self,Strategy,Start_time,End_time,strategy_id ):
         self.Strategy = Strategy
-        b = self.SS.saveStrategy(Strategy,Start_time,End_time)
+        b = self.SS.saveStrategy(Strategy,Start_time,End_time,strategy_id)
         return b 
 
     def getNewStrategy(self,l):
@@ -74,30 +74,33 @@ class StrategyController():
         return b 
 
 
-    def applyStrategy(self,symbol,Strategy,start,end):
+    def applyStrategy(self,symbol,Strategy,start,end,strategy_id):
         self.symbol = symbol
         self.Strategy = Strategy
         self.start = start 
         self.end = end
-        b = self.SS.applyStrategy(symbol,Strategy,start,end)
+        self.strategy_id = strategy_id
+        b = self.SS.applyStrategy(symbol,Strategy,start,end,strategy_id)
         return b 
 
-    def metricCalculation(self,start_time,tweenty_days,St):
+    def metricCalculation(self,start_time,tweenty_days,St,strategy_id):
         self.St = St
         self.start_time = start_time
         self.tweenty_days = tweenty_days
+        self.strategy_id = strategy_id
 
-        b = self.SS.metric_calcgetMetric(start_time,tweenty_days,St)
+        b = self.SS.metric_calcgetMetric(start_time,tweenty_days,St,strategy_id)
 
         return b 
 
     
-    def Total_metricCalculation(self,start_time,tweenty_days,St):
+    def Total_metricCalculation(self,start_time,tweenty_days,St,strategy_id):
         self.St = St
         self.start_time = start_time
         self.tweenty_days = tweenty_days
+        self.strategy_id = strategy_id
 
-        b = self.SS.metric_calcTot_met(start_time,tweenty_days,St)
+        b = self.SS.metric_calcTot_met(start_time,tweenty_days,St,strategy_id)
         return b 
             
 

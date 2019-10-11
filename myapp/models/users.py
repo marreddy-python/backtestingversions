@@ -14,6 +14,8 @@ class Post(db.Model):
 class Strategy(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
+    strategy_id = db.Column(db.Integer,nullable = False)
+    
     Strategy_type_id = db.Column(db.String, nullable=False)
     # Tags = db.Column(db.String, nullable=False)
     Symbol = db.Column(db.String,nullable = False)
@@ -25,7 +27,7 @@ class Strategy(db.Model):
     End_time = db.Column(db.BigInteger, nullable=False)
     Optimization = db.Column(db.String,nullable = False)
     
-    
+
     addresses = db.relationship("Strategies_Grades",backref = "owner")
 
 
@@ -47,6 +49,7 @@ class Strategies_Grades(db.Model):
 class Trades(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
+    strategy_id = db.Column(db.Integer,nullable = False)
     buy_price =  db.Column(db.Float,nullable = False)
     sell_price =  db.Column(db.Float,nullable = False)
     buy_value =  db.Column(db.Float,nullable = False)
@@ -68,6 +71,7 @@ class Trades(db.Model):
 class Daily_metric(db.Model):
 
     id = db.Column(db.Integer,primary_key=True,nullable= False)
+    strategy_id= db.Column(db.Integer,nullable = False)
     Strategy = db.Column(db.JSON)
     Symbol = db.Column(db.String,nullable = False)
     Profit_loss = db.Column(db.Integer)
@@ -82,7 +86,8 @@ class Daily_metric(db.Model):
 
 class Total_metric(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    Strategy_id = db.Column(db.String)
+    strategy_id= db.Column(db.Integer,nullable = False)
+    # Strategy_id = db.Column(db.String)
     Strategy = db.Column(db.JSON)
     Total_Profit = db.Column(db.Float)
     Profit_Factor = db.Column(db.Float)

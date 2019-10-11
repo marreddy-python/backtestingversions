@@ -221,7 +221,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
             
             Optimization = entities[i].Optimization
 
-            Strategy_id = entities[i].id
+            Strategy_id = entities[i].strategy_id
 
             params = entities[i].Params
 

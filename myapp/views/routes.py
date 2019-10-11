@@ -5,7 +5,7 @@ sys.dont_write_bytecode = True
 from myapp.controllers.interface import StrategyController,Strategy,DataController
 from myapp.controllers.decides_start_end import myFunction
 from myapp.controllers.add_favourite import addFav,deletestrategy
-from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot
+from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id
 from myapp.controllers.strategydao import MetricImpl
 
 modulo1_blueprint = Blueprint(name='modulo1', import_name=__name__,template_folder='templates',
@@ -127,16 +127,19 @@ def strategyview():
 
                                         if step_number == 1:
                                                 tweenty_days = end_time - (86400000*5)
-                                                b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days)
+                                                strategy_id = get_strategy_id()
+                                                b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days , strategy_id)
                                                 Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
                                                 print('step number1 excuting')
                                                 return jsonify({'step':1 })       
                                         else:   
-                                                startegy_loader.metricCalculation(start_time,tweenty_days,St)
-                                                startegy_loader.Total_metricCalculation(start_time,tweenty_days,St)
+                                                strategy_id = get_strategy_id()
+
+                                                startegy_loader.metricCalculation(start_time,tweenty_days,St,strategy_id)
+                                                startegy_loader.Total_metricCalculation(start_time,tweenty_days,St,strategy_id)
             
                                                 Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
-                                                b = startegy_loader.saveStrategy(St,start_time,tweenty_days)
+                                                b = startegy_loader.saveStrategy(St,start_time,tweenty_days,strategy_id)
                                                 Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
                                                 print('step number2  excuting')
                                                 # return jsonify({'step':2 }) 

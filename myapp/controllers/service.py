@@ -79,7 +79,7 @@ class StrategyService(iStrategyService):
     get_metr = get_metric()
 
     def saveStrategy(self,Strategy,Start_time,End_time):
-        b = self.SD.saveStrategy(Strategy,Start_time,End_time)
+        b = self.SD.saveStrategy(Strategy,Start_time,End_time,strategy_id )
         return b 
 
     def getNewStrategy(list):
@@ -89,16 +89,16 @@ class StrategyService(iStrategyService):
         b = self.SD.updateStrategy(Strategy,params)
         return b 
 
-    def applyStrategy(self,symbol,Strategy,start,end):
-        b = self.SMA_SPP.applyStrategy(Strategy,start,end)
+    def applyStrategy(self,symbol,Strategy,start,end,strategy_id):
+        b = self.SMA_SPP.applyStrategy(Strategy,start,end,strategy_id)
         return b
 
-    def metric_calcgetMetric(self,start_time,tweenty_days,St):
-        b = self.get_metr.getMetric(start_time,tweenty_days,St)
+    def metric_calcgetMetric(self,start_time,tweenty_days,St,strategy_id):
+        b = self.get_metr.getMetric(start_time,tweenty_days,St,strategy_id)
         return b 
 
-    def metric_calcTot_met(self,start_time,tweenty_days,St):
-        b = self.get_metr.Tot_met(start_time,tweenty_days,St)
+    def metric_calcTot_met(self,start_time,tweenty_days,St,strategy_id):
+        b = self.get_metr.Tot_met(start_time,tweenty_days,St,strategy_id)
         return b
     
     

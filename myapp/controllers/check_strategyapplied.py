@@ -1,5 +1,7 @@
 from myapp.models.users import Trades,db,Strategy
 import json 
+from sqlalchemy import desc
+
 def applied_or_not(s,start,end):
    
     sc = {
@@ -67,6 +69,26 @@ def strategy_savedornot(s,start,end):
         return 'saved'
     else:
         return 'notsaved'
+
+
+def get_strategy_id():
+
+    res = Strategy.query.order_by(Strategy.strategy_id.desc()).first()
+
+    if res != None:
+        strategy_id = res.strategy_id
+        return strategy_id + 1
+
+    else:
+        return 1
+
+
+
+
+
+
+
+
 
 
  

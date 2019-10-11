@@ -21,7 +21,7 @@ import time
 
 class StrategyDAO():
     
-    def saveStrategy(self,s,End_time,Start_time ): 
+    def saveStrategy(self,s,End_time,Start_time,strategy_id  ): 
     
         sc = {
             "buying_angle":s.startegy_values[0] ,
@@ -31,7 +31,7 @@ class StrategyDAO():
             "stop_order":  s.startegy_values[4],
             "less_than_buy": s.startegy_values[5]
         }
- 
+  
         print ('score',sc)
         
         data  = json.dumps(sc)
@@ -60,9 +60,10 @@ class StrategyDAO():
         # if not stored that strategy than store it.
 
         # saving into the startegy table 
-        db_data = Strategy(Strategy_type_id = 'SMA', Symbol = 'TVIX',Created_at = Created_at, Params = score, Start_time= Start_time, End_time =  End_time,Optimization=Opti,isFavourite = False)
+        db_data = Strategy(strategy_id = strategy_id ,Strategy_type_id = 'SMA', Symbol = 'TVIX',Created_at = Created_at, Params = score, Start_time= Start_time, End_time =  End_time,Optimization=Opti,isFavourite = False)
         db.session.add(db_data)
         db.session.commit()
+
 
 
     def updateStrategy(self,MStrategy,params):
@@ -99,7 +100,7 @@ class SMAStrategyProcessor(StrategyProcessor):
     St = None
 
 
-    def applyStrategy(self,s,end,start):
+    def applyStrategy(self,s,end,start,strategy_id):
 
         global start_date,end_date,Strategy 
 
@@ -241,7 +242,7 @@ class SMAStrategyProcessor(StrategyProcessor):
 
                         
                         # ENTERING THE VALUES INTO THE TRADES TABLE
-                        data_into_db = Trades(buy_price = buy_price,sell_price = sell_price,buy_value = buy_value, sell_value = sell_value ,
+                        data_into_db = Trades(strategy_id = strategy_id,buy_price = buy_price,sell_price = sell_price,buy_value = buy_value, sell_value = sell_value ,
                                     profit_loss = profit_loss  , profit_loss_percentage =  profit_loss_percentage ,buy_angle = buy_angle,Sell_angle = sell_angle ,Symbol = 'TVIX',
                                     Type = 'SMA',buy_time = buy_time, Sell_time = sell_time ,Optimization = Opti ,Day_identifier = Day_identifier,Strategy = current_strategy)
                     
@@ -316,6 +317,7 @@ class Metric(object):
         pass
 
 
+
 class MetricImpl(Metric):
 
     '''def __init__(self,name,date,strategy,metric):
@@ -331,7 +333,7 @@ class MetricImpl(Metric):
 
 
 
-    def getMetric(self,endtime,starttime,s):
+    def getMetric(self,endtime,starttime,s,strategy_id):
 
         def myFunction(milliseconds):
             date = datetime.datetime.fromtimestamp(milliseconds/1000.0)
@@ -430,7 +432,7 @@ class MetricImpl(Metric):
 
 
             # Enter these values into the daily trade metrics 
-            data_to_db = Daily_metric( Strategy =  Strategy,Symbol = 'TVIX',
+            data_to_db = Daily_metric( strategy_id = strategy_id, Strategy =  Strategy,Symbol = 'TVIX',
                 Total_Profit =  Profit ,Profit_Factor = Profit_Factor, Profitable = Profitable ,Max_Drawdown = None ,Type = 'SMA', Day_identifier = required_day )
             
             db.session.add(data_to_db)
@@ -440,7 +442,7 @@ class MetricImpl(Metric):
 
 
 
-    def Tot_met(self,endtime,starttime,s):
+    def Tot_met(self,endtime,starttime,s,strategy_id):
 
         def myFunction(milliseconds):
             date = datetime.datetime.fromtimestamp(milliseconds/1000.0)
@@ -533,7 +535,7 @@ class MetricImpl(Metric):
         
         Strategy = stgy
         # Enter these values into the total_metric table
-        data_to_db = Total_metric( Strategy = Strategy, Strategy_id = 'SMA', Total_Profit =  Profit ,Profit_Factor =  Profit_Factor, Profitable = Profitable ,Max_Drawdown = None,Start_Date = starttime,End_Date = endtime )
+        data_to_db = Total_metric( Strategy = Strategy,  strategy_id = strategy_id, Total_Profit =  Profit ,Profit_Factor =  Profit_Factor, Profitable = Profitable ,Max_Drawdown = None,Start_Date = starttime,End_Date = endtime )
         db.session.add(data_to_db)
         db.session.commit()
 
