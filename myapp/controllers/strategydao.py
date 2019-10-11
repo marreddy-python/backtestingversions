@@ -116,11 +116,11 @@ class SMAStrategyProcessor(StrategyProcessor):
         r_start_milliseconds = time.mktime(r_start.timetuple())*1000
         r_end_milliseconds = time.mktime(r_end.timetuple())*1000
 
-        while(r_start_milliseconds <= r_end_milliseconds){
+        while (r_start_milliseconds <= r_end_milliseconds):
 
-            
             r_eod = r_start_milliseconds + 24*60*60*1000
 
+        
             db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
 
             if db_get != None:
@@ -132,8 +132,11 @@ class SMAStrategyProcessor(StrategyProcessor):
                 # pass
 
                 print('skiping it fir ',r_start_milliseconds,r_eod )
+
             r_start_milliseconds = r_start_milliseconds + 24*60*60*1000
-        }
+            r_start = datetime.fromtimestamp(r_start_milliseconds/1000)
+            r_start = r_start.replace(hour=0,minute=0,second=0)
+        
 
 
         def apply(s,end,start,strategy_id):
