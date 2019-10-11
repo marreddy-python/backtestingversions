@@ -88,7 +88,7 @@ def strategyview():
         print (start_time,end_time)
 
         # daily_data = Data_loader.MarketData(start_time,end_time)
-        tweenty_days = end_time - (86400000*20)
+        tweenty_days = end_time - (86400000*5)
         # daily_data = Data_loader.MarketData(start_time,end_time)
         daily_data = Data_loader.MarketData(tweenty_days,start_time)
         # print daily_data
@@ -131,6 +131,7 @@ def strategyview():
                                         print('step number1 excuting')
                                         return jsonify({'step':1 })       
                                 else:   
+                                        tweenty_days = end_time - (86400000*5)
                                         if strategy_id == -1:
                                                 strategy_id = get_strategy_id()
 
