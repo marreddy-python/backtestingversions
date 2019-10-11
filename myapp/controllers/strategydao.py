@@ -62,9 +62,18 @@ class StrategyDAO():
         # if not stored that strategy than store it.
 
         # saving into the startegy table 
-        db_data = Strategy(strategy_id = strategy_id ,Strategy_type_id = 'SMA', Symbol = 'TVIX',Created_at = Created_at, Params = score, Start_time= Start_time, End_time =  End_time,Optimization=Opti,isFavourite = False)
-        db.session.add(db_data)
-        db.session.commit()
+
+        db_get = Strategy.query.filter(and_(  Strategy.Symbol=='TVIX', Strategy.strategy_id == strategy_id)).first()
+            
+        if db_get != None:
+
+            res = Total_metric.query.filter_by(strategy_id=strategy_id).update(dict(Created_at = Created_at,Total_Profit = Profit,Profit_Factor = Profit_Factor,  Start_time= Start_time, End_time =  End_time))
+            db.session.commit()
+
+        else:
+            db_data = Strategy(strategy_id = strategy_id ,Strategy_type_id = 'SMA', Symbol = 'TVIX',Created_at = Created_at, Params = score, Start_time= Start_time, End_time =  End_time,Optimization=Opti,isFavourite = False)
+            db.session.add(db_data)
+            db.session.commit()
 
 
 
@@ -455,15 +464,24 @@ class MetricImpl(Metric):
         
             Strategy = stgy
 
+            # check if it is already there 
 
-            # Enter these values into the daily trade metrics 
-            data_to_db = Daily_metric( strategy_id = strategy_id, Strategy =  Strategy,Symbol = 'TVIX',
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier ==  required_day , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id)).first()
+            
+            if db_get != None:
+
+                res = Daily_metric.query.filter_by(strategy_id=strategy_id).update(dict(Total_Profit = Profit,Profit_Factor = Profit_Factor, Profitable = Profitable))
+                db.session.commit()
+
+            else:
+
+                # Enter these values into the daily trade metrics 
+                data_to_db = Daily_metric( strategy_id = strategy_id, Strategy =  Strategy,Symbol = 'TVIX',
                 Total_Profit =  Profit ,Profit_Factor = Profit_Factor, Profitable = Profitable ,Max_Drawdown = None ,Type = 'SMA', Day_identifier = required_day )
             
-            db.session.add(data_to_db)
-            db.session.commit()
+                db.session.add(data_to_db)
+                db.session.commit()
        
-
 
 
 
@@ -560,8 +578,18 @@ class MetricImpl(Metric):
         
         Strategy = stgy
         # Enter these values into the total_metric table
-        data_to_db = Total_metric( Strategy = Strategy,  strategy_id = strategy_id, Total_Profit =  Profit ,Profit_Factor =  Profit_Factor, Profitable = Profitable ,Max_Drawdown = None,Start_Date = starttime,End_Date = endtime )
-        db.session.add(data_to_db)
-        db.session.commit()
 
-        print ('------------------------DONE --------------------------------------')
+        db_get = Total_metric.query.filter(and_(  Total_metric.Symbol=='TVIX',  Total_metric.strategy_id == strategy_id)).first()
+            
+        if db_get != None:
+
+            res = Total_metric.query.filter_by(strategy_id=strategy_id).update(dict(Total_Profit = Profit,Profit_Factor = Profit_Factor, Profitable = Profitable,Start_Date = starttime,End_Date = endtime))
+            db.session.commit()
+
+        else:
+
+            data_to_db = Total_metric( Strategy = Strategy,Symbol = 'TVIX',  strategy_id = strategy_id, Total_Profit =  Profit ,Profit_Factor =  Profit_Factor, Profitable = Profitable ,Max_Drawdown = None,Start_Date = starttime,End_Date = endtime )
+            db.session.add(data_to_db)
+            db.session.commit()
+
+            print ('------------------------DONE --------------------------------------')

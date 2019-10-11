@@ -87,6 +87,7 @@ class Total_metric(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     strategy_id= db.Column(db.Integer,nullable = False)
     # Strategy_id = db.Column(db.String)
+    Symbol = db.Column(db.String,nullable = False)
     Strategy = db.Column(db.JSON)
     Total_Profit = db.Column(db.Float)
     Profit_Factor = db.Column(db.Float)
