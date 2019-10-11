@@ -472,7 +472,7 @@ class MetricImpl(Metric):
         def myFunction(milliseconds):
             date = datetime.fromtimestamp(milliseconds/1000.0)
             startday = date.strftime('%Y-%m-%d')
-            datee = datetime.datetime.strptime(startday, "%Y-%m-%d")
+            datee = datetime.strptime(startday, "%Y-%m-%d")
             a = datee.year 
             b =  datee.month
             c =  datee.day
