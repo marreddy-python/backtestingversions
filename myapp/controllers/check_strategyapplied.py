@@ -85,6 +85,48 @@ def get_strategy_id():
 
 
 
+def get_lastsaved_strategy():
+
+    entities = Strategy.query.order_by(desc(Strategy.Created_at)).first()
+
+    if entities != None:
+
+        start_time = entities.Start_time
+        tweenty_days = entities.End_time
+
+        params = entities.Params 
+
+        Strategy_values = [params["buying_angle"],params["selling_angle"],params["optimization"],params["relative_angle"],params["stop_order"],params["less_than_buy"]]
+
+        return Strategy_values,start_time,tweenty_days 
+    
+
+    else:
+        Strategy_values = None
+        start_time = None
+        tweenty_days = None
+
+        return Strategy_values,start_time,tweenty_days 
+
+
+def get_strategyinfo(id):
+
+    db_get_strategies =  Strategy.query.filter(Strategy.strategy_id==id).first()
+
+    if db_get_strategies != None:
+        strategy_params = [params["buying_angle"],params["selling_angle"],params["optimization"],params["relative_angle"],params["stop_order"],params["less_than_buy"]]
+        
+        return strategy_params
+
+    else:
+        strategy_params = []
+
+        return strategy_params
+
+
+
+
+
 
 
 

@@ -325,15 +325,18 @@
                 }
                 console.log(SHI)
 
-                // console.log(data)
-
                 console.log(data.Strategies[SHI])
 
                 s = data.Strategies[SHI]
-          
-                heading = s.Buy+'_'+s.Sell+'_'+s.Optimization+'_'+s.stop_order
 
-                window.location = "{{ url_for('modulo1.view_strategy',username = 'heading') }}"
+                id = s.Strategy_id
+
+                heading = s.Buy+'_'+s.Sell+'_'+s.Optimization+'_'+s.stop_order
+                paramstring = 'username='+heading
+                post_url = "{{url_for('modulo1.view_strategy',username='')}}"+id
+                console.log(post_url)
+                console.log(typeof(heading))
+                window.location = post_url            
             
             });
       

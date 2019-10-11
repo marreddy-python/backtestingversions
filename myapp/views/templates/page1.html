@@ -691,6 +691,114 @@
         
       </div>
 
+      <img src="http://homepages.cae.wisc.edu/~ece533/images/cat.png" alt="Smiley face" width="0" height="0" onload="call_strategy({{ strategy_params|safe  }})" ></img>
+
+      <script>
+      
+        function call_strategy( params ){
+          console.log(' CALLING STRATEGY ')
+          console.log('pstrategy_params',params)
+
+      if (params.length > 0 ){
+
+        
+
+          $('.loader').show();
+                // $('.graph_area').hide();
+
+                $.ajax({
+                   type: 'POST',
+                   url: "{{ url_for('modulo1.strategyview')}}",
+                   data: {
+                   main : 'Save' ,
+                   Buying_angle : params[0],
+                   selling_angle : params[1],
+                   Optimization : params[2] ,
+                   relative_angle : params[3],
+                   STPODVALUE : params[4],
+                   less_than_buy : params[5],
+                   step_number : 1
+                 },
+                  contentType: "application/x-www-form-urlencoded",
+                  success: function(s){
+                      a = s["step"]
+                      console.log('step_number',a)
+
+                      if (a == 1 ){
+                        
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ url_for('modulo1.strategyview')}}",
+                            data: {
+                                main : 'Save' ,
+                                Buying_angle : params[0],
+                                selling_angle : params[1],
+                                Optimization : params[2] ,
+                                relative_angle : params[3],
+                                STPODVALUE : params[4],
+                                less_than_buy : params[5],
+                                step_number : 2
+                          },
+
+                          contentType: "application/x-www-form-urlencoded",
+
+                          success: function(main_data){      
+                            console.log(main_data)
+
+                            console.log('step_number',main_data["step"])
+
+                            //$('.graph_area').show();
+
+                            $(".loader").hide();
+
+                            // console.log(main_data["Metric_values"])
+                            // a = main_data["Metric_values"]
+
+                            console.log(main_data["Trades_singleday"])
+
+
+                            Singleday_Trades = main_data["Trades_singleday"]
+                            Performance_Data  = main_data["Performance"]
+
+                            flags( main_data["Buy_flags"],main_data["Sell_flags"])
+                            $('#Buytab').html( $('#buying_angle').attr('value'));
+                            $('#Selltab').html( $('#selling_angle').attr('value'));
+                            $('#Optitab').html( $('#Optimization_steepness' ).attr("checked"));
+                            $('#stop_ordertab').html($('#STPODVALUE').attr("checked"), );
+
+                            // SUMMARY VALUES FOR DEAFULT DATE
+
+                            var d = new Date(dataMin);
+                            var n = d.toLocaleDateString("en-US");
+                            $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
+             
+             
+                            if (Performance_Data !== null){
+                                console.log('excuted')
+                                time_milliseconds = Performance_Data["x"]
+                                default_date = dataMin + 60000
+                                element_index = time_milliseconds.indexOf(default_date)
+
+                                $('#singleday_Total_Profit').val(roundToTwo(Performance_Data["Total_Profit"][element_index])); 
+                                $('#singleday_Profit_factor').val(roundToTwo(Performance_Data["Profit_Factor"][element_index])); 
+                                $('#singleday_Profitable').val(roundToTwo(Performance_Data["Profitable"][element_index])); 
+                                $('#singleday_MaxDrawdown').val(roundToTwo(Performance_Data["Max_Drawdown"][element_index])); 
+                                function roundToTwo(num) {    
+                                    return +(Math.round(num + "e+2")  + "e-2");
+                                }
+                            }
+
+                          }
+                      });
+                      }
+                }
+              });
+      }
+
+
+        }
+      
+      </script>
 
 
 

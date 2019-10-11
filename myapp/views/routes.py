@@ -5,7 +5,7 @@ sys.dont_write_bytecode = True
 from myapp.controllers.interface import StrategyController,Strategy,DataController
 from myapp.controllers.decides_start_end import myFunction
 from myapp.controllers.add_favourite import addFav,deletestrategy
-from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id
+from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id,get_lastsaved_strategy,get_strategyinfo
 from myapp.controllers.strategydao import MetricImpl
 
 modulo1_blueprint = Blueprint(name='modulo1', import_name=__name__,template_folder='templates',
@@ -243,32 +243,43 @@ def delete_strategy():
                 return json.dumps({'status':'Deleted ssuccesfully'})
 
 
-
-
-'''@modulo1_blueprint.route('/view_strategy', methods=['GET','POST'])
-def delete_strategy():
-        if request.method == "POST":
-                 
-                global start_time,end_time,St, Performance,Metric_values_singleday,Trades_singleday,Buy_flags,Sell_flags,Stratey_values
-
-                St = Strategy(1,Stratey_values,'NONE')
-
-                Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
-                Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
-                Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
-
-
-                return json.dumps({'status':'success'})'''
-
-
 @modulo1_blueprint.route('/view_strategy/<username>', methods=['GET','POST'])
 def view_strategy(username):
-        print(username)
+        
+        start_time,end_time = myFunction()
+       
+        print (start_time,end_time)
+
+        # daily_data = Data_loader.MarketData(start_time,end_time)
+        tweenty_days = end_time - (86400000*5)
+        # daily_data = Data_loader.MarketData(start_time,end_time)
+        Data_loader = DataController()
+        daily_data = Data_loader.MarketData(tweenty_days,start_time)
+        
         Data_loader = DataController()
         data,strategy_names = Data_loader.getStrategies()
+        
 
-        return render_template("page2.html",strategy_names = strategy_names, page = 'Arena')     
+        Trades_singleday = None
+        Metric_values_singleday = None
+        Performance = None
+        Buy_flags = None
+        Sell_flags = None
+        Stratey_values = None
 
-        # return 'success'
+
+        print (username.encode('ascii','ignore'))
+        str_param = type(username.encode('ascii','ignore'))
+        ab = int(username,10)
+
+        print (ab)
+        print (type(ab))
+
+        strategy_params = get_strategyinfo(ab)
+        
+
+        return render_template("page1.html", Metric_values_singleday = Metric_values_singleday,Trades_singleday = Trades_singleday,Performance = Performance,daily_data = daily_data,Buy_flags = Buy_flags,Sell_flags = Sell_flags,
+        strategy_names = strategy_names,Strategy_values =Stratey_values,page='strategyview', strategy_params = json.dumps(strategy_params) )
+
 
 
