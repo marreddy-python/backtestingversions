@@ -261,7 +261,7 @@ class SMAStrategyProcessor(StrategyProcessor):
                         print (sell_price,sell_value,sell_angle,sell_time,profit_loss,profit_loss_percentage)
 
             
-                        date = datetime.datetime.fromtimestamp(current_candle_time/1000.0)
+                        date = datetime.fromtimestamp(current_candle_time/1000.0)
                         Day_identifier = date.strftime('%Y-%m-%d')
 
                         
@@ -360,9 +360,10 @@ class MetricImpl(Metric):
     def getMetric(self,endtime,starttime,s,strategy_id):
 
         def myFunction(milliseconds):
-            date = datetime.datetime.fromtimestamp(milliseconds/1000.0)
+
+            date = datetime.fromtimestamp(milliseconds/1000.0)
             startday = date.strftime('%Y-%m-%d')
-            datee = datetime.datetime.strptime(startday, "%Y-%m-%d")
+            datee = datetime.strptime(startday, "%Y-%m-%d")
             a = datee.year 
             b =  datee.month
             c =  datee.day
@@ -469,7 +470,7 @@ class MetricImpl(Metric):
     def Tot_met(self,endtime,starttime,s,strategy_id):
 
         def myFunction(milliseconds):
-            date = datetime.datetime.fromtimestamp(milliseconds/1000.0)
+            date = datetime.fromtimestamp(milliseconds/1000.0)
             startday = date.strftime('%Y-%m-%d')
             datee = datetime.datetime.strptime(startday, "%Y-%m-%d")
             a = datee.year 
