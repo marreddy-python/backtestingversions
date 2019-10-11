@@ -114,39 +114,6 @@ class SMAStrategyProcessor(StrategyProcessor):
 
     def applyStrategy(self,s,end,start,strategy_id):
 
-        global start_date,end_date,Strategy 
-
-
-        r_start = datetime.fromtimestamp(start/1000)
-        r_start = r_start.replace(hour=0,minute=0,second=0)
-
-        r_end = datetime.fromtimestamp(end/1000)
-        r_end = r_end.replace(hour=0,minute=0,second=0)
-
-        r_start_milliseconds = time.mktime(r_start.timetuple())*1000
-        r_end_milliseconds = time.mktime(r_end.timetuple())*1000
-
-        while (r_start_milliseconds <= r_end_milliseconds):
-
-            r_eod = r_start_milliseconds + 24*60*60*1000
-
-        
-            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
-
-            if db_get != None:
-
-                print('calling apply for the day', r_start_milliseconds,r_eod)
-                apply(s,r_eod,r_start_milliseconds,strategy_id)
-                
-            else:
-                # pass
-                print('skiping it fir ',r_start_milliseconds,r_eod )
-
-            r_start_milliseconds = r_start_milliseconds + 24*60*60*1000
-            r_start = datetime.fromtimestamp(r_start_milliseconds/1000)
-            r_start = r_start.replace(hour=0,minute=0,second=0)
-        
-
 
         def apply(s,end,start,strategy_id):
 
@@ -176,7 +143,6 @@ class SMAStrategyProcessor(StrategyProcessor):
 
                     stock_data.append([Time_stamp,Opening,High,Low,close,Volume,Angle])
 
-            
 
             print (start,end)
        
@@ -286,16 +252,41 @@ class SMAStrategyProcessor(StrategyProcessor):
                     else:
                         pass 
         
-            # After all trades enters into the database call metric class for calculation of metric values with starting and ending time 
-            #  After metric calculation call total metric values for calculation of metric values for 20days
-            
-            '''metric_calc = MetricImpl()
-            print (St)
-            metric_calc.getMetric(start_date,end_date,St)
-          
-            metric_calc.Tot_met(start_date,end_date,St)'''
-            
-        # return 'Strategy applied successfully for 20days'
+
+
+
+        global start_date,end_date,Strategy 
+
+        r_start = datetime.fromtimestamp(start/1000)
+        r_start = r_start.replace(hour=0,minute=0,second=0)
+
+        r_end = datetime.fromtimestamp(end/1000)
+        r_end = r_end.replace(hour=0,minute=0,second=0)
+
+        r_start_milliseconds = time.mktime(r_start.timetuple())*1000
+        r_end_milliseconds = time.mktime(r_end.timetuple())*1000
+
+        while (r_start_milliseconds <= r_end_milliseconds):
+
+            r_eod = r_start_milliseconds + 24*60*60*1000
+
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
+
+            if db_get != None:
+
+                print('calling apply for the day', r_start_milliseconds,r_eod)
+                
+                apply(s,r_eod,r_start_milliseconds,strategy_id)
+                
+            else:
+                # pass
+                print('skiping it fir ',r_start_milliseconds,r_eod )
+
+            r_start_milliseconds = r_start_milliseconds + 24*60*60*1000
+            r_start = datetime.fromtimestamp(r_start_milliseconds/1000)
+            r_start = r_start.replace(hour=0,minute=0,second=0)
+        
+
     
 
 class Trade():
