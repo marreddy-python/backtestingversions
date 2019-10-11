@@ -691,7 +691,13 @@
         
       </div>
 
-      <img src="https://homepages.cae.wisc.edu/~ece533/images/cat.png" alt="Smiley face" width="0" height="0" onload="call_strategy({{ strategy_params|safe  }})" ></img>
+      <script>
+
+var stragy_prms = JSON.parse('{{ strategy_params | tojson | safe}}');
+
+      </script>
+
+      <img src="https://homepages.cae.wisc.edu/~ece533/images/cat.png" alt="Smiley face" width="0" height="0" onload="call_strategy(stragy_prms)" ></img>
 
       <script>
       
@@ -700,8 +706,6 @@
           console.log('pstrategy_params',params)
 
       if (params.length > 0 ){
-
-        
 
           $('.loader').show();
                 // $('.graph_area').hide();
