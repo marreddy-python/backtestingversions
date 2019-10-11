@@ -6,18 +6,18 @@ from sqlalchemy.sql.expression import cast
 
 def addFav(clicked_id):
        
-    res = Strategy.query.filter_by(id=clicked_id).first()
+    res = Strategy.query.filter_by(strategy_id=clicked_id).first()
     print (res)
 
     if res != None:
   
         if res.isFavourite == True:
 
-            res = Strategy.query.filter_by(id=clicked_id).update(dict(isFavourite=False))
+            res = Strategy.query.filter_by(strategy_id=clicked_id).update(dict(isFavourite=False))
             db.session.commit()
 
         else:
-            res = Strategy.query.filter_by(id=clicked_id).update(dict(isFavourite=True))
+            res = Strategy.query.filter_by(strategy_id=clicked_id).update(dict(isFavourite=True))
             db.session.commit()
         
     print ('done')
@@ -26,21 +26,6 @@ def addFav(clicked_id):
 def deletestrategy(clicked_id):
 
     # get the startegy from strategy table and delete it from the trades, total metric,daily metric
-    res = Strategy.query.filter_by(id=clicked_id)
-    fetchdata_length = res.count()
-    for i in range(0,fetchdata_length ):
-        delete_strategy = res[i].Params
-
-    print('DELETE STRATEGY',delete_strategy)
-
-    # Deleting the trades
-    '''db_data = Trades.query.filter(and_( Trades.Strategy["buying_angle"] == cast(delete_strategy["buying_angle"], JSON),
-    Trades.Strategy["selling_angle"]== cast(delete_strategy["selling_angle"],JSON),Trades.Strategy["optimization"] == cast(delete_strategy["optimization"],JSON),
-    Trades.Strategy["relative_angle"]==cast(delete_strategy["relative_angle"],JSON),
-    Trades.Strategy["stop_order"]==cast(delete_strategy["stop_order"],JSON),Trades.Strategy["less_than_buy"]== cast(delete_strategy["less_than_buy"],JSON))).all()
-     
-    db.session.delete(db_data)
-    db.session.commit()'''
 
     # Trades
     res = Trades.query.filter_by(strategy_id=clicked_id).delete()
