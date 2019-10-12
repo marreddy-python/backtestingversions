@@ -161,7 +161,7 @@ def strategyview():
 
                 Stratey_values = strategy_params
 
-                if len(Strategy_values) == 0:
+                if len(strategy_params) == 0:
                         Trades_singleday = None
                         Metric_values_singleday = None
                         Performance = None
