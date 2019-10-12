@@ -583,6 +583,7 @@ class MetricImpl(Metric):
         Strategy = stgy
         # Enter these values into the total_metric table
 
+
         db_get = Total_metric.query.filter(and_(  Total_metric.Symbol=='TVIX',  Total_metric.strategy_id == strategy_id)).first()
             
         if db_get != None:
