@@ -270,12 +270,18 @@ class SMAStrategyProcessor(StrategyProcessor):
 
         while (r_start_milliseconds <= r_end_milliseconds):
 
+            print(r_start_milliseconds,r_end_milliseconds)
+
             r_eod = r_start_milliseconds + 24*60*60*1000
 
-            date_str = str(r_start)
+            print('r_eod',r_eod)
 
-            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == date_str , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
+            # date_str = str(r_start)
 
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
+            
+            print('db_get in the apply strategy', db_get )
+            
             if db_get != None:
 
                 print('skiping it fir ',r_start_milliseconds,r_eod )
@@ -472,7 +478,7 @@ class MetricImpl(Metric):
                 db.session.commit()
 
             else:
-                
+
                 # Enter these values into the daily trade metrics 
                 data_to_db = Daily_metric( strategy_id = strategy_id, Strategy =  Strategy,Symbol = 'TVIX',
                 Total_Profit =  Profit ,Profit_Factor = Profit_Factor, Profitable = Profitable ,Max_Drawdown = None ,Type = 'SMA', Day_identifier = required_day )
