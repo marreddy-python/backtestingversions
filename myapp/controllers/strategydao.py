@@ -67,7 +67,7 @@ class StrategyDAO():
             
         if db_get != None:
 
-            res = Total_metric.query.filter_by(strategy_id=strategy_id).update(dict(Created_at = Created_at, Start_time= Start_time, End_time =  End_time))
+            res = Strategy.query.filter_by(strategy_id=strategy_id).update(dict(Created_at = Created_at, Start_time= Start_time, End_time =  End_time))
             db.session.commit()
 
 
