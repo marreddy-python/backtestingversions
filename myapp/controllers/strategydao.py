@@ -116,6 +116,7 @@ class SMAStrategyProcessor(StrategyProcessor):
 
         
         print ('ENETERED APPLY STRATEGY')
+
         def apply(s,end,start,strategy_id):
 
             # Get the data from Strategy_Features table
@@ -271,7 +272,9 @@ class SMAStrategyProcessor(StrategyProcessor):
 
             r_eod = r_start_milliseconds + 24*60*60*1000
 
-            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
+            date_str = str(r_start)
+
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == date_str , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
 
             if db_get != None:
 
@@ -460,7 +463,7 @@ class MetricImpl(Metric):
 
             # check if it is already there 
 
-            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier ==  required_day , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id)).first()
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id)).first()
             
             if db_get != None:
 
