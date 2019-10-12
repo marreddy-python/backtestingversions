@@ -630,8 +630,7 @@
                     elem[0].children[0].innerHTML = a[i]
                 }
 
-             var Strategy_values = JSON.parse('{{ Strategy_values | tojson | safe}}')
-                
+                var Strategy_values = JSON.parse('{{ Strategy_values | tojson | safe}}')
                 console.log( 'Strategy_values', Strategy_values)
 
                 $('#Buytab').html(Strategy_values[0]);
@@ -799,6 +798,7 @@
                       });
                       }
                 }
+                
               });
       }
 

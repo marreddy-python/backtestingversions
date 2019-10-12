@@ -277,7 +277,7 @@ def view_strategy(username):
         Performance = None
         Buy_flags = None
         Sell_flags = None
-        Stratey_values = None
+        # Stratey_values = None
 
 
         print (username.encode('ascii','ignore'))
@@ -288,6 +288,7 @@ def view_strategy(username):
         print (type(ab))
 
         strategy_params = get_strategyinfo(ab)
+        Stratey_values = strategy_params
         
 
         return render_template("page1.html", Metric_values_singleday = Metric_values_singleday,Trades_singleday = Trades_singleday,Performance = Performance,daily_data = daily_data,Buy_flags = Buy_flags,Sell_flags = Sell_flags,
