@@ -102,22 +102,17 @@ def get_lastsaved_strategy():
 
     if entities != None:
 
-        start_time = entities.Start_time
-        tweenty_days = entities.End_time
-
         params = entities.Params 
 
         Strategy_values = [params["buying_angle"],params["selling_angle"],params["optimization"],params["relative_angle"],params["stop_order"],params["less_than_buy"]]
 
-        return Strategy_values,start_time,tweenty_days 
+        return Strategy_values
     
 
     else:
         Strategy_values = None
-        start_time = None
-        tweenty_days = None
 
-        return Strategy_values,start_time,tweenty_days 
+        return Strategy_values
 
 
 def get_strategyinfo(id):
