@@ -67,7 +67,7 @@ class StrategyDAO():
             
         if db_get != None:
 
-            res = Total_metric.query.filter_by(strategy_id=strategy_id).update(dict(Created_at = Created_at,Total_Profit = Profit,Profit_Factor = Profit_Factor,  Start_time= Start_time, End_time =  End_time))
+            res = Total_metric.query.filter_by(strategy_id=strategy_id).update(dict(Created_at = Created_at, Start_time= Start_time, End_time =  End_time))
             db.session.commit()
 
 
@@ -278,13 +278,14 @@ class SMAStrategyProcessor(StrategyProcessor):
 
             if db_get != None:
 
+                print('skiping it fir ',r_start_milliseconds,r_eod )
+                
+            else:
+
                 print('calling apply for the day', r_start_milliseconds,r_eod)
                 
                 apply(s,r_eod,r_start_milliseconds,strategy_id)
-                
-            else:
-                # pass
-                print('skiping it fir ',r_start_milliseconds,r_eod )
+ 
 
             r_start_milliseconds = r_start_milliseconds + 24*60*60*1000
             r_start = datetime.fromtimestamp(r_start_milliseconds/1000)
@@ -471,7 +472,7 @@ class MetricImpl(Metric):
                 db.session.commit()
 
             else:
-
+                
                 # Enter these values into the daily trade metrics 
                 data_to_db = Daily_metric( strategy_id = strategy_id, Strategy =  Strategy,Symbol = 'TVIX',
                 Total_Profit =  Profit ,Profit_Factor = Profit_Factor, Profitable = Profitable ,Max_Drawdown = None ,Type = 'SMA', Day_identifier = required_day )
