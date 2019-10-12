@@ -104,13 +104,13 @@ def get_lastsaved_strategy():
 
         params = entities.Params 
 
-        Strategy_values = [params["buying_angle"],params["selling_angle"],params["optimization"],params["relative_angle"],params["stop_order"],params["less_than_buy"]]
+        Strategy_values = [params["buying_angle"],params["selling_angle"],params["optimization"],params["relative_angle"],params["stop_order"],params["less_than_buy"],entities.strategy_id]
 
         return Strategy_values
     
 
     else:
-        Strategy_values = None
+        Strategy_values = []
 
         return Strategy_values
 
