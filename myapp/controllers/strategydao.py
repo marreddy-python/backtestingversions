@@ -482,7 +482,7 @@ class MetricImpl(Metric):
             
             if db_get != None:
 
-                res = Daily_metric.query.filter_by(strategy_id=strategy_id).update(dict(Total_Profit = Profit,Profit_Factor = Profit_Factor, Profitable = Profitable))
+                res = Daily_metric.query.filter(and_(strategy_id=strategy_id,Day_identifier =required_for)).update(dict(Total_Profit = Profit,Profit_Factor = Profit_Factor, Profitable = Profitable))
                 db.session.commit()
 
             else:

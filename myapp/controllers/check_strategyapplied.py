@@ -96,7 +96,6 @@ def get_strategy_id(Stratey_values):
 
 
 
-
 def get_lastsaved_strategy():
 
     entities = Strategy.query.order_by(desc(Strategy.Created_at)).first()
