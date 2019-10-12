@@ -491,7 +491,6 @@ class MetricImpl(Metric):
                 data_to_db = Daily_metric( strategy_id = strategy_id, Strategy =  Strategy,Symbol = 'TVIX',
                 Total_Profit =  Profit ,Profit_Factor = Profit_Factor, Profitable = Profitable ,Max_Drawdown = None ,Type = 'SMA', Day_identifier = required_day )
             
-                
                 db.session.add(data_to_db)
                 db.session.commit()
        
