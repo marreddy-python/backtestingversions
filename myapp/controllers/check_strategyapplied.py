@@ -75,7 +75,7 @@ def get_strategy_id(Stratey_values):
 
     res = Strategy.query.order_by(Strategy.strategy_id.desc()).all()
 
-    if res != None:
+    if len(res)==0:
 
         for pams in res:
 
