@@ -396,9 +396,17 @@ class MetricImpl(Metric):
         
         # get each day between starttime and endtime
         for single_date in daterange(start_date, end_date):
+            
             required_day = single_date.strftime("%Y-%m-%d") 
 
+            d = datetime.strptime(str(single_date), "%Y-%m-%d").strftime('%s')
+            d_in_ms = int(d)*1000
+
+            required_for = datetime.fromtimestamp(d_in_ms/1000)
+            required_for = required_for.replace(hour=0,minute=0,second=0)
+
             print('required_day',required_day)
+            print('required_for',required_for)
         
 
             # Filter the database based on Day_identifier 
@@ -470,7 +478,7 @@ class MetricImpl(Metric):
 
             # check if it is already there 
 
-            db_get = Daily_metric.query.filter(and_( Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id)).first()
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Symbol=='TVIX', Daily_metric.Day_identifier == required_for, Daily_metric.strategy_id == strategy_id)).first()
             
             if db_get != None:
 
