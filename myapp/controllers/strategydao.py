@@ -276,23 +276,21 @@ class SMAStrategyProcessor(StrategyProcessor):
 
             print('r_eod',r_eod)
 
-            # date_str = str(r_start)
-
-            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id))
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id)).first()
             
-            print('db_get in the apply strategy', db_get )
+            print('db_get in the apply strategy', db_get.Day_identifier )
             
             if db_get != None:
 
                 print('skiping it fir ',r_start_milliseconds,r_eod )
-                
+   
             else:
-
                 print('calling apply for the day', r_start_milliseconds,r_eod)
                 
                 apply(s,r_eod,r_start_milliseconds,strategy_id)
- 
-
+       
+              
+             
             r_start_milliseconds = r_start_milliseconds + 24*60*60*1000
             r_start = datetime.fromtimestamp(r_start_milliseconds/1000)
             r_start = r_start.replace(hour=0,minute=0,second=0)
