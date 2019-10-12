@@ -161,6 +161,7 @@ def strategyview():
 
 
 
+
 @modulo1_blueprint.route('/Arena', methods=['GET','POST'])
 def Arena():  
         Data_loader = DataController()
