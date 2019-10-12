@@ -88,7 +88,7 @@ def get_strategy_id(Stratey_values):
 
                 return strategy_id 
         
-        strategy_id = pams.strategy_id
+        strategy_id = res[0].strategy_id
         return strategy_id + 1
 
     else:
