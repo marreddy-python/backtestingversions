@@ -276,9 +276,11 @@ class SMAStrategyProcessor(StrategyProcessor):
 
             print('r_eod',r_eod)
 
-            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == r_start , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id)).first()
+            date_str = str(r_start)
+
+            db_get = Daily_metric.query.filter(and_( Daily_metric.Day_identifier == date_str , Daily_metric.Symbol=='TVIX',  Daily_metric.strategy_id == strategy_id)).first()
             
-            print('db_get in the apply strategy', db_get.Day_identifier )
+            print('db_get in the apply strategy', db_get)
             
             if db_get != None:
 
