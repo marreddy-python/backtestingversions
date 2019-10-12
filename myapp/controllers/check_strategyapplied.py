@@ -77,7 +77,7 @@ def get_strategy_id(Stratey_values):
 
     if res != None:
 
-        for pams in range(0,res.count()):
+        for pams in res:
 
             strategy_id = pams.strategy_id
 
