@@ -84,7 +84,7 @@ def get_strategy_id(Stratey_values):
             
             strategy_params = pams.Params 
 
-            if (strategy_params["buying_angle"]= Stratey_values[0] and strategy_params["selling_angle"]= Stratey_values[1] and strategy_params["optimization"]= Stratey_values[2] and strategy_params["relative_angle"]= Stratey_values[3] andstrategy_params["stop_order"]= Stratey_values[4] andstrategy_params["less_than_buy"]= Stratey_values[5]  ):
+            if (strategy_params["buying_angle"]== Stratey_values[0] and strategy_params["selling_angle"]== Stratey_values[1] and strategy_params["optimization"]== Stratey_values[2] and strategy_params["relative_angle"]== Stratey_values[3] and strategy_params["stop_order"]== Stratey_values[4] and strategy_params["less_than_buy"]== Stratey_values[5]  ):
 
                 return strategy_id 
         
