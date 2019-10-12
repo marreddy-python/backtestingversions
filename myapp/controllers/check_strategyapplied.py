@@ -71,12 +71,24 @@ def strategy_savedornot(s,start,end):
         return 'notsaved'
 
 
-def get_strategy_id():
+def get_strategy_id(Stratey_values):
 
-    res = Strategy.query.order_by(Strategy.strategy_id.desc()).first()
+    res = Strategy.query.order_by(Strategy.strategy_id.desc()).all()
 
     if res != None:
-        strategy_id = res.strategy_id
+
+        for pams in range(0,res.count()):
+
+            strategy_id = pams.strategy_id
+
+            
+            strategy_params = pams.Params 
+
+            if (strategy_params["buying_angle"]= Stratey_values[0] and strategy_params["selling_angle"]= Stratey_values[1] and strategy_params["optimization"]= Stratey_values[2] and strategy_params["relative_angle"]= Stratey_values[3] andstrategy_params["stop_order"]= Stratey_values[4] andstrategy_params["less_than_buy"]= Stratey_values[5]  ):
+
+                return strategy_id 
+        
+
         return strategy_id + 1
 
     else:

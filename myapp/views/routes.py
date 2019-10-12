@@ -119,12 +119,13 @@ def strategyview():
 
                         #After Clicking on save button
                         if request.form.get('main') == 'Save':
+
                 
                                 if step_number == 1:
                                         tweenty_days = end_time - (86400000*5)
                                         
                                         if strategy_id == -1:
-                                                strategy_id = get_strategy_id()
+                                                strategy_id = get_strategy_id(Stratey_values)
 
                                         b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days , strategy_id)
                                         Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
@@ -133,7 +134,7 @@ def strategyview():
                                 else:   
                                         tweenty_days = end_time - (86400000*5)
                                         if strategy_id == -1:
-                                                strategy_id = get_strategy_id()
+                                                strategy_id = get_strategy_id(Stratey_values)
 
                                         startegy_loader.metricCalculation(start_time,tweenty_days,St,strategy_id)
                                         startegy_loader.Total_metricCalculation(start_time,tweenty_days,St,strategy_id)
