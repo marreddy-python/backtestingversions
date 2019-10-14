@@ -519,6 +519,14 @@
                       Performance_Profit_Factor = sum(Performance_Data["Profit_Factor"])
                       Performance_Profitable = sum(Performance_Data["Profitable"])
                       
+                      function sum(arr){
+                        age = 0
+                        for (var i = 0; i < arr.length; i++) {
+                          age += array[i].age;
+                      }
+                      return age
+                      }
+
                       $('#Performance_Total_Profit').val(roundToTwo(Performance_Total_Profit )); 
                       $('#Performance_Profit_Factor').val(roundToTwo(Performance_Profit_Factor)); 
                       $('#Performance_Profitable').val(roundToTwo(Performance_Profitable)); 
@@ -600,7 +608,7 @@
                             // TAB VALUES FOR THE APPLIED STRATEGY 
                             $('#Buytab').html( $('#buying_angle').attr('value'));
                             $('#Selltab').html( $('#selling_angle').attr('value'));
-                            
+
                             if( $('#Optimization_steepness' ).attr("checked") == 'checked '){
                                 $('#Optitab').html( $('#relative_angle').attr('value'));
                             }
