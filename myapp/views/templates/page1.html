@@ -204,10 +204,19 @@
               <label class="sum_lbl">Total profit </label>
               <input class="sum_inp" type="text" id="singleday_Total_Profit" size="10" value=" ">
 
-              <label class="sum_lbl">Profit factor</label>
+              <label class="sum_lbl">Profit factor
+                  <div style ="display:inline" class="tool"> ?
+                      <span class="tooltext"> Winning trades sum/losing trades sum </span> 
+                    </div>
+              </label>
               <input class="sum_inp" type="text" id="singleday_Profit_factor" size="10" value=" ">
 
-              <label class="sum_lbl">%Profitable</label>
+              <label class="sum_lbl">%Profitable
+                  <label style ="display:inline"  class="sum_lbl"><a href="#" class="myHref" id = "Profit_Factor">Profit factor</a>
+                    <div style ="display:inline" class="tool"> ?
+                      <span class="tooltext"> Winning trades length/Total trades </span> 
+                    </div>
+              </label>
               <input class="sum_inp" type="text" id="singleday_Profitable" size="10" value=" ">
 
               <!-- <label class="sum_lbl">Max Drawdown</label>   
@@ -340,10 +349,19 @@
           
         <form style="margin-top:20px;">
 
-            <label class="sum_lbl"><a href="#" class="myHref default_chart_open" id = "Total_Profit">Total profit </a></label>
+            <label  style ="display:inline" class="sum_lbl"><a href="#" class="myHref default_chart_open" id = "Total_Profit">Total profit </a>
+              <div style ="display:inline" class="tool"> ?
+                <span class="tooltext"> Winning trades sum/losing trades sum </span> 
+              </div>
+            </label>
+
             <input class="sum_inp" type="text" id="Performance_Total_Profit" size="10" value=" ">
 
-            <label class="sum_lbl"><a href="#" class="myHref" id = "Profit_Factor">Profit factor</a></label>
+            <label style ="display:inline"  class="sum_lbl"><a href="#" class="myHref" id = "Profit_Factor">Profit factor</a>
+              <div style ="display:inline" class="tool"> ?
+                <span class="tooltext"> Winning trades length/Total trades </span> 
+              </div>
+            </label>
             <input class="sum_inp" type="text" id="Performance_Profit_Factor"  size="10" value=" ">
 
             <label class="sum_lbl"><a href="#" class="myHref" id = "Profitable">%Profitable</a></label>
@@ -838,7 +856,7 @@
                             function roundToTwo(num) {    
                                     return +(Math.round(num + "e+2")  + "e-2");
                                 }
-                                
+
                             from_total_metric = main_data["from_total_metric"]
                             console.log('from_total_metric', from_total_metric )
                             $('#Performance_Total_Profit').val(roundToTwo(from_total_metric[0] )); 

@@ -11,6 +11,44 @@
     border-radius: 10px;
 }
 
+
+.tool {
+    /* font-size: 40px; */
+    visibility: visible;
+    position: absolute;
+    color:  #F0F0F0;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px; 
+    background-color: #3498db;
+    text-align : center;
+    font-size: 12px;
+    /* display: inline-block; */
+    /* border-bottom: 1px dotted black; */
+  }
+  
+ .tooltext {
+    visibility: hidden;
+    width: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    font-size: 10px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: -1;
+    top: -5px;
+    left: 105%;
+  }
+  
+  .tool:hover .tooltext {
+    visibility: visible;
+    background-color: #a5a5a5;
+  }
+  
 #first {
     margin-left :20px;
     width: 230px; 
