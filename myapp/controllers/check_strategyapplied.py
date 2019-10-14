@@ -1,4 +1,4 @@
-from myapp.models.users import Trades,db,Strategy
+from myapp.models.users import Trades,db,Strategy,Total_metric
 import json 
 from sqlalchemy import desc
 
@@ -134,9 +134,8 @@ def get_strategyinfo(id):
 
 def from_total_metric(id):
 
-    db_get_total =  Strategy.query.filter(Strategy.strategy_id==id).first()
+    db_get_total =  Total_metric.query.filter(Total_metric.strategy_id==id).first()
 
-    print('from_total_metric',db_get_total.Total_Profit,db_get_total.Profit_Factor)
     
     if db_get_total != None:
 
