@@ -134,10 +134,13 @@ def get_strategyinfo(id):
 
 def from_total_metric(id):
 
-    db_get_strategies =  Strategy.query.filter(Strategy.strategy_id==id).first()
-    if db_get_strategies != None:
+    db_get_total =  Strategy.query.filter(Strategy.strategy_id==id).first()
 
-        total_values = [db_get_strategies.Total_Profit, db_get_strategies.Profit_Factor,db_get_strategies.Profitable]
+    print('from_total_metric',db_get_total.Total_Profit,db_get_total.Profit_Factor)
+    
+    if db_get_total != None:
+
+        total_values = [db_get_total.Total_Profit, db_get_total.Profit_Factor,db_get_total.Profitable]
         return total_values
     
     else:
