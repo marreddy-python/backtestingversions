@@ -767,10 +767,10 @@
                             Performance_Data  = main_data["Performance"]
 
                             flags( main_data["Buy_flags"],main_data["Sell_flags"])
-                            $('#Buytab').html( $('#buying_angle').attr('value'));
-                            $('#Selltab').html( $('#selling_angle').attr('value'));
-                            $('#Optitab').html( $('#Optimization_steepness' ).attr("checked"));
-                            $('#stop_ordertab').html($('#STPODVALUE').attr("checked"), );
+                            $('#Buytab').html( params[0]);
+                            $('#Selltab').html(params[1]);
+                            $('#Optitab').html(params[2]);
+                            $('#stop_ordertab').html( params[4]);
 
                             // SUMMARY VALUES FOR DEAFULT DATE
 
@@ -793,17 +793,11 @@
                                     return +(Math.round(num + "e+2")  + "e-2");
                                 }
                             }
-
+                          
+                        
                           }
                       });
 
-                var Strategy_values = JSON.parse('{{ Strategy_values | tojson | safe}}')
-                console.log( 'Strategy_values', Strategy_values)
-
-                $('#Buytab').html(params[0]);
-                $('#Selltab').html(params[1]);
-                $('#Optitab').html(params[2]);
-                $('#stop_ordertab').html(params[4] );
 
                       }
                 }
