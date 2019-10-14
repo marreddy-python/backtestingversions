@@ -5,7 +5,8 @@ sys.dont_write_bytecode = True
 from myapp.controllers.interface import StrategyController,Strategy,DataController
 from myapp.controllers.decides_start_end import myFunction
 from myapp.controllers.add_favourite import addFav,deletestrategy
-from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id,get_lastsaved_strategy,get_strategyinfo,from_total_metric
+from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id,get_lastsaved_strategy,get_strategyinfo,
+from myapp.controllers.check_strategyapplied import from_total_metric
 from myapp.controllers.strategydao import MetricImpl
 
 modulo1_blueprint = Blueprint(name='modulo1', import_name=__name__,template_folder='templates',
@@ -145,9 +146,9 @@ def strategyview():
                                         b = startegy_loader.saveStrategy(St,start_time,tweenty_days,strategy_id)
                                         Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
                                         print('step number2  excuting')
-                                        from_total_metric = from_total_metric(strategy_id)
+                                        from_total_metric_values = from_total_metric(strategy_id)
                                         # return jsonify({'step':2 }) 
-                                        return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags,'step':2,'from_total_metric':from_total_metric })
+                                        return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags,'step':2,'from_total_metric':from_total_metric_values })
                                 
                                
                                 
