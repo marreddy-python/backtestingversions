@@ -636,7 +636,7 @@
                 $('#Buytab').html(Strategy_values[0]);
                 $('#Selltab').html(Strategy_values[1]);
                 $('#Optitab').html( Strategy_values[2]);
-                $('#stop_ordertab').html(Strategy_values[4] );
+                $('#stop_ordertab').html(Strategy_values[4]);
 
                 function roundToTwo(num) {    
                       return +(Math.round(num + "e+2")  + "e-2");
@@ -800,12 +800,10 @@
                 var Strategy_values = JSON.parse('{{ Strategy_values | tojson | safe}}')
                 console.log( 'Strategy_values', Strategy_values)
 
-                $('#Buytab').html(Strategy_values[0]);
-                $('#Selltab').html(Strategy_values[1]);
-                $('#Optitab').html( Strategy_values[2]);
-                $('#stop_ordertab').html(Strategy_values[4] );
-
-                console.log(Strategy_values)
+                $('#Buytab').html(params[0]);
+                $('#Selltab').html(params[1]);
+                $('#Optitab').html(params[2]);
+                $('#stop_ordertab').html(params[4] );
 
                       }
                 }
