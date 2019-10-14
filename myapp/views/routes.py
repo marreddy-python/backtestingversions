@@ -106,7 +106,9 @@ def strategyview():
                 strategy_id  = int(request.form.get('strategy_id'))
                 
                 print(Buying_angle,selling_angle,optimization,relative_angle,stop_order,less_than_buy)
+                
                 Stratey_values = [Buying_angle,selling_angle,optimization,relative_angle,stop_order,less_than_buy] 
+                
                 if selling_angle == '' and Buying_angle == '':
                         print ('--------------------------------FAILED-----------------------------')
                         # FLASH MESSAGE NEEDS TO BE HERE 
@@ -151,6 +153,7 @@ def strategyview():
                         else:
                                 return json.dumps({'status':'Failed'})
   
+
         else:
                 
                 Data_loader = DataController()
@@ -158,7 +161,7 @@ def strategyview():
                 print ('data',data )
                 print ('Stratey_values',Stratey_values)
                 strategy_params = get_lastsaved_strategy()
-
+                
                 Stratey_values = strategy_params
 
                 if len(strategy_params) == 0:

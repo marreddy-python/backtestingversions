@@ -519,7 +519,7 @@ class MetricImpl(Metric):
 
 
 
-        Tweenty_days_trades = Trades.query.filter(and_(Trades.Day_identifier.between(st_da,e_da),Trades.Symbol=='TVIX'))
+        Tweenty_days_trades = Trades.query.filter(and_(Trades.Day_identifier.between(st_da,e_da),Trades.Symbol=='TVIX',Trades.strategy_id == strategy_id))
         
         print (Tweenty_days_trades.count())
 

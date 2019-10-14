@@ -56,6 +56,8 @@
                         $('#realtime-chart').highcharts('StockChart', chartConfig); 
                     }
 
+
+
                 $(function() {
 
                     var dates = $( "input[name=date_selector]" ).datepicker({
@@ -339,13 +341,13 @@
         <form style="margin-top:20px;">
 
             <label class="sum_lbl"><a href="#" class="myHref default_chart_open" id = "Total_Profit">Total profit </a></label>
-            <input class="sum_inp" type="text" id="mytext" size="10" value=" ">
+            <input class="sum_inp" type="text" id="Performance_Total_Profit" size="10" value=" ">
 
             <label class="sum_lbl"><a href="#" class="myHref" id = "Profit_Factor">Profit factor</a></label>
-            <input class="sum_inp" type="text" id="mytext"  size="10" value=" ">
+            <input class="sum_inp" type="text" id="Performance_Profit_Factor"  size="10" value=" ">
 
             <label class="sum_lbl"><a href="#" class="myHref" id = "Profitable">%Profitable</a></label>
-            <input class="sum_inp" type="text" id="mytext"  size="10" value=" ">
+            <input class="sum_inp" type="text" id="Performance_Profitable"  size="10" value=" ">
 
             <!-- <label class="sum_lbl"><a href="#" class="myHref" id = "Max_Drawdown">Max Drawdown</a></label>  
             <input class="sum_inp" type="text" id="mytext"  size="10" value="0">-->
@@ -483,11 +485,10 @@
                           var date = new Date(a[i]);
                           b.push(date.toLocaleDateString())
                       }
-
-                     
                       chart.xAxis[0].setCategories(b);
-                      
+                         
 
+                    
                       // GET START DATE AND END DATE FROM PERFORMANCE VARAIABLE 
                       dates = Performance_Data["x"]
                       from = dates[0]
@@ -512,6 +513,17 @@
                           return [year, month, day].join('-');
                       }
 
+
+                      // TOTAL PERFORMANCE VALUES IN PERFORMANCE TAB
+                      Performance_Total_Profit = sum(Performance_Data["Total_Profit"])
+                      Performance_Profit_Factor = sum(Performance_Data["Profit_Factor"])
+                      Performance_Profitable = sum(Performance_Data["Profitable"])
+                      
+                      $('#Performance_Total_Profit').val(roundToTwo(Performance_Total_Profit )); 
+                      $('#Performance_Profit_Factor').val(roundToTwo(Performance_Profit_Factor)); 
+                      $('#Performance_Profitable').val(roundToTwo(Performance_Profitable)); 
+                       
+                     
 
                 }
                 });
@@ -582,18 +594,29 @@
                             Singleday_Trades = main_data["Trades_singleday"]
                             Performance_Data  = main_data["Performance"]
 
+
                             flags( main_data["Buy_flags"],main_data["Sell_flags"])
+                            
+                            // TAB VALUES FOR THE APPLIED STRATEGY 
                             $('#Buytab').html( $('#buying_angle').attr('value'));
                             $('#Selltab').html( $('#selling_angle').attr('value'));
-                            $('#Optitab').html( $('#Optimization_steepness' ).attr("checked"));
-                            $('#stop_ordertab').html($('#STPODVALUE').attr("checked"), );
+                            if( $('#Optimization_steepness' ).attr("checked") == 'checked '){
+                                $('#Optitab').html( $('#relative_angle').attr('value'));
+                            }
+                            else{
+                              $('#Optitab').html( 'N');
+                            }
+                            if( $('#STPODVALUE').attr("checked") == 'checked'){
+                              $('#stop_ordertab').html( $('#stop_order').attr('value') );   
+                            }
+                            else{
+                              $('#stop_ordertab').html('N')
+                             }
 
                             // SUMMARY VALUES FOR DEAFULT DATE
-
                             var d = new Date(dataMin);
                             var n = d.toLocaleDateString("en-US");
                             $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
-             
              
                             if (Performance_Data !== null){
                                 console.log('excuted')
@@ -769,9 +792,21 @@
                             flags( main_data["Buy_flags"],main_data["Sell_flags"])
                             $('#Buytab').html( params[0]);
                             $('#Selltab').html(params[1]);
-                            $('#Optitab').html(params[2]);
-                            $('#stop_ordertab').html( params[4]);
 
+                            if (params[2] == 'checked'){
+                                $('#Optitab').html(params[3]);
+                            }
+                            else{
+                              $('#Optitab').html('N')
+                            }
+                            
+                            if(params[4] == 'checked'){
+                                $('#stop_ordertab').html( params[5]);
+                            }
+                            else{
+                              $('#stop_ordertab').html('N')
+                            }
+                            
                             // SUMMARY VALUES FOR DEAFULT DATE
 
                             var d = new Date(dataMin);
