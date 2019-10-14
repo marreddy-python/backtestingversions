@@ -164,7 +164,7 @@ def strategyview():
                 strategy_params = get_lastsaved_strategy()
                 
                 Stratey_values = strategy_params
-                from_total_metric = from_total_metric(strategy_id)
+                from_total_metric_values = from_total_metric(strategy_id)
 
                 if len(strategy_params) == 0:
                         Trades_singleday = None
@@ -175,7 +175,7 @@ def strategyview():
 
 
                 return render_template("page1.html", Metric_values_singleday = Metric_values_singleday,Trades_singleday = Trades_singleday,Performance = Performance,daily_data = daily_data,Buy_flags = Buy_flags,Sell_flags = Sell_flags,
-                strategy_names = strategy_names,Strategy_values = Stratey_values,page='strategyview',strategy_params = strategy_params, from_total_metric = from_total_metric)
+                strategy_names = strategy_names,Strategy_values = Stratey_values,page='strategyview',strategy_params = strategy_params, from_total_metric = from_total_metric_values)
 
 
 
