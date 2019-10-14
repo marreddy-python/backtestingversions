@@ -176,7 +176,7 @@ def strategyview():
 
 
                 return render_template("page1.html", Metric_values_singleday = Metric_values_singleday,Trades_singleday = Trades_singleday,Performance = Performance,daily_data = daily_data,Buy_flags = Buy_flags,Sell_flags = Sell_flags,
-                strategy_names = strategy_names,Strategy_values = Stratey_values,page='strategyview',strategy_params = strategy_params)
+                strategy_names = strategy_names,Strategy_values = Stratey_values,page='strategyview',strategy_params = json.dumps(strategy_params))
 
 
 

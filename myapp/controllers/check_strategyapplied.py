@@ -123,9 +123,9 @@ def get_strategyinfo(id):
 
     if db_get_strategies != None:
         a = params["optimization"]
-        a = '"{}"'.format(a)
+      
         b = params["stop_order"]
-        b = '"{}"'.format(b)
+        
 
         strategy_params = [params["buying_angle"],params["selling_angle"],a,params["relative_angle"],b,params["less_than_buy"],id]
         
