@@ -5,7 +5,7 @@ import abc
 import datetime
 from datetime import date
 from sqlalchemy import and_
-from sqlalchemy import desc
+from sqlalchemy import desc,asc
 
 from datetime import timedelta
 
