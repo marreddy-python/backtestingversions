@@ -5,7 +5,7 @@ sys.dont_write_bytecode = True
 from myapp.controllers.interface import StrategyController,Strategy,DataController
 from myapp.controllers.decides_start_end import myFunction
 from myapp.controllers.add_favourite import addFav,deletestrategy
-from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id,get_lastsaved_strategy,get_strategyinfo,
+from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id,get_lastsaved_strategy,get_strategyinfo
 from myapp.controllers.check_strategyapplied import from_total_metric
 from myapp.controllers.strategydao import MetricImpl
 
