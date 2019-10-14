@@ -5,7 +5,7 @@ sys.dont_write_bytecode = True
 from myapp.controllers.interface import StrategyController,Strategy,DataController
 from myapp.controllers.decides_start_end import myFunction
 from myapp.controllers.add_favourite import addFav,deletestrategy
-from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id,get_lastsaved_strategy,get_strategyinfo
+from myapp.controllers.check_strategyapplied import applied_or_not,strategy_savedornot,get_strategy_id,get_lastsaved_strategy,get_strategyinfo,from_total_metric
 from myapp.controllers.strategydao import MetricImpl
 
 modulo1_blueprint = Blueprint(name='modulo1', import_name=__name__,template_folder='templates',
@@ -145,8 +145,9 @@ def strategyview():
                                         b = startegy_loader.saveStrategy(St,start_time,tweenty_days,strategy_id)
                                         Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
                                         print('step number2  excuting')
+                                        from_total_metric = from_total_metric(strategy_id)
                                         # return jsonify({'step':2 }) 
-                                        return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags,'step':2 })
+                                        return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags,'step':2,'from_total_metric':from_total_metric })
                                 
                                
                                 
@@ -163,6 +164,7 @@ def strategyview():
                 strategy_params = get_lastsaved_strategy()
                 
                 Stratey_values = strategy_params
+                from_total_metric = from_total_metric(strategy_id)
 
                 if len(strategy_params) == 0:
                         Trades_singleday = None
@@ -173,7 +175,7 @@ def strategyview():
 
 
                 return render_template("page1.html", Metric_values_singleday = Metric_values_singleday,Trades_singleday = Trades_singleday,Performance = Performance,daily_data = daily_data,Buy_flags = Buy_flags,Sell_flags = Sell_flags,
-                strategy_names = strategy_names,Strategy_values = Stratey_values,page='strategyview',strategy_params = strategy_params)
+                strategy_names = strategy_names,Strategy_values = Stratey_values,page='strategyview',strategy_params = strategy_params, from_total_metric = from_total_metric)
 
 
 

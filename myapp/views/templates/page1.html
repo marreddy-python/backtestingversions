@@ -336,7 +336,7 @@
 
     <div class= "summary"> 
     
-      <p style="font-size: 15px;background-color: #e0e0e0;text-align: center;color:white;font-weight: bold; padding:2mm;color: rgba(0, 0, 0, 0.8);">Summary</p>
+      <p style="font-size: 15px;background-color: #e0e0e0;text-align: center;color:white;font-weight: bold; padding:2mm;color: rgba(0, 0, 0, 0.8);">Cumulative Summary</p>
           
         <form style="margin-top:20px;">
 
@@ -515,23 +515,13 @@
 
 
                       // TOTAL PERFORMANCE VALUES IN PERFORMANCE TAB
-                      Performance_Total_Profit = sum(Performance_Data["Total_Profit"])
-                      Performance_Profit_Factor = sum(Performance_Data["Profit_Factor"])
-                      Performance_Profitable = sum(Performance_Data["Profitable"])
-                      
-                      function sum(arr){
-                        age = 0
-                        for (var i = 0; i < arr.length; i++) {
-                          age += arr[i];
-                      }
-                      return age
-                      }
-
-                      $('#Performance_Total_Profit').val(roundToTwo(Performance_Total_Profit )); 
-                      $('#Performance_Profit_Factor').val(roundToTwo(Performance_Profit_Factor)); 
-                      $('#Performance_Profitable').val(roundToTwo(Performance_Profitable)); 
+                      var from_total_metric = JSON.parse('{{ from_total_metric | tojson | safe}}');
+                      if(from_total_metric.length == 0 ){
+                      $('#Performance_Total_Profit').val(roundToTwo(from_total_metric[0] )); 
+                      $('#Performance_Profit_Factor').val(roundToTwo(from_total_metric[1])); 
+                      $('#Performance_Profitable').val(roundToTwo(from_total_metric[2])); 
                        
-                     
+                      } 
 
                 }
                 });
@@ -637,11 +627,17 @@
                                 $('#singleday_Profit_factor').val(roundToTwo(Performance_Data["Profit_Factor"][element_index])); 
                                 $('#singleday_Profitable').val(roundToTwo(Performance_Data["Profitable"][element_index])); 
                                 $('#singleday_MaxDrawdown').val(roundToTwo(Performance_Data["Max_Drawdown"][element_index])); 
-                                function roundToTwo(num) {    
+                             
+                            }
+                            function roundToTwo(num) {    
                                     return +(Math.round(num + "e+2")  + "e-2");
                                 }
-                            }
-
+                            from_total_metric = main_data["from_total_metric"]
+                            $('#Performance_Total_Profit').val(roundToTwo(from_total_metric[0] )); 
+                            $('#Performance_Profit_Factor').val(roundToTwo(from_total_metric[1])); 
+                            $('#Performance_Profitable').val(roundToTwo(from_total_metric[2])); 
+                      
+                     
                           }
                       });
                       }
@@ -843,11 +839,17 @@
                                 $('#singleday_Profit_factor').val(roundToTwo(Performance_Data["Profit_Factor"][element_index])); 
                                 $('#singleday_Profitable').val(roundToTwo(Performance_Data["Profitable"][element_index])); 
                                 $('#singleday_MaxDrawdown').val(roundToTwo(Performance_Data["Max_Drawdown"][element_index])); 
-                                function roundToTwo(num) {    
+                                 
+                            }
+                            function roundToTwo(num) {    
                                     return +(Math.round(num + "e+2")  + "e-2");
                                 }
-                            }
-                          
+                            from_total_metric = main_data["from_total_metric"]
+                            console.log('from_total_metric', from_total_metric )
+                            $('#Performance_Total_Profit').val(roundToTwo(from_total_metric[0] )); 
+                            $('#Performance_Profit_Factor').val(roundToTwo(from_total_metric[1])); 
+                            $('#Performance_Profitable').val(roundToTwo(from_total_metric[2])); 
+                      
                         
                           }
                       });

@@ -128,6 +128,25 @@
     {Strategy: "30,15,Yes"},
     {Strategy: "40,20,Yes"}
 ] */
+   // Loading the saved strategies,updating home template recent strategy values
+        //console.log('strategy_names' , JSON.parse('{{ strategy_names | tojson | safe}}') )
+        a = JSON.parse('{{ strategy_names | tojson | safe}}');
+        console.log(a)
+    
+        n = a.length
+        // console.log(n)
+
+        if (n >=5){
+        a = a.slice(0, 4);
+        n = 4
+        }
+
+        for (i = 0;i<n;i++)
+        {
+        var elem = document.querySelectorAll('#saved_strategy'+i);
+        elem[0].children[0].innerHTML = a[i]
+        }
+
 
 
 var chart = $('#container1').highcharts();
@@ -449,25 +468,7 @@ $(chart.series).each(function(i, serie){
 
 
 
-       // Loading the saved strategies,updating home template recent strategy values
-        //console.log('strategy_names' , JSON.parse('{{ strategy_names | tojson | safe}}') )
-        a = JSON.parse('{{ strategy_names | tojson | safe}}');
-        console.log(a)
     
-        n = a.length
-        // console.log(n)
-
-        if (n >=5){
-        a = a.slice(0, 4);
-        n = 4
-        }
-
-        for (i = 0;i<n;i++)
-        {
-        var elem = document.querySelectorAll('#saved_strategy'+i);
-        elem[0].children[0].innerHTML = a[i]
-        }
-
 
 
 </script>
