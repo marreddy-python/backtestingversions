@@ -410,7 +410,7 @@ class MetricImpl(Metric):
         
 
             # Filter the database based on Day_identifier 
-            db_data = Trades.query.filter(and_(Trades.Day_identifier == required_day,Trades.Symbol=='TVIX'))
+            db_data = Trades.query.filter(and_(Trades.Day_identifier == required_day,Trades.Symbol=='TVIX',Trades.strategy_id == strategy_id))
           
             fetchdata_length = db_data.count()
            

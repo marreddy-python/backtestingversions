@@ -600,6 +600,7 @@
                             // TAB VALUES FOR THE APPLIED STRATEGY 
                             $('#Buytab').html( $('#buying_angle').attr('value'));
                             $('#Selltab').html( $('#selling_angle').attr('value'));
+                            
                             if( $('#Optimization_steepness' ).attr("checked") == 'checked '){
                                 $('#Optitab').html( $('#relative_angle').attr('value'));
                             }
@@ -658,8 +659,18 @@
 
                 $('#Buytab').html(Strategy_values[0]);
                 $('#Selltab').html(Strategy_values[1]);
-                $('#Optitab').html( Strategy_values[2]);
-                $('#stop_ordertab').html(Strategy_values[4]);
+                if(Strategy_values[2] == 'checked'){
+                  $('#Optitab').html( Strategy_values[3]);
+                }
+                else{
+                $('#Optitab').html('N');
+                }
+                if(Strategy_values[4] == 'checked'){
+                  $('#stop_ordertab').html(Strategy_values[5]);
+                }
+                else{
+                $('#stop_ordertab').html('N');
+                }
 
                 function roundToTwo(num) {    
                       return +(Math.round(num + "e+2")  + "e-2");
@@ -806,7 +817,7 @@
                             else{
                               $('#stop_ordertab').html('N')
                             }
-                            
+
                             // SUMMARY VALUES FOR DEAFULT DATE
 
                             var d = new Date(dataMin);

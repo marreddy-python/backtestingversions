@@ -142,6 +142,7 @@ console.log(n)
 
 //M stores names of the strategies
 m = []
+b = null
 
 var html = "";
     for (var i = 0; i < main.Strategies.length; i++){
@@ -448,7 +449,7 @@ $(chart.series).each(function(i, serie){
 
 
 
-        // Loading the saved strategies,updating home template recent strategy values
+       // Loading the saved strategies,updating home template recent strategy values
         //console.log('strategy_names' , JSON.parse('{{ strategy_names | tojson | safe}}') )
         a = JSON.parse('{{ strategy_names | tojson | safe}}');
         console.log(a)
