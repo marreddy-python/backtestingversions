@@ -151,7 +151,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
         current_strategy = St.startegy_values
         print (current_strategy)
 
-        db_fetch = Daily_metric.query.filter(and_( Daily_metric.Day_identifier.between(start_date,end_date), Daily_metric.Symbol=='TVIX',))
+        db_fetch = Daily_metric.query.filter(and_( Daily_metric.Day_identifier.between(start_date,end_date), Daily_metric.Symbol=='TVIX',)).order_by(asc(Daily_metric.Day_identifier))
         
         fetchdata_length = db_fetch.count()
         
