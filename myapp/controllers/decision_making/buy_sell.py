@@ -43,6 +43,7 @@ def buy_sell(buying_angle,selling_angle,angle):
             
 
     else:
+        
         last_direction = INSIGNIFICANT
         decision = HOLD
 
