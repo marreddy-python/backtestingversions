@@ -480,7 +480,7 @@ $(chart.series).each(function(i, serie){
 
             if (i == 0){
                 b = main.Strategies[0]
-                console.log(b.strategy)
+                console.log(b.Strategy)
                 chart.get(b.Strategy).setState('hover'); 
                 $('#marsu0').val( b.TWENTY_TP)
                 $('#marsu1').val( b.TWENTY_PF )
@@ -489,7 +489,10 @@ $(chart.series).each(function(i, serie){
             else{
                 console.log('came to else')
                 console.log(b.Strategy)
+                chart.get(b.Strategy).setState('hover');
                 chart.get(b.Strategy).setState('inactive'); 
+              
+
             }
     }
     
