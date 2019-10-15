@@ -459,7 +459,23 @@ $(chart.series).each(function(i, serie){
             }  
         }
         }).on('mouseout', function(){
-            default_values_summary();
+            console.log('calling for mouse out function')
+            // default_values_summary();
+            main = JSON.parse(sessionStorage.getItem("ba")) 
+            for(i=0;i<main.Strategies.length;i++){
+            b = main.Strategies[i]
+
+            if (i == 0){
+                b = main.Strategies[0]
+                chart.get(b.Strategy).setState('hover'); 
+                $('#marsu0').val( b.TWENTY_TP)
+                $('#marsu1').val( b.TWENTY_PF )
+                $('#marsu2').val( b.TWENTY_PT)            
+            }
+            else{
+                chart.get(b.Strategy).setState('inactive'); 
+            }
+    }
         })
     });
 
@@ -467,8 +483,8 @@ $(chart.series).each(function(i, serie){
 
     default_values_summary();
     function default_values_summary(){
-        main = JSON.parse(sessionStorage.getItem("ba")) 
 
+        main = JSON.parse(sessionStorage.getItem("ba")) 
         for(i=0;i<main.Strategies.length;i++){
             b = main.Strategies[i]
 
