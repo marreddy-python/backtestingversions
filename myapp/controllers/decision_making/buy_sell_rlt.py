@@ -63,3 +63,11 @@ def buy_sell_rlt_reset():
     stock_status = UNAVAILABLE
     last_direction = INSIGNIFICANT
 
+
+def buy_sell_rlt_isavaliable():
+
+    if stock_status == AVAILABLE:
+        return True
+    else:
+        return False
+

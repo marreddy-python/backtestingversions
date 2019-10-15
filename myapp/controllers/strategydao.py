@@ -2,10 +2,10 @@ import abc
 import datetime
 from datetime import date
 import json 
-from decision_making.buy_sell import buy_sell,buy_sell_reset
-from decision_making.buy_sell_rlt import buy_sell_rlt,buy_sell_rlt_reset
-from decision_making.buy_sell_stop import buy_sell_stop,buy_sell_stop_reset
-from decision_making.buy_sell_rlt_stop import buy_sell_rlt_stop,buy_sell_rlt_stop_reset
+from decision_making.buy_sell import buy_sell,buy_sell_reset,buy_sell_isavaliable
+from decision_making.buy_sell_rlt import buy_sell_rlt,buy_sell_rlt_reset,buy_sell_rlt_isavaliable,
+from decision_making.buy_sell_stop import buy_sell_stop,buy_sell_stop_reset,buy_sell_stop_isavaliable
+from decision_making.buy_sell_rlt_stop import buy_sell_rlt_stop,buy_sell_rlt_stop_reset,buy_sell_rlt_stop_isavaliable
 from datetime import timedelta
 
 from myapp.models.users import Strategy,Strategy_type,Strategies_Grades,Trades,Daily_metric,Total_metric,db
@@ -269,7 +269,18 @@ class SMAStrategyProcessor(StrategyProcessor):
                     
                     else:
 
-                        if decision == 1:
+                        if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
+                            avaibility = buy_sell_isavaliable()
+                        elif current_strategy["stop_order"] == 'None':
+                            avaibility = buy_sell_rlt_isavaliable()
+                           
+                        elif current_strategy["optimization"] == 'None':
+                            avaibility = buy_sell_stop_isavaliable()     
+                        else:
+                            avaibility = buy_sell_rlt_stop_isavaliable()
+
+
+                        if avaibility == True:
 
                             buy_price = buy_price 
                             buy_angle =  buy_angle 
@@ -289,17 +300,17 @@ class SMAStrategyProcessor(StrategyProcessor):
                             
                             # for reseting decision making algorithms
                             if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
-                                decision = buy_sell_reset()
+                                buy_sell_reset()
                                 Opti = "No"
             
                             elif current_strategy["stop_order"] == 'None':
-                                decision = buy_sell_rlt_reset()
+                                buy_sell_rlt_reset()
                                 Opti = "Yes"
                             elif current_strategy["optimization"] == 'None':
-                                decision = buy_sell_stop_reset()
+                                buy_sell_stop_reset()
                                 Opti = "Yes"
                             else:
-                                decision = buy_sell_rlt_stop_reset()
+                                buy_sell_rlt_stop_reset()
                                 Opti = "Yes"
 
 
@@ -309,6 +320,16 @@ class SMAStrategyProcessor(StrategyProcessor):
                     
                             db.session.add(data_into_db)
                             db.session.commit()
+                        
+                        if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
+                            buy_sell_reset()
+                        elif current_strategy["stop_order"] == 'None':
+                            buy_sell_rlt_reset()
+                        elif current_strategy["optimization"] == 'None':
+                            buy_sell_stop_reset()      
+                        else:
+                            buy_sell_rlt_stop_reset()
+                            
                         
                         break
                        
