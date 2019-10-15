@@ -118,7 +118,7 @@ li a:hover {
         margin-top:3px;
     }
     .tool {
-        /* font-size: 40px; */
+        display: inline;
         visibility: visible;
         position: absolute;
         color:  #F0F0F0;
@@ -133,6 +133,7 @@ li a:hover {
       }
       
      .tooltext {
+        display: inline;
         visibility: hidden;
         width: 100px;
         background-color: black;
@@ -187,7 +188,7 @@ li a:hover {
     #tabscroller{
         display:none 
     }
-    
+
     .tool {
     visibility: hidden;
     }
@@ -553,7 +554,7 @@ tbody tr {
       .table tbody tr td {
         vertical-align: middle;
         font-size: 15px;
-        opacity:0.7;
+        /* opacity:0.7; */
       }
 }
 

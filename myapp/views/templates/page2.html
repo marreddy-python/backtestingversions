@@ -219,7 +219,17 @@ var chart = $('#container1').highcharts();
             id : b.Strategy, 
         });
     }
-    chart.xAxis[0].setCategories(b.x);
+
+    a = b.x
+    read_date = []
+    for(i = 0; i<a.length ; i++){
+        var date = new Date(a[i]);
+        read_date.push(date.toLocaleDateString())
+    }
+    chart.xAxis[0].setCategories(read_date);
+    
+
+    // chart.xAxis[0].setCategories(b.x);
 
 
 $("#Total_profit").on('click',function(){
