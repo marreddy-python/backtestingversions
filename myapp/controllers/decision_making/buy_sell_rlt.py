@@ -58,4 +58,8 @@ def buy_sell_rlt(buying_angle, selling_angle,relative_angle,angle):
     return decision
 
 
+def buy_sell_rlt_reset():
     
+    stock_status = UNAVAILABLE
+    last_direction = INSIGNIFICANT
+

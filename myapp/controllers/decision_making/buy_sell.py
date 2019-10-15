@@ -49,6 +49,12 @@ def buy_sell(buying_angle,selling_angle,angle):
     return decision
 
 
+def buy_sell_reset():
+    
+    stock_status = UNAVAILABLE
+    last_direction = INSIGNIFICANT
+
+
 
 
 

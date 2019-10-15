@@ -61,6 +61,12 @@ def buy_sell_stop(buying_angle,selling_angle,angle,buying_price,current_price,le
 
 
 
+def buy_sell_stop_reset():
+    
+    stock_status = UNAVAILABLE
+    last_direction = INSIGNIFICANT
+
+
 
  
 

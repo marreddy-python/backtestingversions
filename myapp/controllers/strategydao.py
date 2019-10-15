@@ -2,10 +2,10 @@ import abc
 import datetime
 from datetime import date
 import json 
-from decision_making.buy_sell import buy_sell
-from decision_making.buy_sell_rlt import buy_sell_rlt
-from decision_making.buy_sell_stop import buy_sell_stop
-from decision_making.buy_sell_rlt_stop import buy_sell_rlt_stop
+from decision_making.buy_sell import buy_sell,buy_sell_reset
+from decision_making.buy_sell_rlt import buy_sell_rlt,buy_sell_rlt_reset
+from decision_making.buy_sell_stop import buy_sell_stop,buy_sell_stop_reset
+from decision_making.buy_sell_rlt_stop import buy_sell_rlt_stop,buy_sell_rlt_stop_reset
 from datetime import timedelta
 
 from myapp.models.users import Strategy,Strategy_type,Strategies_Grades,Trades,Daily_metric,Total_metric,db
@@ -129,6 +129,15 @@ class SMAStrategyProcessor(StrategyProcessor):
     
             # STOCK_DATA STORES THE MARKET DATA ALONG WITH THE ANGLE INFOMATION 
             stock_data = []
+
+            # Adding 9 hours 30 minutes to the start
+            market_start = start + 32400000 + (600000*30)
+            # Adding 16 hours to the start
+            market_end = start + 57600000
+            # market end time
+            end_trade = market_end - 600000
+
+            
             for i in range(0,fetched_data):
 
                 a =  db_data[i].Feature
@@ -141,7 +150,7 @@ class SMAStrategyProcessor(StrategyProcessor):
                 Volume = a["Volume"]
                 Angle = a["Angle"]
 
-                if Time_stamp >= start and Time_stamp <= end:
+                if Time_stamp >= market_start  and Time_stamp <= market_end:
 
                     stock_data.append([Time_stamp,Opening,High,Low,close,Volume,Angle])
 
@@ -184,8 +193,9 @@ class SMAStrategyProcessor(StrategyProcessor):
             Sell_time = 0
             Opmz = 0
             Day_identifier = 0
+            decision = 0
 
-      
+
             # iterate over the lenth of candles
             for i in range(0,len(stock_data)):
 
@@ -196,64 +206,112 @@ class SMAStrategyProcessor(StrategyProcessor):
                 
                 if angle == 'angle calculation is not possible':
                     pass
-                else:   
-                
-                    if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
-                        decision = buy_sell(current_strategy["buying_angle"],current_strategy["selling_angle"],angle)
-                        Opti = "No"
+                else: 
+
+                    if time < end_trade :
+
+                        if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
+                            decision = buy_sell(current_strategy["buying_angle"],current_strategy["selling_angle"],angle)
+                            Opti = "No"
             
-                    elif current_strategy["stop_order"] == 'None':
-                        decision = buy_sell_rlt(current_strategy["buying_angle"],current_strategy["selling_angle"],current_strategy["relative_angle"],angle)
-                        Opti = "Yes"
-                    elif current_strategy["optimization"] == 'None':
-                        decision = buy_sell_stop(current_strategy["buying_angle"],current_strategy["selling_angle"],angle,buy_price,price,current_strategy["less_than_buy"])
-                        Opti = "Yes"
-                    else:
-                        decision = buy_sell_rlt_stop(current_strategy["buying_angle"],current_strategy["selling_angle"],current_strategy["relative_angle"],angle,buy_price,price,current_strategy["less_than_buy"])
-                        Opti = "Yes"
+                        elif current_strategy["stop_order"] == 'None':
+                            decision = buy_sell_rlt(current_strategy["buying_angle"],current_strategy["selling_angle"],current_strategy["relative_angle"],angle)
+                            Opti = "Yes"
+                        elif current_strategy["optimization"] == 'None':
+                            decision = buy_sell_stop(current_strategy["buying_angle"],current_strategy["selling_angle"],angle,buy_price,price,current_strategy["less_than_buy"])
+                            Opti = "Yes"
+                        else:
+                            decision = buy_sell_rlt_stop(current_strategy["buying_angle"],current_strategy["selling_angle"],current_strategy["relative_angle"],angle,buy_price,price,current_strategy["less_than_buy"])
+                            Opti = "Yes"
 
-                    print (time,angle,decision)
+                        print (time,angle,decision)
 
-                    if decision == 1:
-                        # update the global buy_price,buy_value,buying_angle,buy_time varaibles
-                        buy_price = price 
-                        buy_angle = angle
-                        buy_value = buy_price * 1400
-                        buy_time = time
+
+                        if decision == 1:
+                            # update the global buy_price,buy_value,buying_angle,buy_time varaibles
+                            buy_price = price 
+                            buy_angle = angle
+                            buy_value = buy_price * 1400
+                            buy_time = time
                     
-                    elif decision == 2:
+                        elif decision == 2:
                     
-                        # update the global sell_price,sell_value,selling_angle,sell_time
-                        # Give same day identifier if the trade happend in the same day 
+                            # update the global sell_price,sell_value,selling_angle,sell_time
+                            # Give same day identifier if the trade happend in the same day 
 
-                        sell_price = price 
-                        print (price)
-                        sell_value = sell_price * 1400
-                        sell_angle = angle
-                        sell_time = time
-                        profit_loss = -(buy_value - sell_value)
-                        profit_loss_percentage =((profit_loss/sell_value))*100
+                            sell_price = price 
+                            print (price)
+                            sell_value = sell_price * 1400
+                            sell_angle = angle
+                            sell_time = time
+                            profit_loss = -(buy_value - sell_value)
+                            profit_loss_percentage =((profit_loss/sell_value))*100
 
-                        current_candle_time = time
+                            current_candle_time = time
 
-                        print (sell_price,sell_value,sell_angle,sell_time,profit_loss,profit_loss_percentage)
+                            print (sell_price,sell_value,sell_angle,sell_time,profit_loss,profit_loss_percentage)
 
             
-                        date = datetime.fromtimestamp(current_candle_time/1000.0)
-                        Day_identifier = date.strftime('%Y-%m-%d')
+                            date = datetime.fromtimestamp(current_candle_time/1000.0)
+                            Day_identifier = date.strftime('%Y-%m-%d')
 
                         
-                        # ENTERING THE VALUES INTO THE TRADES TABLE
-                        data_into_db = Trades(strategy_id = strategy_id,buy_price = buy_price,sell_price = sell_price,buy_value = buy_value, sell_value = sell_value ,
+                            # ENTERING THE VALUES INTO THE TRADES TABLE
+                            data_into_db = Trades(strategy_id = strategy_id,buy_price = buy_price,sell_price = sell_price,buy_value = buy_value, sell_value = sell_value ,
                                     profit_loss = profit_loss  , profit_loss_percentage =  profit_loss_percentage ,buy_angle = buy_angle,Sell_angle = sell_angle ,Symbol = 'TVIX',
                                     Type = 'SMA',buy_time = buy_time, Sell_time = sell_time ,Optimization = Opti ,Day_identifier = Day_identifier,Strategy = current_strategy)
                     
-                        db.session.add(data_into_db)
-                        db.session.commit()
+                            db.session.add(data_into_db)
+                            db.session.commit()
     
+                        else:
+                            pass 
+                    
                     else:
-                        pass 
-        
+
+                        if decision == 1:
+
+                            buy_price = buy_price 
+                            buy_angle =  buy_angle 
+                            buy_value = buy_price * 1400
+                            buy_time = buy_time
+                            sell_price = price 
+                            sell_value = sell_price * 1400
+                            sell_angle = angle
+                            sell_time = time
+                            profit_loss = -(buy_value - sell_value)
+                            profit_loss_percentage =((profit_loss/sell_value))*100
+                            
+                            current_candle_time = time
+
+                            date = datetime.fromtimestamp(current_candle_time/1000.0)
+                            Day_identifier = date.strftime('%Y-%m-%d')
+                            
+                            # for reseting decision making algorithms
+                            if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
+                                decision = buy_sell_reset()
+                                Opti = "No"
+            
+                            elif current_strategy["stop_order"] == 'None':
+                                decision = buy_sell_rlt_reset()
+                                Opti = "Yes"
+                            elif current_strategy["optimization"] == 'None':
+                                decision = buy_sell_stop_reset()
+                                Opti = "Yes"
+                            else:
+                                decision = buy_sell_rlt_stop_reset()
+                                Opti = "Yes"
+
+
+                            data_into_db = Trades(strategy_id = strategy_id,buy_price = buy_price,sell_price = sell_price,buy_value = buy_value, sell_value = sell_value ,
+                                    profit_loss = profit_loss  , profit_loss_percentage =  profit_loss_percentage ,buy_angle = buy_angle,Sell_angle = sell_angle ,Symbol = 'TVIX',
+                                    Type = 'SMA',buy_time = buy_time, Sell_time = sell_time ,Optimization = Opti ,Day_identifier = Day_identifier,Strategy = current_strategy)
+                    
+                            db.session.add(data_into_db)
+                            db.session.commit()
+                        
+                        break
+                       
 
 
         print('Excuting apply strategy')
