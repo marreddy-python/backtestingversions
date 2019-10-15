@@ -404,6 +404,8 @@ $('.mar').click(function(e){
                 $('#marsu0').val( b.TWENTY_TP)
                 $('#marsu1').val( b.TWENTY_PF )
                 $('#marsu2').val( b.TWENTY_PT)
+                c = chart.get(b.Strategy).color
+                $('#marsu0, #marsu1,#marsu2').css({'color': c });
                 
             }
             else{
@@ -452,7 +454,9 @@ $(chart.series).each(function(i, serie){
                 //CHANGING THE VALUES OF A DIMENSIONS 
                 $('#marsu0').val( b.TWENTY_TP)
                 $('#marsu1').val( b.TWENTY_PF )
-                $('#marsu2').val( b.TWENTY_PT)    
+                $('#marsu2').val( b.TWENTY_PT)  
+                c = chart.get(b.Strategy).color
+                $('#marsu0, #marsu1,#marsu2').css({'color': c });  
             }
             else{
                 chart.get(b.Strategy).setState('inactive')  
@@ -473,7 +477,7 @@ $(chart.series).each(function(i, serie){
 
         main = JSON.parse(sessionStorage.getItem("ba")) 
         for(i=0;i<main.Strategies.length;i++){
-
+     
         console.log('inside the loop')
             
             b = main.Strategies[i]
@@ -484,12 +488,13 @@ $(chart.series).each(function(i, serie){
                 chart.get(b.Strategy).setState('hover'); 
                 $('#marsu0').val( b.TWENTY_TP)
                 $('#marsu1').val( b.TWENTY_PF )
-                $('#marsu2').val( b.TWENTY_PT)            
+                $('#marsu2').val( b.TWENTY_PT) 
+                c = chart.get(b.Strategy).color
+                $('#marsu0, #marsu1,#marsu2').css({'color': c });           
             }
             else{
                 console.log('came to else')
                 console.log(b.Strategy)
-                chart.get(b.Strategy).setState('hover');
                 chart.get(b.Strategy).setState('inactive'); 
               
 
