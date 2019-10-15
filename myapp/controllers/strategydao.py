@@ -131,7 +131,7 @@ class SMAStrategyProcessor(StrategyProcessor):
             stock_data = []
 
             # Adding 9 hours 30 minutes to the start
-            market_start = start + 32400000 + (600000*30)
+            market_start = start + 32400000 + (600000*3)
             # Adding 16 hours to the start
             market_end = start + 57600000
             # market end time
