@@ -440,13 +440,12 @@ $('.mar').click(function(e){
 
 // Hovering the name 
 $(chart.series).each(function(i, serie){
-        serie.legendItem.on('mouseover', function(){ 
-            //any action
-            id = serie.name
 
+        serie.legendItem.on('mouseover', function(){ 
+            id = serie.name
         for(i=0;i<main.Strategies.length;i++){
             b = main.Strategies[i]
-            
+
             if(b.Strategy==id){
                 console.log(b.TWENTY_PF,b.TWENTY_PT,b.TWENTY_TP)
                 chart.get(id).setState('hover') 
@@ -465,18 +464,27 @@ $(chart.series).each(function(i, serie){
     });
 
 
+
     default_values_summary();
     function default_values_summary(){
         main = JSON.parse(sessionStorage.getItem("ba")) 
-        if (main.Strategies.length > 0){
-            b = main.Strategies[0]
-            chart.get(b.Strategy).setState('hover'); 
-            $('#marsu0').val( b.TWENTY_TP)
-            $('#marsu1').val( b.TWENTY_PF )
-            $('#marsu2').val( b.TWENTY_PT)            
-        }
-    }
 
+        for(i=0;i<main.Strategies.length;i++){
+            b = main.Strategies[i]
+
+            if (i == 0){
+                b = main.Strategies[0]
+                chart.get(b.Strategy).setState('hover'); 
+                $('#marsu0').val( b.TWENTY_TP)
+                $('#marsu1').val( b.TWENTY_PF )
+                $('#marsu2').val( b.TWENTY_PT)            
+            }
+            else{
+                chart.get(b.Strategy).setState('inactive'); 
+            }
+    }
+    
+    }
 
 
     
