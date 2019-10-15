@@ -446,6 +446,7 @@ $(chart.series).each(function(i, serie){
 
         for(i=0;i<main.Strategies.length;i++){
             b = main.Strategies[i]
+            
             if(b.Strategy==id){
                 console.log(b.TWENTY_PF,b.TWENTY_PT,b.TWENTY_TP)
                 chart.get(id).setState('hover') 
@@ -462,6 +463,7 @@ $(chart.series).each(function(i, serie){
             default_values_summary();
         })
     });
+
 
     default_values_summary();
     function default_values_summary(){
