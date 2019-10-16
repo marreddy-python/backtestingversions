@@ -551,7 +551,7 @@ class MetricImpl(Metric):
             Winning_Trades_length = len(Winning_Trades)
 
             if Winning_Trades_sum !=0 and losing_Trades_sum !=0:
-                Profit_Factor = Winning_Trades_sum / losing_Trades_sum
+                Profit_Factor = (Winning_Trades_sum / losing_Trades_sum)*-1
                 print ('length_winning_trades,total_trades',len(Winning_Trades),Total_trades)
                 Profitable = float(Winning_Trades_length) / Total_trades
             else:
@@ -666,7 +666,8 @@ class MetricImpl(Metric):
             WIINING_TRADES_LENGTH = len(WIINING_TRADES ) 
 
             if WIINING_TRADES_SUM != 0 and LOOSING_TRADES_SUM !=0:
-                Profit_Factor = WIINING_TRADES_SUM  / LOOSING_TRADES_SUM
+
+                Profit_Factor = (WIINING_TRADES_SUM  / LOOSING_TRADES_SUM)*-1 
                 Profitable =  float(WIINING_TRADES_LENGTH) / Total_Trades_len
                 
             else:
