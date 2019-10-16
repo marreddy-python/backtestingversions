@@ -94,17 +94,22 @@ class DataDAOPostgreImpl(DataDAOPostgre):
                 buy_dict = {
                     "x": None,
                     "title": 'B',
-                    "text":'Buy'
+                    "text":None,
+                   
                 }
 
                 sell_dict = {
                     "x": None,
                     "title": 'S',
-                    "text":'Sell'
+                    "text":None,
+                
                 }
 
                 buy_dict["x"] = int(db_data[i].buy_time)
+                buy_dict["text"] = 'Price : $'+buy_price 
+
                 sell_dict["x"] = int(db_data[i].Sell_time)
+                sell_dict["text"] = 'Price : $'+ sell_price
 
                 buy_flags.append(buy_dict)
                 sell_flags.append(sell_dict)
