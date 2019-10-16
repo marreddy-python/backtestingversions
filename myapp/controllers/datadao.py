@@ -216,7 +216,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
         strategy_names = []
 
         # LOADING THE LATEST STORED STRATEGIES
-        entities = Strategy.query.order_by(desc(Strategy.Created_at)).limit(10).all()
+        entities = Strategy.query.order_by(desc(Strategy.Created_at)).all()
           
         print ('length_entities',len(entities))
 
