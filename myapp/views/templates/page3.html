@@ -286,6 +286,23 @@
                                         $('#'+strategy_id).closest("div").remove(); 
 
                                         // REMOVING THE VALUES FROM SESSION
+                                        main = JSON.parse(sessionStorage.getItem("ba"))  
+                                        for(i=0;i<main.Strategies.length;i++){
+                                            main.Strategies["strategy_id"] ==  strategy_id ;
+
+                                            var deletedItem = main.Strategies.splice(i,1);
+                                            sessionStorage.setItem("ba",JSON.stringify(main)); 
+
+                                            main = JSON.parse(sessionStorage.getItem("ba")) 
+                                            
+                                            if (main!== null){
+                                                n = main.Strategies.length
+                                                var elem = document.querySelectorAll('#cart');
+                                                elem[0].children[0].innerHTML = 'Arena('+n+')';
+                                            }
+                                        }
+
+
 
                                         
 
