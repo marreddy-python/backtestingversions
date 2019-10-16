@@ -68,6 +68,8 @@ def buy_sell_rlt_stop(buying_angle,selling_angle,relative_angle,angle,buying_pri
     return decision
 
 def buy_sell_rlt_stop_reset():
+    
+    global last_direction,stock_status,UP,DOWN,INSIGNIFICANT,AVAILABLE,UNAVAILABLE,decision
 
     stock_status = UNAVAILABLE
     last_direction = INSIGNIFICANT
@@ -75,6 +77,8 @@ def buy_sell_rlt_stop_reset():
    
 
 def buy_sell_rlt_stop_isavaliable():
+    
+    global last_direction,stock_status,UP,DOWN,INSIGNIFICANT,AVAILABLE,UNAVAILABLE,decision
 
     if stock_status == AVAILABLE:
         return True

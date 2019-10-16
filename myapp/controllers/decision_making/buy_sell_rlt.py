@@ -59,12 +59,15 @@ def buy_sell_rlt(buying_angle, selling_angle,relative_angle,angle):
 
 
 def buy_sell_rlt_reset():
-    
+    global last_direction,stock_status,UP,DOWN,INSIGNIFICANT,AVAILABLE,UNAVAILABLE,decision
+
     stock_status = UNAVAILABLE
     last_direction = INSIGNIFICANT
 
 
 def buy_sell_rlt_isavaliable():
+    
+    global last_direction,stock_status,UP,DOWN,INSIGNIFICANT,AVAILABLE,UNAVAILABLE,decision
 
     if stock_status == AVAILABLE:
         return True
