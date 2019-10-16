@@ -92,6 +92,7 @@
                         startDate=startDate.split("/");
                         endDate=endDate.split("/");
                         var chart = $('#realtime-chart').highcharts();
+                        
                         chart.xAxis[0].setExtremes(
                             Date.UTC(startDate[2], startDate[0]-1, startDate[1]),
                             Date.UTC(endDate[2], endDate[0]-1, endDate[1])
@@ -101,7 +102,7 @@
                   //LOGIC FOR DYNAMIC NATURE OF SUMMARY AND TRADES
                   console.log(startDate_milliseconds)
 
-                  startDate_milliseconds = startDate_milliseconds + 19800000
+                  startDate_milliseconds = startDate_milliseconds - (myDate.getTimezoneOffset()*60000)
 
                   console.log(Performance_Data)
 
