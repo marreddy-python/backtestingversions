@@ -52,9 +52,11 @@ def buy_sell(buying_angle,selling_angle,angle):
 
 def buy_sell_reset():
 
-    print('================ buy_sell_reset called  ========================')
-    print('======== BEFORE RESTING IT ======',stock_status, last_direction)
+    global last_direction,stock_status,UP,DOWN,INSIGNIFICANT,AVAILABLE,UNAVAILABLE,decision
 
+    print('================ buy_sell_reset called  ========================')
+    print('======== BEFORE RESTING IT ======', stock_status , last_direction)
+  
     stock_status = UNAVAILABLE
     last_direction = INSIGNIFICANT
 
@@ -62,6 +64,8 @@ def buy_sell_reset():
 
 def buy_sell_isavaliable():
     
+    global last_direction,stock_status,UP,DOWN,INSIGNIFICANT,AVAILABLE,UNAVAILABLE,decision
+
     print('CALLED  buy_sell_isavaliable ' )
     print ('I AM RETURNING STOCK STATUS', stock_status)
     if stock_status == AVAILABLE:
