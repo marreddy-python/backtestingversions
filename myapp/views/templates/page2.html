@@ -253,7 +253,7 @@ $("#Total_profit").on('click',function(){
         chart.yAxis[0].setTitle({ 
             text: 'Total_profit',
         }) 
-        chart.xAxis[0].setCategories(b.x);
+        chart.xAxis[0].setCategories(read_date);
                       
 
         chart.addSeries({
@@ -282,7 +282,7 @@ $("#Profit_factor").on('click',function(){
         chart.yAxis[0].setTitle({ 
         text: 'Profit_factor',
         }) 
-        chart.xAxis[0].setCategories(b.x);
+        chart.xAxis[0].setCategories(read_date);
 
         chart.addSeries({
             data: someData,
@@ -309,7 +309,7 @@ $("#Profitable").on('click',function(){
         chart.yAxis[0].setTitle({ 
         text: '%Profitable',
         }) 
-        chart.xAxis[0].setCategories(b.x);
+        chart.xAxis[0].setCategories(read_date);
 
         chart.addSeries({
             data: someData,
