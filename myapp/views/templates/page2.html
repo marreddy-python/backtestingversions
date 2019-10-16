@@ -230,6 +230,7 @@ var chart = $('#container1').highcharts();
         var date = new Date(a[i]);
         read_date.push(date.toLocaleDateString())
     }
+    
     chart.xAxis[0].setCategories(read_date);
     
 
