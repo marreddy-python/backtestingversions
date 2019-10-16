@@ -137,6 +137,10 @@ class SMAStrategyProcessor(StrategyProcessor):
             # market end time
             end_trade = market_end - 600000
 
+            print('=========== ACTUAL START AND END DATES ==========', start , end)
+            
+            print('========== NEW DATES =======',market_start,market_end ,end_trade )
+
             
             for i in range(0,fetched_data):
 
@@ -199,6 +203,8 @@ class SMAStrategyProcessor(StrategyProcessor):
             # iterate over the lenth of candles
             for i in range(0,len(stock_data)):
 
+                print ('=========== STOCK_DATA LENGTH============',len(stock_data) )
+
                 market_data = stock_data[i]
                 time = market_data[0]
                 price = market_data[4]
@@ -212,6 +218,7 @@ class SMAStrategyProcessor(StrategyProcessor):
 
                         if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
                             decision = buy_sell(current_strategy["buying_angle"],current_strategy["selling_angle"],angle)
+                            print('I AM CALLING 1')
                             Opti = "No"
             
                         elif current_strategy["stop_order"] == 'None':
@@ -257,6 +264,8 @@ class SMAStrategyProcessor(StrategyProcessor):
 
                         
                             # ENTERING THE VALUES INTO THE TRADES TABLE
+                            print('I AM ENTERING IT TO DATABASE')
+
                             data_into_db = Trades(strategy_id = strategy_id,buy_price = buy_price,sell_price = sell_price,buy_value = buy_value, sell_value = sell_value ,
                                     profit_loss = profit_loss  , profit_loss_percentage =  profit_loss_percentage ,buy_angle = buy_angle,Sell_angle = sell_angle ,Symbol = 'TVIX',
                                     Type = 'SMA',buy_time = buy_time, Sell_time = sell_time ,Optimization = Opti ,Day_identifier = Day_identifier,Strategy = current_strategy)
@@ -268,9 +277,12 @@ class SMAStrategyProcessor(StrategyProcessor):
                             pass 
                     
                     else:
-
+                        
+                        print ('========================= EXCUTING THE ELSE OF STRATEGY APPLY STRATEGY  ===========================')
+                        
                         if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
                             avaibility = buy_sell_isavaliable()
+                            print('I AM CALLING 1 FOR AVAILABILTY')
                         elif current_strategy["stop_order"] == 'None':
                             avaibility = buy_sell_rlt_isavaliable()
                            
@@ -278,9 +290,10 @@ class SMAStrategyProcessor(StrategyProcessor):
                             avaibility = buy_sell_stop_isavaliable()     
                         else:
                             avaibility = buy_sell_rlt_stop_isavaliable()
+                        
+                        print('============= AVAIBILITY   ====================', avaibility )
 
-
-                        if avaibility == True:
+                        if avaibility == 1:
 
                             buy_price = buy_price 
                             buy_angle =  buy_angle 
@@ -299,8 +312,11 @@ class SMAStrategyProcessor(StrategyProcessor):
                             Day_identifier = date.strftime('%Y-%m-%d')
                             
                             # for reseting decision making algorithms
+                            print ('=============== CALLING RESET    =======================')
+                        
                             if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
                                 buy_sell_reset()
+                                print ('I AM CALLING 1 FOR RESET')
                                 Opti = "No"
             
                             elif current_strategy["stop_order"] == 'None':
@@ -320,9 +336,15 @@ class SMAStrategyProcessor(StrategyProcessor):
                     
                             db.session.add(data_into_db)
                             db.session.commit()
+
+                            print('============== INSERTED INTO DATABASE ==========================')
                         
+                        
+                        print ('========== avalibity not found i am restig it  ===========')
+                    
                         if current_strategy["optimization"] == 'None' and current_strategy["stop_order"] == 'None':
                             buy_sell_reset()
+                            print ('======== DECISION IS NOT EQUAL TO 1 I CALLED 1 FOR RESET ===== ')
                         elif current_strategy["stop_order"] == 'None':
                             buy_sell_rlt_reset()
                         elif current_strategy["optimization"] == 'None':
@@ -331,6 +353,7 @@ class SMAStrategyProcessor(StrategyProcessor):
                             buy_sell_rlt_stop_reset()
                             
                         
+                        print('=========I AM BREAKING THE LOOP FOR THE DAY  ========')
                         break
                        
 
