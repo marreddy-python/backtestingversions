@@ -108,6 +108,7 @@ class DataDAOPostgreImpl(DataDAOPostgre):
                 buy_dict["x"] = int(db_data[i].buy_time)
                 buy_dict["text"] = 'Price : $'+ str(buy_price)
 
+
                 sell_dict["x"] = int(db_data[i].Sell_time)
                 sell_dict["text"] = 'Price : $'+ str(sell_price)
 
