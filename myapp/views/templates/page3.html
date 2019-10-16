@@ -289,9 +289,10 @@
                                         main = JSON.parse(sessionStorage.getItem("ba"))  
                                         for(i=0;i<main.Strategies.length;i++){
 
-                                            console.log(main.Strategies.Strategy_id)
+                                            arr = main.Strategies[i]
+                                            console.log(arr.Strategy_id)
 
-                                            if (main.Strategies.Strategy_id ==  strategy_id ){
+                                            if (arr.Strategy_id ==  strategy_id ){
                                                 console.log('In session found')
                                                 var deletedItem = main.Strategies.splice(i,1);
                                                 console.log('Removed from the session ')
