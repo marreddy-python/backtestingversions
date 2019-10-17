@@ -51,7 +51,9 @@
     
             <p style="font-size: 15px;background-color: #e0e0e0;text-align: center;color:white;font-weight: bold; padding:2mm;color: rgba(0, 0, 0, 0.8);"> Strategy results </p>
             <form class="icyLink">
-    
+                
+                <input class="sum_inp" type="text" id="marsustname" size="10" value="0$" readonly >
+                
                 <label class="sum_lbl"><a href="#" id="Total_profit" >Total profit</a> </label>
                 <input class="sum_inp" type="text" id="marsu0" size="10" value="0$" readonly >
     
@@ -419,8 +421,10 @@ $('.mar').click(function(e){
                 $('#marsu0').val( b.TWENTY_TP)
                 $('#marsu1').val( b.TWENTY_PF )
                 $('#marsu2').val( b.TWENTY_PT)
+                $('#marsustname').val( b.Strategy)
+
                 c = chart.get(b.Strategy).color
-                $('#marsu0, #marsu1,#marsu2').css({'color': c });
+                $('#marsu0, #marsu1,#marsu2,#marsustname').css({'color': c });
                 
             }
             else{
@@ -469,9 +473,10 @@ $(chart.series).each(function(i, serie){
                 //CHANGING THE VALUES OF A DIMENSIONS 
                 $('#marsu0').val( b.TWENTY_TP)
                 $('#marsu1').val( b.TWENTY_PF )
-                $('#marsu2').val( b.TWENTY_PT)  
+                $('#marsu2').val( b.TWENTY_PT) 
+                $('#marsustname').val( b.Strategy) 
                 c = chart.get(b.Strategy).color
-                $('#marsu0, #marsu1,#marsu2').css({'color': c });  
+                $('#marsu0, #marsu1,#marsu2,#marsustname').css({'color': c });  
             }
             else{
                 chart.get(b.Strategy).setState('inactive')  
@@ -504,8 +509,9 @@ $(chart.series).each(function(i, serie){
                 $('#marsu0').val( b.TWENTY_TP)
                 $('#marsu1').val( b.TWENTY_PF )
                 $('#marsu2').val( b.TWENTY_PT) 
+                $('#marsustname').val( b.Strategy)
                 c = chart.get(b.Strategy).color
-                $('#marsu0, #marsu1,#marsu2').css({'color': c });           
+                $('#marsu0, #marsu1,#marsu2,#marsustname').css({'color': c });           
             }
             else{
                 console.log('came to else')
