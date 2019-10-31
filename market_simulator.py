@@ -2,8 +2,9 @@ import time
 from getters.api import td_ameritrade
 from getters.decides_dg_count import check
 from getters.export import highcharts_export
+from getters.decides_start_end import decide_start_end
 from celery_task import db
-from flask import session
+from flask import session 
 from models_celery.tables import price_data
 from celery_task import Strategy_features
 from sqlalchemy import and_
@@ -30,9 +31,14 @@ class MarketSimulator:
         # THis loop will save the candle information
         for i in range(len(self.symbols)):
 
-            endtime = int(time.time()*1000.0) 
-            starttime = endtime - 86400000*5
+            # endtime = int(time.time()*1000.0) 
+            # starttime = endtime - 86400000*5
 
+            starttime,endtime  = decide_start_end()
+            print (starttime,endtime)
+            
+            # starttime = endtime - (86400000*7)
+            
             print(starttime,endtime)
 
             a = data_main.readData(self.symbols[i],starttime,endtime)
@@ -147,7 +153,12 @@ class MarketDAOImpl(MarketDAO):
                 # print ('data already exists in a database')
                 pass
     
+        # Removing the extra data from the price_data table
+  
+        # db_data = price_data.query.filter(and_(price_data.Time_stamp >= 1571731200000,price_data.Time_stamp <= 1571741820000,price_data.stock_symbol=='TVIX')).delete()
         
+        # db.session.commit()
+
 
         # print('candles are saved successfully')
          
@@ -213,27 +224,39 @@ class SMAPreprocessor(StrategyPreprocessor):
 
         High_main = HighChartsAdapter()
 
-        print (loaded_data[1][0])
+        # print (loaded_data[1][0])
 
         print (len(loaded_data))
-    
-        for i in range(0,len(loaded_data)):
-            print(i)
+
+        print (loaded_data)
+
+        # for i in xrange(0,len(loaded_data)):
+        while (startTime <= endTime):
+        
+            # current_candle = loaded_data[i][0]
+            # grouped_candle = current_candle + 120000
+            
+            print ('loaded_data_len',len(loaded_data))
+
             # CHECK IF ANGLE IS ALREADY CALCULATED OR NOT if not calculate
-            db_angledata = Strategy_features.query.filter(and_(Strategy_features.Day_identifier == loaded_data[i][0],Strategy_features.Symbol=='TVIX'))
+            db_angledata = Strategy_features.query.filter(and_(Strategy_features.Day_identifier == startTime,Strategy_features.Symbol=='TVIX'))
+            
             db_angledata_length = db_angledata.count()
+
             print (db_angledata_length)
             if db_angledata_length == 0 :
                 
-                endtime = loaded_data[i][0]
+                endtime = startTime + 120000
                 # checking to decide the end date
                 starttime = check(endtime)
                 print (endtime,starttime)
+
                 a = High_main.getMarketData(symbol,starttime,endtime)
             else:
-                pass
+                print(' Angle for the candle is already calculated ')
 
-        #a = High_main.getMarketData(symbol,startTime,endTime)
+            startTime = startTime + 120000
+
         
         smimpl =  SMADAOImpl()
         smimpl.connectToPostgreDB()
@@ -259,7 +282,7 @@ class HighChartsAdapter(AngleGenerator):
 
         # print startTime,endTime
        
-        db_data = price_data.query.filter(and_(price_data.Time_stamp.between(startTime,endTime),price_data.stock_symbol=='TVIX'))
+        db_data = price_data.query.filter(and_(price_data.Time_stamp >= startTime,price_data.Time_stamp <= endTime,price_data.stock_symbol=='TVIX'))
         
         fetchdata_length = db_data.count()
         print ('fetchdata_length',fetchdata_length)
@@ -284,35 +307,54 @@ class HighChartsAdapter(AngleGenerator):
                 stock_data.append([Time_stamp,Opening,High,Low,close,Volume])
 
             # print (stock_data)
-           
-            angle = highcharts_export(stock_data)
-            print (angle)
             stock_length  = len(stock_data)
             print (stock_length)
-            candle_info = stock_data[stock_length-1]
+            candle_info = stock_data[stock_length-2]
+           
+            db_angledata = Strategy_features.query.filter(and_(Strategy_features.Day_identifier == candle_info[0],Strategy_features.Symbol=='TVIX'))
+            db_angledata_length = db_angledata.count()
+
+            print (db_angledata_length)
+
+            if db_angledata_length == 0 :
+                angle = highcharts_export(stock_data)
+                print (angle)
+                
+
+                print (candle_info)
         
 
-            score = {"Time_stamp":None ,"Open": None, "High": None,"Low": None, "Close": None,"Volume": None, "Angle": None,}    
+                score = {"Time_stamp":None ,"Open": None, "High": None,"Low": None, "Close": None,"Volume": None, "Angle": None,}    
 
-            score["Time_stamp"] = candle_info[0] 
-            score["Open"] = candle_info[1] 
-            score["High"] = candle_info[2] 
-            score["Low"] = candle_info[3] 
-            score["Close"] = candle_info[4] 
-            score["Volume"] = candle_info[5] 
-            score["Angle"] = angle 
+                score["Time_stamp"] = candle_info[0] 
+                score["Open"] = candle_info[1] 
+                score["High"] = candle_info[2] 
+                score["Low"] = candle_info[3] 
+                score["Close"] = candle_info[4] 
+                score["Volume"] = candle_info[5] 
+                score["Angle"] = angle 
 
-            data  = json.dumps(score)
-            data = json.loads(data)
+                data  = json.dumps(score)
+                data = json.loads(data)
 
-            # print (data) 
+                # print (data) 
 
-            Day_identifier = candle_info[0]
+                Day_identifier = candle_info[0]
 
-            register = Strategy_features(Feature = data , Strategy_type_id = 'SMA',  Symbol = 'TVIX',Day_identifier = Day_identifier )
+                db_angledata = Strategy_features.query.filter(and_(Strategy_features.Day_identifier == candle_info[0],Strategy_features.Symbol=='TVIX'))
+                db_angledata_length = db_angledata.count()
 
-            db.session.add(register)
-            db.session.commit() 
+                print (db_angledata_length)
+
+                if db_angledata_length == 0 :
+
+                    register = Strategy_features(Feature = data , Strategy_type_id = 'SMA',  Symbol = 'TVIX',Day_identifier = Day_identifier )
+
+                    db.session.add(register)
+                    db.session.commit() 
+
+                else:
+                    print(' Im not inserting into the database ')
 
 
 class SMADA0(object):

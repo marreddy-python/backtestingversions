@@ -85,25 +85,42 @@
                     var endDate= convertDate(theDate);
 
                     console.log(startDate)
+                    console.log(endDate)
+
                     var myDate = new Date(startDate);
                     var startDate_milliseconds = myDate.getTime();
+
+                    var myend = new Date(endDate);
+                    var endDate_milliseconds = myend.getTime();
+
+                    console.log(startDate_milliseconds)
+                    console.log(endDate_milliseconds)
+
 
                     if (startDate!=="" && endDate!=="") {
                         startDate=startDate.split("/");
                         endDate=endDate.split("/");
                         var chart = $('#realtime-chart').highcharts();
-                        
-                        chart.xAxis[0].setExtremes(
+                      
+                        /*chart.xAxis[0].setExtremes(
                             Date.UTC(startDate[2], startDate[0]-1, startDate[1]),
                             Date.UTC(endDate[2], endDate[0]-1, endDate[1])
+                        );*/
+
+                        chart.xAxis[0].setExtremes(
+                          startDate_milliseconds,
+                          endDate_milliseconds
                         );
+                        
                     }
 
                   //LOGIC FOR DYNAMIC NATURE OF SUMMARY AND TRADES
                   console.log(startDate_milliseconds)
 
-                  startDate_milliseconds = startDate_milliseconds - (myDate.getTimezoneOffset()*60000)
-
+                  // startDate_milliseconds = startDate_milliseconds - (myDate.getTimezoneOffset()*60000)
+                  
+                  console.log('SELECTED_DATE',startDate_milliseconds)
+                  
                   console.log(Performance_Data)
 
                   if (Performance_Data !== null){
@@ -135,15 +152,23 @@
                 dataMin = chart.xAxis[0].min
                 dataMax =  chart.xAxis[0].max,
                 console.log('dataMin',dataMin)
+                console.log('dataMax',dataMax)
+
                
-                var d = new Date(dataMin);
-                var n = d.toLocaleDateString("en-US");
+                var d = new Date(dataMax);
+                
+                var n = d.toLocaleDateString("en");
+                
+                console.log(n)
+
                 $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
              
                 if (Performance_Data !== null){
                 console.log('excuted')
                 time_milliseconds = Performance_Data["x"]
                 default_date = dataMin + 60000
+
+
                 element_index = time_milliseconds.indexOf(default_date)
 
                 $('#singleday_Total_Profit').val(roundToTwo(Performance_Data["Total_Profit"][element_index])); 
@@ -561,6 +586,7 @@
 
                 $('.loader').show();
                 // $('.graph_area').hide();
+                $("#Save").attr("disabled", true);
 
                 $.ajax({
                    type: 'POST',
@@ -644,7 +670,7 @@
                             var n = d.toLocaleDateString("en-US");
                             $( "input[name=date_selector]").datepicker().datepicker("setDate", n);
              
-                            if (Performance_Data !== null){
+                            /*if (Performance_Data !== null){
                                 console.log('excuted')
                                 time_milliseconds = Performance_Data["x"]
                                 default_date = dataMin + 60000
@@ -655,7 +681,8 @@
                                 $('#singleday_Profitable').val(roundToTwo(Performance_Data["Profitable"][element_index])); 
                                 $('#singleday_MaxDrawdown').val(roundToTwo(Performance_Data["Max_Drawdown"][element_index])); 
                              
-                            }
+                            }*/
+
                             function roundToTwo(num) {    
                                     return +(Math.round(num + "e+2")  + "e-2");
                                 }
@@ -663,7 +690,8 @@
                             $('#Performance_Total_Profit').val(roundToTwo(from_total_metric[0] )); 
                             $('#Performance_Profit_Factor').val(roundToTwo(from_total_metric[1])); 
                             $('#Performance_Profitable').val(roundToTwo(from_total_metric[2])); 
-                      
+                            
+                            $("#Save").removeAttr("disabled");
                      
                           }
                       });
@@ -772,6 +800,7 @@
         
 
           $('.loader').show();
+          $("#Save").attr("disabled", true);
                 // $('.graph_area').hide();
 
                 $.ajax({
@@ -878,12 +907,13 @@
                             $('#Performance_Profit_Factor').val(roundToTwo(from_total_metric[1])); 
                             $('#Performance_Profitable').val(roundToTwo(from_total_metric[2])); 
                       
-                        
+                            $("#Save").removeAttr("disabled");
                           }
                       });
 
 
                       }
+                      
                 }
                 
               });

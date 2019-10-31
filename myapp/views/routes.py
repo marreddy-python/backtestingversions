@@ -12,9 +12,11 @@ from myapp.controllers.strategydao import MetricImpl
 modulo1_blueprint = Blueprint(name='modulo1', import_name=__name__,template_folder='templates',
 static_folder='static', static_url_path='/login,/trades.svg,/infile.json')
 
-
+# from celery_task import generate_trades
+# generate_trades()
 
 from myapp.models.users import Post,db
+
 import time
 
 #LOGIN PAGE
@@ -88,10 +90,13 @@ def strategyview():
        
         print (start_time,end_time)
 
+
+
         # daily_data = Data_loader.MarketData(start_time,end_time)
-        tweenty_days = end_time - (86400000*5)
+        tweenty_days = end_time - (86400000*10)
+        print('@@@@@@',tweenty_days,end_time)
         # daily_data = Data_loader.MarketData(start_time,end_time)
-        daily_data = Data_loader.MarketData(tweenty_days,start_time)
+        daily_data = Data_loader.MarketData(tweenty_days,end_time)
         # print daily_data
 
 
@@ -125,32 +130,31 @@ def strategyview():
 
                 
                                 if step_number == 1:
-                                        tweenty_days = end_time - (86400000*5)
+                                        tweenty_days = end_time - (86400000*10)
                                         
                                         if strategy_id == -1:
                                                 strategy_id = get_strategy_id(Stratey_values)
 
-                                        b = startegy_loader.applyStrategy('TVIX',St ,start_time,tweenty_days , strategy_id)
-                                        Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,start_time,tweenty_days)
+                                        b = startegy_loader.applyStrategy('TVIX',St ,end_time,tweenty_days , strategy_id)
+                                        Trades_singleday,Buy_flags,Sell_flags = Data_loader.getTrades('TVIX',St,end_time,tweenty_days)
                                         print('step number1 excuting')
                                         return jsonify({'step':1 })       
                                 else:   
-                                        tweenty_days = end_time - (86400000*5)
+                                        tweenty_days = end_time - (86400000*10)
                                         if strategy_id == -1:
                                                 strategy_id = get_strategy_id(Stratey_values)
 
-                                        startegy_loader.metricCalculation(start_time,tweenty_days,St,strategy_id)
-                                        startegy_loader.Total_metricCalculation(start_time,tweenty_days,St,strategy_id)
+                                        startegy_loader.metricCalculation(end_time,tweenty_days,St,strategy_id)
+                                        startegy_loader.Total_metricCalculation(end_time,tweenty_days,St,strategy_id)
             
                                         Metric_values_singleday = Data_loader.getPerformance('TVIX',St,start_time,end_time)
-                                        b = startegy_loader.saveStrategy(St,start_time,tweenty_days,strategy_id)
-                                        Performance = Data_loader.getPerformance('TVIX',St ,start_time,tweenty_days)
+                                        b = startegy_loader.saveStrategy(St,end_time,tweenty_days,strategy_id)
+                                        Performance = Data_loader.getPerformance('TVIX',St ,end_time,tweenty_days)
                                         print('step number2  excuting')
                                         from_total_metric_values = from_total_metric(strategy_id)
-                                        # return jsonify({'step':2 }) 
+                                       
                                         return jsonify({'Trades_singleday':Trades_singleday,'Metric_values': Metric_values_singleday,'Performance':Performance,'Buy_flags':Buy_flags,'Sell_flags':Sell_flags,'step':2,'from_total_metric':from_total_metric_values })
-                                
-                               
+                             
                                 
                         else:
                                 return json.dumps({'status':'Failed'})
@@ -249,7 +253,6 @@ def settings():
 
 
 
-
 @modulo1_blueprint.route('/delete_strategy', methods=['GET','POST'])
 def delete_strategy():
         if request.method == "POST":
@@ -261,6 +264,7 @@ def delete_strategy():
                 return json.dumps({'status':'Deleted ssuccesfully'})
 
 
+
 @modulo1_blueprint.route('/view_strategy/<username>', methods=['GET','POST'])
 def view_strategy(username):
         
@@ -269,7 +273,7 @@ def view_strategy(username):
         print (start_time,end_time)
 
         # daily_data = Data_loader.MarketData(start_time,end_time)
-        tweenty_days = end_time - (86400000*5)
+        tweenty_days = end_time - (86400000*10)
         # daily_data = Data_loader.MarketData(start_time,end_time)
         Data_loader = DataController()
         daily_data = Data_loader.MarketData(tweenty_days,start_time)

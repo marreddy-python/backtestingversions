@@ -14,10 +14,17 @@ INSIGNIFICANT = 3
 last_direction=INSIGNIFICANT  
 stock_status= UNAVAILABLE
 
-def buy_sell_stop(buying_angle,selling_angle,angle,buying_price,current_price,less_than_buy):
+def buy_sell_stop(buying_angle,selling_angle,angle,buying_price,current_candle_low_price,less_than_buy):
+    
+    print( buying_angle,selling_angle,angle,buying_price,current_candle_low_price,less_than_buy)
     
     a = buying_price * (less_than_buy/100)
     selling_price = buying_price - a 
+    selling_price = round(selling_price,2)
+   
+    print('buy price = ', buying_price)
+    print('current_candle_low_price = ', current_candle_low_price)
+    print('selling price = ', selling_price)
     
     global last_direction,stock_status,UP,DOWN,INSIGNIFICANT,AVAILABLE,UNAVAILABLE
     
@@ -26,30 +33,40 @@ def buy_sell_stop(buying_angle,selling_angle,angle,buying_price,current_price,le
     HOLD= 3
 
 
-    if angle < selling_angle:
+    if current_candle_low_price < selling_price and stock_status == AVAILABLE: 
+
+            print('CURRENT PRICE =' , current_candle_low_price)
+            print('SELLING PRICE =' , selling_price)
+            decision = SELL
+            stock_status = UNAVAILABLE
+            last_direction = DOWN
+            print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!STOP ORDER EXCUTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+     
+     
+    elif angle < selling_angle :
+       
         if (stock_status == AVAILABLE)and(last_direction == DOWN):
             decision = SELL
             stock_status = UNAVAILABLE
         else:
             last_direction = DOWN
             decision = HOLD
+    
 
-    elif angle > buying_angle:
+    elif angle > buying_angle :
+        
         if stock_status == UNAVAILABLE and last_direction == UP:
             decision = BUY
             stock_status = AVAILABLE
         else:
             last_direction = UP
             decision = HOLD
+           
+   
 
     
-    elif current_price < selling_price:
-        if stock_status == AVAILABLE and last_direction == UP:
-            decision = SELL
-            stock_status = UNAVAILABLE
-            last_direction = DOWN
-        else:
-            decision = HOLD
+  
+
 
     else:
         last_direction = INSIGNIFICANT

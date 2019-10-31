@@ -392,8 +392,6 @@ class DataDAOPostgreImpl(DataDAOPostgre):
 
         stock_data = []
             
-        # stock_data = [[db_data[i].Opening_price, db_data[i].High,db_data[i].Low,db_data[i].Closing_price,db_data[i].Volume ] for i in range(0,fetchdata_length)]
-        
         for candle in db_data:
 
             Time_stamp = int(candle.Time_stamp)

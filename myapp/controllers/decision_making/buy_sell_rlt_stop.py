@@ -13,12 +13,13 @@ last_direction=INSIGNIFICANT
 stock_status= UNAVAILABLE
 
 
-def buy_sell_rlt_stop(buying_angle,selling_angle,relative_angle,angle,buying_price,current_price,less_than_buy):
+def buy_sell_rlt_stop(buying_angle,selling_angle,relative_angle,angle,buying_price,current_candle_low_price,less_than_buy):
 
     global last_direction,stock_status,UP,DOWN,INSIGNIFICANT,AVAILABLE,UNAVAILABLE
 
     a = buying_price * (less_than_buy/100)
     selling_price = buying_price - a 
+    selling_price = round(selling_price,2)
     
     BUY = 1
     SELL= 2
@@ -33,6 +34,22 @@ def buy_sell_rlt_stop(buying_angle,selling_angle,relative_angle,angle,buying_pri
             last_direction = DOWN
             decision = HOLD
 
+    elif (angle < selling_angle) and (angle > relative_angle) and (stock_status == AVAILABLE):
+       
+        if (stock_status == AVAILABLE):
+            decision = SELL
+            stock_status = UNAVAILABLE
+        else:
+            last_direction = DOWN
+            decision = HOLD
+
+    elif current_candle_low_price < selling_price and  stock_status == AVAILABLE:
+        
+        decision = SELL
+        stock_status = UNAVAILABLE
+        last_direction = DOWN
+    
+
     elif angle > buying_angle:
 
         if (stock_status == UNAVAILABLE) and (last_direction == UP):
@@ -42,23 +59,6 @@ def buy_sell_rlt_stop(buying_angle,selling_angle,relative_angle,angle,buying_pri
             last_direction = UP
             decision = HOLD
 
-    elif (angle < selling_angle) and (angle > relative_angle):
-       
-        if (stock_status == AVAILABLE) and (last_direction == DOWN):
-            decision = SELL
-            stock_status = UNAVAILABLE
-        else:
-            last_direction = DOWN
-            decision = HOLD
-
-    elif current_price < selling_price:
-        
-        if stock_status == AVAILABLE and last_direction == UP:
-            decision = SELL
-            stock_status = UNAVAILABLE
-            last_direction = DOWN
-        else:
-            decision = HOLD
     
     else:
         last_direction = INSIGNIFICANT

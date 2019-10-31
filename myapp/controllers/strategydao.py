@@ -19,8 +19,6 @@ from datetime import datetime
 import time
 
 
-import time
-
 class StrategyDAO():
     
     def saveStrategy(self,s,End_time,Start_time,strategy_id  ): 
@@ -131,11 +129,18 @@ class SMAStrategyProcessor(StrategyProcessor):
             stock_data = []
 
             # Adding 9 hours 30 minutes to the start
-            market_start = start + 32400000 + (600000*3)
+            '''market_start = start + 32400000 + (600000*3)
             # Adding 16 hours to the start
             market_end = start + 57600000
             # market end time
+            end_trade = market_end - 600000'''
+
+            market_start = start + 68400000
+            # Adding 16 hours to the start
+            market_end = start + 90000000
+            # market end time
             end_trade = market_end - 600000
+
 
             print('=========== ACTUAL START AND END DATES ==========', start , end)
             
@@ -158,6 +163,7 @@ class SMAStrategyProcessor(StrategyProcessor):
 
                     stock_data.append([Time_stamp,Opening,High,Low,close,Volume,Angle])
 
+            print('STOCK_DATA',stock_data)
 
             print (start,end)
        
@@ -209,6 +215,7 @@ class SMAStrategyProcessor(StrategyProcessor):
                 time = market_data[0]
                 price = market_data[4]
                 angle = market_data[6]
+                low_price = market_data[3]
                 
                 if angle == 'angle calculation is not possible':
                     pass
@@ -225,10 +232,11 @@ class SMAStrategyProcessor(StrategyProcessor):
                             decision = buy_sell_rlt(current_strategy["buying_angle"],current_strategy["selling_angle"],current_strategy["relative_angle"],angle)
                             Opti = "Yes"
                         elif current_strategy["optimization"] == 'None':
-                            decision = buy_sell_stop(current_strategy["buying_angle"],current_strategy["selling_angle"],angle,buy_price,price,current_strategy["less_than_buy"])
+                            print('$$$$$BUY_SELL_STOP_ORDER CALLED')
+                            decision = buy_sell_stop(current_strategy["buying_angle"],current_strategy["selling_angle"],angle,buy_price,low_price ,current_strategy["less_than_buy"])
                             Opti = "Yes"
                         else:
-                            decision = buy_sell_rlt_stop(current_strategy["buying_angle"],current_strategy["selling_angle"],current_strategy["relative_angle"],angle,buy_price,price,current_strategy["less_than_buy"])
+                            decision = buy_sell_rlt_stop(current_strategy["buying_angle"],current_strategy["selling_angle"],current_strategy["relative_angle"],angle,buy_price,low_price ,current_strategy["less_than_buy"])
                             Opti = "Yes"
 
                         print (time,angle,decision)
@@ -259,7 +267,7 @@ class SMAStrategyProcessor(StrategyProcessor):
                             print (sell_price,sell_value,sell_angle,sell_time,profit_loss,profit_loss_percentage)
 
             
-                            date = datetime.fromtimestamp(current_candle_time/1000.0)
+                            date = datetime.fromtimestamp( start/1000.0)
                             Day_identifier = date.strftime('%Y-%m-%d')
 
                         
@@ -308,6 +316,7 @@ class SMAStrategyProcessor(StrategyProcessor):
                             
                             current_candle_time = time
 
+                            # date = datetime.fromtimestamp(current_candle_time/1000.0)
                             date = datetime.fromtimestamp(current_candle_time/1000.0)
                             Day_identifier = date.strftime('%Y-%m-%d')
                             
@@ -361,6 +370,8 @@ class SMAStrategyProcessor(StrategyProcessor):
         print('Excuting apply strategy')
         global start_date,end_date,Strategy 
 
+        print (' **********STRATEGY APPLYING BETWEEN**********', start,end)
+
         r_start = datetime.fromtimestamp(start/1000)
         r_start = r_start.replace(hour=0,minute=0,second=0)
 
@@ -369,6 +380,10 @@ class SMAStrategyProcessor(StrategyProcessor):
 
         r_start_milliseconds = time.mktime(r_start.timetuple())*1000
         r_end_milliseconds = time.mktime(r_end.timetuple())*1000
+        
+        print('r_start_milliseconds',r_start_milliseconds)
+        print('r_end_milliseconds',r_end_milliseconds)
+
 
         while (r_start_milliseconds <= r_end_milliseconds):
 
@@ -377,6 +392,7 @@ class SMAStrategyProcessor(StrategyProcessor):
             r_eod = r_start_milliseconds + 24*60*60*1000
 
             print('r_eod',r_eod)
+            print('r_start_milliseconds',r_start_milliseconds)
 
             date_str = str(r_start)
 

@@ -36,6 +36,7 @@ var chartConfig = {
         plotBorderColor: '#606063'
 },
 
+
   tooltip: {
     crosshairs: true,
     shared: true,
@@ -44,6 +45,7 @@ var chartConfig = {
     enabledIndicators: true,
  
   },
+ 
 
   exporting: {
             enabled: true,
@@ -125,7 +127,10 @@ rangeSelector: {
         type:'sma',
         linkedTo: 'means',
         color: 'rgb(0, 175, 251)',
-        peroids:10,
+        params:{
+          period:10,
+          index:3
+          },
         marker:{
           enabled:false,
         }
@@ -173,6 +178,12 @@ navigator:{
     },
    
 };
+
+Highcharts.setOptions({
+  global: {
+    useUTC: false
+  }
+});
 
   chartConfig.series[0].type = 'candlestick';
   chartConfig.series[0].data = JSON.parse('{{ daily_data | tojson | safe}}');
