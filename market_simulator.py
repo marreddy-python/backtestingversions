@@ -37,7 +37,7 @@ class MarketSimulator:
             starttime,endtime  = decide_start_end()
             print (starttime,endtime)
             
-            # starttime = endtime - (86400000*7)
+            starttime = endtime - (86400000*7)
             
             print(starttime,endtime)
 
